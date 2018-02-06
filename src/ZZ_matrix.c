@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "ZZ_matrix.h"
 
-
+/*
 void main()
 {
 	float **matrix;
@@ -23,7 +23,7 @@ void main()
 	}
 	
 }
-
+*/
 float** loadMatrixFromFile(char* fileName,int*line,int*column,int *errorCode)
 {
 	FILE* file = fopen(fileName,"r");
