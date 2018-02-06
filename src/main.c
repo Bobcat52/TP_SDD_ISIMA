@@ -1,11 +1,16 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <math.h>
-
+#include "main.h"
 
 /* fichier de base */
 void main()
 {
+	afficherHelloWorld();
+	
+}
 
-	print("Hello world");
+void afficherHelloWorld()
+{
+	printf("Hello World\n");
 }
