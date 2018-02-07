@@ -5,19 +5,25 @@
 
 void main(int argc, char *argv[])
 {
-	matrix_t matrix;
+	matrix_t matrixA;
+	matrix_t matrixB;
 	int codeError;
 
 	char *fileName = "matrice1.txt";
+	matrixA = loadMatrixFromFile(fileName,&codeError);
 
-	matrix = loadMatrixFromFile(fileName,&codeError);
+	char *fileName2 = "matrice2.txt";
+	matrixB = loadMatrixFromFile(fileName2,&codeError);
 
 	if(codeError == 1)
 	{
 		printf("Matrix successfully created !\n");
-		displayMatrix(matrix);
-		printf("Le nombre de ligne de la matrice est : %d\n",matrix.line);
-		printf("Le nombre de colone de la matrice est : %d\n",matrix.column);
+
+		matrix_t matrixC;
+		matrixC = multiply(matrixA,matrixB,&codeError);
+		displayMatrix(matrixC);
+
+
 	}
 	else
 	{
