@@ -24,6 +24,11 @@ void main()
 	
 }
 */
+/*
+* -1 = problem while openin file
+* 1 = no problem
+* 0 = problem during allocation
+*/
 float** loadMatrixFromFile(char* fileName,int*line,int*column,int *errorCode)
 {
 	FILE* file = fopen(fileName,"r");
@@ -35,7 +40,7 @@ float** loadMatrixFromFile(char* fileName,int*line,int*column,int *errorCode)
 
 		/* We can get dimension of the matrice n*m through the first line*/
 		int n=0, m=0, i=0, j=0;
-	
+		*errorCode = 0;
 		fscanf(file,"%d %d",&n,&m);
 		printf("n = %d, m = %d\n",n,m);
 		matrix=malloc(n*sizeof(float*));
@@ -45,7 +50,7 @@ float** loadMatrixFromFile(char* fileName,int*line,int*column,int *errorCode)
 			return(NULL);
 		}
 
-
+		/* TODO: free the memory already allocate if we encouter a problem */
 		for(i=0; i<n; i++)
 		{
 			matrix[i]= malloc(m*sizeof(float));

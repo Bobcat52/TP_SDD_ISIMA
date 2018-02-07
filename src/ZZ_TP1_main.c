@@ -2,18 +2,15 @@
 #include <stdio.h>
 
 #include "ZZ_matrix.h"
-#include "ZZ_Liste_chainee.h"
-
-
-
 
 void main(int argc, char *argv[])
 {
 	float **matrix;
 	int codeError;
 	int n,m; /* n = line, m = column */
+	char *fileName = "matrice1.txt";
 
-	matrix = loadMatrixFromFile("../matrice1.txt",&n,&m,&codeError);
+	matrix = loadMatrixFromFile(fileName,&n,&m,&codeError);
 
 	if(codeError == 1)
 	{
@@ -22,7 +19,15 @@ void main(int argc, char *argv[])
 	}
 	else
 	{
-		printf("[ERROR] : Error during creation\n");
+		printf("[ERROR] : Can't create the matrix from the file : %s \n[ERROR] : Reason : ",fileName);
+		if(codeError == 0)
+		{
+			printf("Unable to allocate enough space for the matrix\n");
+		}
+		else
+		{
+			printf("the file doesn't exist\n");
+		}
 	}
 
 }
