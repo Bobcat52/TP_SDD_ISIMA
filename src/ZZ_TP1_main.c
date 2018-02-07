@@ -5,17 +5,19 @@
 
 void main(int argc, char *argv[])
 {
-	float **matrix;
+	matrix_t matrix;
 	int codeError;
-	int n,m; /* n = line, m = column */
+
 	char *fileName = "matrice1.txt";
 
-	matrix = loadMatrixFromFile(fileName,&n,&m,&codeError);
+	matrix = loadMatrixFromFile(fileName,&codeError);
 
 	if(codeError == 1)
 	{
 		printf("Matrix successfully created !\n");
-		displayMatrix(matrix,n,m);
+		displayMatrix(matrix);
+		printf("Le nombre de ligne de la matrice est : %d\n",matrix.line);
+		printf("Le nombre de colone de la matrice est : %d\n",matrix.column);
 	}
 	else
 	{

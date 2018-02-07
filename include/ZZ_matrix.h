@@ -1,5 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-float** loadMatrixFromFile(char* fileName,int*line,int*column,int *errorCode);
-void displayMatrix(float **matrix,int n,int m);
+typedef struct matrix
+{
+	float **value;
+	int line;
+	int column;
+
+} matrix_t;
+
+matrix_t loadMatrixFromFile(char* fileName,int *errorCode);
+void displayMatrix(matrix_t matrix);
+matrix_t multiply(matrix_t A, matrix_t B);
