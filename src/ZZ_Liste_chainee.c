@@ -4,10 +4,33 @@
 #include "ZZ_Liste_chainee.h"
 
 
-float mat[I][J]={ {1, 2, 3}, {4, 5, 6}, {7, 8, 9} };
 
-
-
+void insererListe(struct tableau **pTete, struct tableau *element)
+{
+	element->suivant = *pTete;
+	*pTete = element;
+}
+tableau_t * addNewElement( tableau_t **ptete)
+{
+		tableau_t *newelmt= (struct tableau *)malloc(sizeof(struct tableau));
+		insererListe(ptete,newelmt);
+}
+float* rechElt(int v, tableau_t * tableau)
+{
+	tableau_t  *pprec= tableau;
+	tableau_t  *cour= &tableau->valeur;
+	while (cour!=NULL && cour->valeur < v)
+	{
+			pprec = &(cour->suivant);
+			cour = pprec->suivant;
+	}
+	return(&pprec->valeur);
+}
+void afficherListeChaine(struct tableau *pTete)
+{
+	
+}
+/*
 
 float min2(float matrice[I][J])
 {		
@@ -90,12 +113,37 @@ void listech (float ** matrice[I][J])
 		matrice[i][j]=M[0];
 	}
 
-
+*/
 int main()
 {
-	float  M=max(mat[I][J]);
-	float  m=min(mat[I][J]);
-	printf("Le max est %f et le min est %f \n", M , m);
-	return 0;
+	tableau_t *pTete;
+	pTete = (struct tableau*)malloc(sizeof(struct tableau));
+	pTete->valeur = 5;
+	pTete->ligne = 5;
+	pTete->colonne = 2;
+	
+	tableau_t *nvElement = (struct tableau*)malloc(sizeof(struct tableau));
+	nvElement->valeur = 3;
+	nvElement->ligne = 2;
+	nvElement->colonne = 5;
+	
+	insererListe(&pTete,nvElement);
+	
+	
+	tableau_t *nvElement1 = (struct tableau*)malloc(sizeof(struct tableau));
+	nvElement1->valeur = 6;
+	nvElement1->ligne = 5;
+	nvElement1->colonne = 7;
+	
+	insererListe(&pTete,nvElement1);
+	
+	
+	tableau_t *nvElement2 = (struct tableau*)malloc(sizeof(struct tableau));
+	nvElement2->valeur = 1;
+	nvElement2->ligne = 2;
+	nvElement2->colonne = 6;
+	
+	insererListe(&pTete,nvElement2);	
+	
 } 	
 	
