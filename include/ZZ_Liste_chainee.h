@@ -11,10 +11,17 @@ typedef struct liste
 	int colonne;
 	struct donnee * suivant;
 }liste_t;
+
+typedef struct tab
+{
+	int valeur;
+	int ligne:
+	int collone;
+}tab_t;
 float * tab (int tabsize);
 float min (float matrice[I][J]);
 float max (float  matrice[I][J]);
-void petitK( float  matrice[I][J]);
+void listech(float  matrice[I][J]);
 
 
 
