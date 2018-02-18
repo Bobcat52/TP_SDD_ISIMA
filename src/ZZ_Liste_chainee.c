@@ -12,138 +12,93 @@ void insererListe(struct tableau **pTete, struct tableau *element)
 }
 tableau_t * addNewElement( tableau_t **ptete)
 {
-		tableau_t *newelmt= (struct tableau *)malloc(sizeof(struct tableau));
-		insererListe(ptete,newelmt);
+	tableau_t *newelmt= (struct tableau *)malloc(sizeof(struct tableau));
+	insererListe(ptete,newelmt);
 }
-float* rechElt(int v, tableau_t * tableau)
+tableau_t * rechElt(float v, tableau_t * tableau)
 {
-	tableau_t  *pprec= tableau;
-	tableau_t  *cour= &tableau->valeur;
-	while (cour!=NULL && cour->valeur < v)
+	tableau_t  *cour = tableau;
+
+	while (cour != NULL && cour->valeur < v)
+	{
+			cour = cour->suivant;
+	}
+
+	return(cour);
+}
+/* ------------------------------------------------------------------------ */
+/* insertKSorted     Insert a block in the sorted linked list of K length */
+/*                                                                      */
+/* En entrée: s1, s2 Deux chaînes de caractères                         */
+/*                                                                      */
+/* En sortie: La valeur entière retournée est 0 si les chaînes sont     */
+/*            égales; négative si s1 < s2 et positive si s1 > s2.       */
+/* -------------------------------------------------------------------- */
+void insertKSorted(tableau_t ** tableau, tableau_t *adresse,tableau_t *element,int K)
+{
+	tableau_t  **pprec= tableau;
+	tableau_t  *cour= *tableau;
+	int j;
+	j=0; /* indice de parcours */
+	while (cour != NULL && cour != adresse)
 	{
 			pprec = &(cour->suivant);
-			cour = pprec->suivant;
+			cour = cour->suivant;
+
+			j++;
 	}
-	return(&pprec->valeur);
+
+	if(adresse == NULL) /* If the block need to be put at the end of the linked list but length < K */
+	{
+		if(j < K)
+		{
+			element->suivant = cour; /* create a specific function */
+			*pprec = element;
+		}
+	}
+	else
+	{
+		
+		element->suivant = cour; /* create a specific function */
+		*pprec = element;
+		
+		if(j < K)
+		{
+			while (cour != NULL && j < K-2)
+			{
+				pprec = &(cour->suivant);
+				cour = cour->suivant;
+				j++;
+			}
+		}
+	
+		if(cour != NULL)
+			cour->suivant = NULL;
+		
+	}
 }
 void afficherListeChaine(struct tableau *pTete)
 {
-	
-}
-/*
+	printf("Nouvelle liste chainée : \n");
+	tableau_t  *cour = pTete;
 
-float min2(float matrice[I][J])
-{		
-		float tab=float malloc(3*sizeof(float));
-		int i, j, k, l;
-		for (k=0;k<K;k++)
-		{
-			
-			²
-
-
-float min (float matrice[I][J])
-{	float * T=NULL;
-	float m=matrice[0][0];
-	int i,j;
-	tab=getTabAlloc(3);		
-	T[0]=m;
-	T[1]=0;
-	T[2]=0;
-	for(i=0;i<I;i++)
+	while (cour != NULL)
 	{
-		for (j=0;i<J;j++)
-		{
-			if (m> matrice[i][j])
-			{	
-				m= matrice[i][j];
-				T[0]=m;
-				T[1]=i;
-				T[2]=j;
-			}
-		}
+			printf("L'usine %d a une production de %f à la période %d \n",cour->ligne,cour->valeur,cour->colonne);
+			cour = cour->suivant;
 	}
-	
-	return T;
+	printf("Fin nouvelle liste chainée \n\n");
 }
-
-
-float max (float matrice[I][J])
-{
-	float  m= matrice[0][0];
-	float *T=NULL;
-	int i,j;
-	
-	T[0]=m;
-	T[1]=0;
-	T[2]=0;
-	for(i=0;i<I;i++)
-	{
-		for (j=0;i<J;j++)
-		{
-			if (m<  matrice[i][j])
-			{
-				
-				m= matrice[i][j];
-				tab[0]=m;
-				tab[1]=i;
-				tab[2]=j;;
-			}
-		}
-	}
-	return  tab;
-}
-
-void listech (float ** matrice[I][J])
-{
-	liste * cell= liste_t malloc(sizeof(liste_t));
-	float M[3]=max(matrice[I][J]);
-	float m[3];
-	int k, i ,j, v;
-	for (k=0;k<K;k++)
-	{	
-		m=min(matrice[I][J]);
-		v=m[0];
-		i=m[1];
-		j=m[2];
-		cell->valeur= l;
-		cell->ligne = i;
-		cell->colonne= j;
-		cell-suivant=liste_t malloc(sizeof(liste_t));
-		matrice[i][j]=M[0];
-	}
-
-*/
-int main()
-{
-	tableau_t *pTete;
-	pTete = (struct tableau*)malloc(sizeof(struct tableau));
-	pTete->valeur = 5;
-	pTete->ligne = 5;
-	pTete->colonne = 2;
+void insertBlock(tableau_t **pTete,float valeur,int ligne,int colonne,int K)
+{	
+	tableau_t *adresseAInserer;
+	adresseAInserer = rechElt(valeur,*pTete);
 	
 	tableau_t *nvElement = (struct tableau*)malloc(sizeof(struct tableau));
-	nvElement->valeur = 3;
-	nvElement->ligne = 2;
-	nvElement->colonne = 5;
-	
-	insererListe(&pTete,nvElement);
-	
-	
-	tableau_t *nvElement1 = (struct tableau*)malloc(sizeof(struct tableau));
-	nvElement1->valeur = 6;
-	nvElement1->ligne = 5;
-	nvElement1->colonne = 7;
-	
-	insererListe(&pTete,nvElement1);
-	
-	
-	tableau_t *nvElement2 = (struct tableau*)malloc(sizeof(struct tableau));
-	nvElement2->valeur = 1;
-	nvElement2->ligne = 2;
-	nvElement2->colonne = 6;
-	
-	insererListe(&pTete,nvElement2);	
-	
-} 	
-	
+	nvElement->valeur = valeur;
+	nvElement->ligne = ligne;
+	nvElement->colonne = colonne;
+	nvElement->suivant = NULL;
+
+	insertKSorted(pTete,adresseAInserer,nvElement,K);	
+}

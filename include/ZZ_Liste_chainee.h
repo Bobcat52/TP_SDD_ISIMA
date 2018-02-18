@@ -17,9 +17,10 @@ typedef struct tableau
 
 tableau_t * addNewElement( tableau_t **ptete);
 void insererListe(struct tableau **pTete, struct tableau *element);
-float* rechElt(int v, tableau_t * tableau);
-
-
+tableau_t * rechElt(float v, tableau_t * tableau);
+void afficherListeChaine(struct tableau *pTete);
+void insertKSorted(tableau_t ** tableau, tableau_t *adresse,tableau_t *element,int K);
+void insertBlock(tableau_t **pTete,float valeur,int ligne,int colonne,int K);
 
 
 
