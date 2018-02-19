@@ -5,100 +5,105 @@
 
 
 
-void insererListe(struct tableau **pTete, struct tableau *element)
+production_t * rechElt(float v, production_t * pHead)
 {
-	element->suivant = *pTete;
-	*pTete = element;
-}
-tableau_t * addNewElement( tableau_t **ptete)
-{
-	tableau_t *newelmt= (struct tableau *)malloc(sizeof(struct tableau));
-	insererListe(ptete,newelmt);
-}
-tableau_t * rechElt(float v, tableau_t * tableau)
-{
-	tableau_t  *cour = tableau;
+	production_t  *curr = pHead;
 
-	while (cour != NULL && cour->valeur < v)
+	while (curr != NULL && curr->value < v)
 	{
-			cour = cour->suivant;
+			curr = curr->next;
 	}
 
-	return(cour);
+	return(curr);
 }
 /* ------------------------------------------------------------------------ */
 /* insertKSorted     Insert a block in the sorted linked list of K length */
 /*                                                                      */
 /* En entrée: s1, s2 Deux chaînes de caractères                         */
 /*                                                                      */
-/* En sortie: La valeur entière retournée est 0 si les chaînes sont     */
+/* En sortie: La value entière retournée est 0 si les chaînes sont     */
 /*            égales; négative si s1 < s2 et positive si s1 > s2.       */
 /* -------------------------------------------------------------------- */
-void insertKSorted(tableau_t ** tableau, tableau_t *adresse,tableau_t *element,int K)
+void insertKSorted(production_t ** pHead, production_t *adresse, production_t *element, int K)
 {
-	tableau_t  **pprec= tableau;
-	tableau_t  *cour= *tableau;
-	int j;
-	j=0; /* indice de parcours */
-	while (cour != NULL && cour != adresse)
+	production_t  ** prev  =  pHead;
+	production_t  *  curr  = *pHead;
+
+	int j = 0;
+	
+	while (curr != NULL && curr != adresse)
 	{
-			pprec = &(cour->suivant);
-			cour = cour->suivant;
+			prev = &(curr->next);
+			curr = curr->next;
 
 			j++;
 	}
 
 	if(adresse == NULL) /* If the block need to be put at the end of the linked list but length < K */
 	{
-		if(j < K)
+		if(j <= K-1)
 		{
-			element->suivant = cour; /* create a specific function */
-			*pprec = element;
+			element->next = curr; /* create a specific function */
+			*prev = element;
 		}
 	}
 	else
 	{
 		
-		element->suivant = cour; /* create a specific function */
-		*pprec = element;
+		element->next = curr; /* create a specific function */
+		*prev = element;
 		
-		if(j < K)
+		if(j <= K-1)
 		{
-			while (cour != NULL && j < K-2)
+			while (curr != NULL && j <= K-1)
 			{
-				pprec = &(cour->suivant);
-				cour = cour->suivant;
+				prev = &(curr->next);
+				curr = curr->next;
+				
 				j++;
 			}
 		}
-	
-		if(cour != NULL)
-			cour->suivant = NULL;
 		
+
+		if(curr != NULL && curr->next != NULL)
+		{
+			curr->next = NULL;
+		}
 	}
 }
-void afficherListeChaine(struct tableau *pTete)
+void printLinkedList(struct production *pHead)
 {
-	printf("Nouvelle liste chainée : \n");
-	tableau_t  *cour = pTete;
+	production_t  *curr = pHead;
 
-	while (cour != NULL)
+	while (curr != NULL)
 	{
-			printf("L'usine %d a une production de %f à la période %d \n",cour->ligne,cour->valeur,cour->colonne);
-			cour = cour->suivant;
+			printf("L'usine %d a une production de %f à la période %d \n",curr->factory,curr->value,curr->period);
+			curr = curr->next;
 	}
-	printf("Fin nouvelle liste chainée \n\n");
-}
-void insertBlock(tableau_t **pTete,float valeur,int ligne,int colonne,int K)
-{	
-	tableau_t *adresseAInserer;
-	adresseAInserer = rechElt(valeur,*pTete);
-	
-	tableau_t *nvElement = (struct tableau*)malloc(sizeof(struct tableau));
-	nvElement->valeur = valeur;
-	nvElement->ligne = ligne;
-	nvElement->colonne = colonne;
-	nvElement->suivant = NULL;
 
-	insertKSorted(pTete,adresseAInserer,nvElement,K);	
+}
+void insertProductionBlock(production_t **pHead, float value, int factory, int period, int K)
+{	
+	production_t *insertAdress;
+	insertAdress = rechElt(value,*pHead);
+	
+	production_t *newElement = (production_t *)malloc(sizeof(production_t));
+	newElement->value = value;
+	newElement->factory = factory;
+	newElement->period = period;
+	newElement->next = NULL;
+
+	insertKSorted(pHead,insertAdress,newElement,K);	
+}
+void freeLinkedList(production_t *pHead)
+{
+	production_t *curr = pHead;
+	production_t *temp = NULL;
+
+	while(curr != NULL)
+	{
+		temp = curr;
+		curr = curr->next;
+		free(temp);
+	}
 }

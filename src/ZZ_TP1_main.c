@@ -17,10 +17,9 @@ void main(int argc, char *argv[])
 	{
 		printf("Matrix successfully created !\n");
 
-	
 		displayMatrix(matrixA);
 
-		tableau_t *pTete;
+		production_t *pTete;
 		pTete = NULL;
 
 		int i,j;
@@ -28,21 +27,24 @@ void main(int argc, char *argv[])
 		{
 			for(j =0;j < matrixA.column;j++)
 			{
-				insertBlock(&pTete,matrixA.value[i][j],i,j,10);
+				insertProductionBlock(&pTete,matrixA.value[i][j],i,j,10);
 			}
 		}
-		afficherListeChaine(pTete);
+		printLinkedList(pTete);
+
+		/* We can now free the linked list properly */
+		freeLinkedList(pTete);
 	}
 	else
 	{
 		printf("[ERROR] : Can't create the matrix from the file : %s \n[ERROR] : Reason : ",fileName);
 		if(codeError == 0)
 		{
-			printf("Unable to allocate enough space for the matrix\n");
+			printf("Unable to allocate enough space for the matrix.\n");
 		}
 		else
 		{
-			printf("the file doesn't exist\n");
+			printf("the file doesn't exist in the current directory.\n");
 		}
 	}
 }
