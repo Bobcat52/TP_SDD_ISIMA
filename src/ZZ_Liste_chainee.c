@@ -41,10 +41,14 @@ void insertKSorted(production_t ** pHead, production_t *adresse, production_t *e
 
 	if(adresse == NULL) /* If the block need to be put at the end of the linked list but length < K */
 	{
-		if(j <= K-1)
+		if(j < K-2)
 		{
 			element->next = curr; /* create a specific function */
 			*prev = element;
+		} 
+		else
+		{
+			free(element); /* we free the element because it's outrange */
 		}
 	}
 	else
@@ -53,9 +57,9 @@ void insertKSorted(production_t ** pHead, production_t *adresse, production_t *e
 		element->next = curr; /* create a specific function */
 		*prev = element;
 		
-		if(j <= K-1)
+		if(j < K-2)
 		{
-			while (curr != NULL && j <= K-1)
+			while (curr != NULL && j < K-2)
 			{
 				prev = &(curr->next);
 				curr = curr->next;
@@ -63,11 +67,17 @@ void insertKSorted(production_t ** pHead, production_t *adresse, production_t *e
 				j++;
 			}
 		}
-		
 
-		if(curr != NULL && curr->next != NULL)
+		if(curr != NULL)
 		{
+			production_t *temp;
+			temp = curr->next;
+			printf("liste supprimé \n");
 			curr->next = NULL;
+			printLinkedList(temp);
+			printf("fin liste supprimée \n");
+			freeLinkedList(temp);
+			temp = NULL;
 		}
 	}
 }
@@ -85,9 +95,11 @@ void printLinkedList(struct production *pHead)
 void insertProductionBlock(production_t **pHead, float value, int factory, int period, int K)
 {	
 	production_t *insertAdress;
-	insertAdress = rechElt(value,*pHead);
+	production_t *newElement;
 	
-	production_t *newElement = (production_t *)malloc(sizeof(production_t));
+	insertAdress = rechElt(value,*pHead);
+	newElement = (production_t *)malloc(sizeof(production_t));
+	
 	newElement->value = value;
 	newElement->factory = factory;
 	newElement->period = period;

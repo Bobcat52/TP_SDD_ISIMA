@@ -1,6 +1,6 @@
 CC = gcc
 LD_FLAGS = -I./include -I./src
-CX_FLAGS = -Wall -Wextra -I./include -I./src
+CX_FLAGS = -Wall -Wextra -ansi -pedantic -I./include -I./src
 
 all: main
 
