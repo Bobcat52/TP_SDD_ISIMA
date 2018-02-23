@@ -62,13 +62,15 @@ matrix_t loadMatrixFromFile(char* fileName,int *errorCode)
 				fscanf(file,"%f",&matrix.value[i][j]);
 			}
 		}
+
+		fclose(file);
 	}
 	else
 	{
 		*errorCode = -1; /* We had a problem while opening the file*/
 	}
 
-	fclose(file);
+
 	return(matrix);
 }
 void freeMatrix(matrix_t matrix)

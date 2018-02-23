@@ -32,6 +32,14 @@ int main()
 		/*Delete the matrix */
 		freeMatrix(matrixA);
 
+		printLinkedList(pTete);
+		printf("~~~~~~\n");
+
+		removeFactory(&pTete,0);
+		printLinkedList(pTete);
+
+		writeLinkedListToFile("result.txt",pTete);
+		
 		/* We can now free the linked list properly */
 		freeLinkedList(pTete);
 

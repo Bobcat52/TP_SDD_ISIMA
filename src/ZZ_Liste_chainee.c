@@ -72,13 +72,37 @@ void insertKSorted(production_t ** pHead, production_t *adresse, production_t *e
 		{
 			production_t *temp;
 			temp = curr->next;
-			printf("liste supprimé \n");
 			curr->next = NULL;
-			printLinkedList(temp);
-			printf("fin liste supprimée \n");
 			freeLinkedList(temp);
 			temp = NULL;
 		}
+	}
+}
+void removeFactory(production_t **pHead,int factory)
+{
+	production_t  ** prev  =  pHead;
+	production_t  *  curr  = *pHead;
+	production_t  *  tmp;
+
+	while (curr != NULL)
+	{	
+		tmp = NULL;
+		if(curr->factory == factory)
+		{
+			tmp = curr;
+			*prev = curr->next;
+		}
+		else
+		{
+			prev = &(curr->next);
+		}
+		
+		curr = curr->next;
+		
+		if(tmp != NULL)
+		{
+			 free(tmp);
+		}	
 	}
 }
 void printLinkedList(struct production *pHead)
@@ -91,6 +115,21 @@ void printLinkedList(struct production *pHead)
 			curr = curr->next;
 	}
 
+}
+void writeLinkedListToFile(char *fileName,production_t *pHead)
+{
+	FILE* file = fopen(fileName,"w");
+	production_t  *curr = pHead;
+
+	if(file != NULL)
+	{
+		while (curr != NULL)
+		{
+				fprintf(file,"L'usine %d a une production de %f à la période %d \n",curr->factory,curr->value,curr->period);
+				curr = curr->next;
+		}
+		fclose(file);
+	}
 }
 void insertProductionBlock(production_t **pHead, float value, int factory, int period, int K)
 {	

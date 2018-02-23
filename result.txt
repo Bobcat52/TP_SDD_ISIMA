@@ -1,0 +1,7 @@
+L'usine 3 a une production de 0.010000 à la période 3 
+L'usine 3 a une production de 0.100000 à la période 6 
+L'usine 5 a une production de 0.200000 à la période 4 
+L'usine 5 a une production de 0.300000 à la période 5 
+L'usine 5 a une production de 0.800000 à la période 6 
+L'usine 4 a une production de 1.300000 à la période 0 
+L'usine 5 a une production de 1.500000 à la période 2 

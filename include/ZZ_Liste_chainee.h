@@ -16,6 +16,7 @@ void printLinkedList(struct production *pHead);
 void insertKSorted(production_t ** pHead, production_t *adresse,production_t *element,int K);
 void insertProductionBlock(production_t **pHead,float value,int factory,int period,int K);
 void freeLinkedList(production_t *pHead);
-
+void removeFactory(production_t **pHead,int factory);
+void writeLinkedListToFile(char *fileName,production_t *pHead);
 
 #endif
