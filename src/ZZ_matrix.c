@@ -3,11 +3,19 @@
 #include "ZZ_matrix.h"
 
 
-/*
-* -1 = problem while openin file
-* 1 = no problem
-* 0 = problem during allocation
-*/
+
+/*-1 = problem while openin file	*/
+/* 1 = no problem				*/
+/* 0 = problem during allocation	*/
+
+
+/* ------------------------------------------------------------------------------------------------- */
+/* loadMatrixFromFile  Create a matrix from a file 													 */
+/* Inputs: fileName is a pointer of a file where it is written some data of production	of a company */
+/*        errorCode is a pointer of an error message												 */
+/* Output: return a matrix created from a file         												 */
+/* ------------------------------------------------------------------------------------------------- */
+
 matrix_t loadMatrixFromFile(char* fileName,int *errorCode)
 {
 	FILE* file = fopen(fileName,"r");
@@ -73,6 +81,14 @@ matrix_t loadMatrixFromFile(char* fileName,int *errorCode)
 
 	return(matrix);
 }
+
+/* ------------------------------------------------------------------------------------------------- */
+/*																									 */
+/* freeMatrix  Free the memory of the matrix even if it is badly created.                            */
+/* Inputs: matrix is a list of list where is stored some data of production of a company	         */
+/*      																							 */
+/* ------------------------------------------------------------------------------------------------- */
+
 void freeMatrix(matrix_t matrix)
 {
 	int i;
@@ -93,6 +109,16 @@ void freeMatrix(matrix_t matrix)
 	}
 	
 }
+
+/* ------------------------------------------------------------------------------------------------- */
+/*																									 */
+/* printMatrix  Display the matrix in the terminal                            						 */
+/* Inputs: matrix is a list of list where is stored some data of production of a company	         */
+/*      																							 */
+/* ------------------------------------------------------------------------------------------------- */
+
+
+
 void printMatrix(matrix_t matrix)
 {
 	int i,j;
@@ -106,6 +132,12 @@ void printMatrix(matrix_t matrix)
 		printf("\n");
 	}
 }
+
+
+/*-------------------------------------------------------------------------------------------------------------------------------------*/
+/* Don't look at these function, we wrote them to help us                                                                              */
+
+
 matrix_t multiply(matrix_t A,matrix_t B,int *errorCode)
 {
 	int error;
@@ -159,6 +191,11 @@ matrix_t multiply(matrix_t A,matrix_t B,int *errorCode)
 *	1 = no problem
 * 0 = problem allocation
 */
+
+
+
+
+
 matrix_t zeroMatrix(int line,int column,int *errorCode)
 {
 	int i, j;
@@ -190,7 +227,7 @@ matrix_t zeroMatrix(int line,int column,int *errorCode)
 			return(matrix);
 		}
 	}
-	/* We then, get the values of the matrix */
+	/* Then we get the values of the matrix */
 	*errorCode = 1;
 
 
