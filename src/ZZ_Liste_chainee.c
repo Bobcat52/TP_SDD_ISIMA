@@ -29,54 +29,77 @@ void insertKSorted(production_t ** pHead, production_t *adresse, production_t *e
 	production_t  ** prev  =   pHead;
 	production_t  *  curr  = * pHead;
 
-	int j = 0;
-	
-	while (curr != NULL && curr != adresse)
+	if(curr != NULL)
 	{
-		prev = &(curr->next);
-		curr = curr->next;
+		int j = 0;
+		printf("test\n");
+		
 
-		j++;
-	}
-
-	if(adresse == NULL) /* If the block need to be put at the end of the linked list but length < K */
-	{
-		if(j < K-2)
+		/* We go through the linked list, searching for the adress */
+		while (curr != NULL && curr != adresse)
 		{
-			element->next = curr; /* create a specific function */
-			*prev = element;
-		} 
+			prev = &(curr->next);
+			curr = curr->next;
+
+			j++; /* We increment a counter, if it overpasses K, it means we can free the block because it has a to high 			value */
+		}
+
+		
+		/* Once we found it, we either insert it into the list or we free the block */
+		if(adresse == NULL)
+		{
+
+			if(j <= K-2 )
+			{
+				element->next = curr; /* TODO : create a specific function */
+				*prev = element;
+			} 
+			else
+			{
+				free(element); /* we free the element because it's outranged */
+			}
+		}
 		else
 		{
-			free(element); /* we free the element because it's outrange */
+		
+			if(j <= K-2)
+			{	
+				element->next = curr; /* TODO : create a specific function */
+				*prev = element;
+		
+				while (curr != NULL && j < K-2)
+				{
+					prev = &(curr->next);
+					curr = curr->next;
+				
+					j++;
+				}
+
+				if(curr != NULL)
+				{
+					production_t *temp;
+					temp = curr->next;
+					curr->next = NULL;
+					freeLinkedList(temp);
+					temp = NULL;
+				}
+
+			}
+			else
+			{
+				free(element); /* we free the element because it's outranged */
+			}
+
+		
 		}
 	}
 	else
 	{
-		
-		element->next = curr; /* create a specific function */
+		element->next = curr; /* TODO : create a specific function */
 		*prev = element;
-		
-		if(j < K-2)
-		{
-			while (curr != NULL && j < K-2)
-			{
-				prev = &(curr->next);
-				curr = curr->next;
-				
-				j++;
-			}
-		}
-
-		if(curr != NULL)
-		{
-			production_t *temp;
-			temp = curr->next;
-			curr->next = NULL;
-			freeLinkedList(temp);
-			temp = NULL;
-		}
 	}
+
+
 }
 void removeFactory(production_t **pHead,int factory)
 {
@@ -105,31 +128,16 @@ void removeFactory(production_t **pHead,int factory)
 		}	
 	}
 }
-void printLinkedList(struct production *pHead)
+void writeLinkedListToFile(FILE* file,production_t *pHead)
 {
 	production_t  *curr = pHead;
 
 	while (curr != NULL)
 	{
-			printf("L'usine %d a une production de %f à la période %d \n",curr->factory,curr->value,curr->period);
-			curr = curr->next;
+		fprintf(file,"L'usine %d a une production de %f à la période %d \n",curr->factory,curr->value,curr->period);
+		curr = curr->next;
 	}
 
-}
-void writeLinkedListToFile(char *fileName,production_t *pHead)
-{
-	FILE* file = fopen(fileName,"w");
-	production_t  *curr = pHead;
-
-	if(file != NULL)
-	{
-		while (curr != NULL)
-		{
-				fprintf(file,"L'usine %d a une production de %f à la période %d \n",curr->factory,curr->value,curr->period);
-				curr = curr->next;
-		}
-		fclose(file);
-	}
 }
 void insertProductionBlock(production_t **pHead, float value, int factory, int period, int K)
 {	
