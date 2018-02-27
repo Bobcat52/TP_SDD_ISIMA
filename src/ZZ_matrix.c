@@ -113,6 +113,7 @@ matrix_t multiply(matrix_t A,matrix_t B,int *errorCode)
 	int i,j;
 
 	matrixRes.value = NULL;
+
 	/* We first verify that we can't actualy do the multiplication */
 	if(A.column == B.line)
 	{
