@@ -26,17 +26,17 @@ production_t * rechElt(float v, production_t * pHead)
 /* -------------------------------------------------------------------- */
 void insertKSorted(production_t ** pHead, production_t *adresse, production_t *element, int K)
 {
-	production_t  ** prev  =   pHead;
-	production_t  *  curr  = * pHead;
+	production_t  ** prev  =  pHead;
+	production_t  *  curr  = *pHead;
 
 	int j = 0;
 	
 	while (curr != NULL && curr != adresse)
 	{
-		prev = &(curr->next);
-		curr = curr->next;
+			prev = &(curr->next);
+			curr = curr->next;
 
-		j++;
+			j++;
 	}
 
 	if(adresse == NULL) /* If the block need to be put at the end of the linked list but length < K */
