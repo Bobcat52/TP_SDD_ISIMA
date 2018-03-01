@@ -18,7 +18,7 @@ int main(int argc, char * argv[])
 
 		/* Load some of them thanks to arguments of the program */
 		K = atoi(argv[2]);
-		factoryIndex = atoi(argv[2]); 
+		factoryIndex = atoi(argv[3]); 
 		matrixA = loadMatrixFromFile(argv[1],&codeError);
 
 		/* Start with the creation of the matrix, if we manage to load it */
@@ -38,13 +38,16 @@ int main(int argc, char * argv[])
 				}
 			}
 
-			/*Delete the matrix */
+			/* Delete the matrix, we don't need it anymore */
 			freeMatrix(matrixA);
 
 			writeLinkedListToFile(stdout,pTete);
 			printf("After removing the factory with the indice %d\n",factoryIndex);
 
+			/* Removing all the block having factoryIndex as value */
 			removeFactory(&pTete,factoryIndex);
+
+			/* Print the new linked list */
 			writeLinkedListToFile(stdout,pTete);
 
 
@@ -56,6 +59,7 @@ int main(int argc, char * argv[])
 				writeLinkedListToFile(file,pTete);
 				fclose(file);
 			}
+
 			/* We can finally free the linked list properly */
 			freeLinkedList(pTete);
 
