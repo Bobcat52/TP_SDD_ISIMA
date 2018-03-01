@@ -18,7 +18,7 @@
 
 matrix_t loadMatrixFromFile(char* fileName,int *errorCode)
 {
-	FILE* file = fopen(fileName,"r");
+	FILE* file = fopen(fileName,"r");		/* creation of a flow */
 	/* We create a matrix_t to store its value, column and line */
 	matrix_t matrix;
 	int issue;	
@@ -32,19 +32,19 @@ matrix_t loadMatrixFromFile(char* fileName,int *errorCode)
 		int i=0, j=0;
 		*errorCode = 0;
 
-		fscanf(file,"%d %d",&matrix.line,&matrix.column);
+		fscanf(file,"%d %d",&matrix.line,&matrix.column);		
 
-		matrix.value = malloc(matrix.line * sizeof(float*));
+		matrix.value = malloc(matrix.line * sizeof(float*)); /* First, we create lines of the matrix */
 
 		issue = 0;
 
-		if (matrix.value != NULL)
+		if (matrix.value != NULL)			/* while we aren't arrived at the end of the matrix which is a list of list, we go through it */
 		{
-			for(i=0; i< matrix.line; i++)
+			for(i=0; i< matrix.line; i++)   /* we go through the list which will become lines of the matrix */
 			{
 				if(issue == 0)
 				{
-					matrix.value[i]= malloc(matrix.column * sizeof(float));
+					matrix.value[i]= malloc(matrix.column * sizeof(float));		/* Now, we create columns of the matrix */
 				}
 
 				if(issue == 0 && matrix.value[i]==NULL)
@@ -59,13 +59,13 @@ matrix_t loadMatrixFromFile(char* fileName,int *errorCode)
 			freeMatrix(matrix);
 		}
 
-		/* We then, get the values of the matrix */
+		/* Then, we get the values of the matrix */
 		*errorCode = 1;
 
 
-		for(i = 0;i < matrix.line;i++)
+		for(i = 0;i < matrix.line;i++)	/* we go through lines of the matrix */
 		{
-			for(j=0;j < matrix.column;j++)
+			for(j=0;j < matrix.column;j++)		/* we go through columns of the matrix */
 			{
 				fscanf(file,"%f",&matrix.value[i][j]);
 			}
@@ -84,7 +84,7 @@ matrix_t loadMatrixFromFile(char* fileName,int *errorCode)
 
 /* ------------------------------------------------------------------------------------------------- */
 /*																									 */
-/* freeMatrix  Free the memory of the matrix even if it is badly created.                            */
+/* freeMatrix  Free the matrix even if it is badly created.                            */
 /* Inputs: matrix is a list of list where is stored some data of production of a company	         */
 /*      																							 */
 /* ------------------------------------------------------------------------------------------------- */
@@ -95,7 +95,7 @@ void freeMatrix(matrix_t matrix)
 
 	if (matrix.value != NULL)
 	{
-		for(i=0; i< matrix.line; i++)
+		for(i=0; i< matrix.line; i++)			/* we go through lines of the matrix */
 		{
 			if(matrix.value[i] != NULL)
 			{
@@ -123,11 +123,11 @@ void printMatrix(matrix_t matrix)
 {
 	int i,j;
 
-	for(i = 0;i < matrix.line;i++)
+	for(i = 0;i < matrix.line;i++)     /* we go through lines of the matrix */
 	{
-		for(j=0;j < matrix.column;j++)
+		for(j=0;j < matrix.column;j++)	/* we go through columns of the matrix */
 		{
-			printf("%f ",matrix.value[i][j]);
+			printf("%f ",matrix.value[i][j]);		/* we display the value of the element in the line i and the column j */
 		}
 		printf("\n");
 	}
