@@ -2,12 +2,12 @@
 #include <stdlib.h>
 #include "ZZ_Pile.h"
 
-pile_t * initPile(int taille)	
+pile_t * initPile(int taille, int * codeE)	
 {	
 	pile_t * p;
-	int      codeE;
 	
-	codeE=-1;
+	
+	*codeE=-1;
 	p = malloc(sizeof(pile_t));
 
 	if (p !=NULL)
@@ -17,7 +17,7 @@ pile_t * initPile(int taille)
 			{
 					p->tailleMax = taille;
 					p->numSommet = -1;
-					codeE = 1;
+					*codeE = 1;
 			}
 			else 
 			{
@@ -51,23 +51,24 @@ int estVide(pile_t * p)
 }
 
 
-void empiler (pile_t * p, typePile v)
+void empiler (pile_t * p, typePile v,int * codeE)
 {		
-		int codeE;
 		
-		codeE = -1;
+		
+		*codeE = -1;
 		if (p->numSommet < (p->tailleMax) )
 		{
 				*((p->deb) + (p->numSommet +1)*sizeof(typePile)) = v;
 				p->numSommet += 1;
-				codeE = 1;
+				*codeE = 1;
 		}
 		
 }
 
-void depiler ( pile_t * p, typePile * v)
+void depiler ( pile_t * p, typePile * v, int * codeE)
 {
-		/*codeE = -1;*/
+		*codeE = -1;
+		
 		if (!estVide(p))
 		{
 				*v = *((p->deb) + (p->numSommet)*sizeof(typePile));
