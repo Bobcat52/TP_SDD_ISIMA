@@ -2,22 +2,41 @@
 #include <stdlib.h>
 #include "ZZ_Pile.h"
 
-pile_t * initPile(int taille, int * codeE)	
-{	
-	pile_t * p;
-	
-	
-	*codeE=-1;
-	p = malloc(sizeof(pile_t));
 
-	if (p !=NULL)
+/* -------------------------------------------------------------------- */
+/* initStack        Init a stack properly                	         	*/
+/*                                                                      */
+/* Inputs :   - p0 is a pointer of the stack                     		*/
+/*            - size is the size of the queue 			            	*/
+/*	          - errorCode is an integer that stores the result of the 	*/
+/*		        function :  -1 - there is an issue while allocating 	*/
+/*				                 the queue            		         	*/
+/*								                                     	*/
+/*			                 0 - there is an issue while allocation the	*/
+/*				                 the array in the queue			        */
+/*									                                    */
+/*			                 1 - Everything went well !                 */
+/*                                                                      */
+/* Output :  Return the adress of the pointer of the head of the stack  */ 
+/* -------------------------------------------------------------------- */
+
+stack_t * initStack(int size, int * errorCode)	
+{	
+	stack_t * p;   /* we declare a pointer of the stack */
+	
+	
+	*errorCode=-1;
+	p = malloc(sizeof(stack_t));	/* we initialize the pointer */
+
+	if (p != NULL)   /* If the pointer is not null we initialize the point stack */
 	{
-			p->deb = malloc(taille*sizeof(typePile));
-			if ((p->deb)!= NULL)
+			p->begin = malloc(size*sizeof(typeStack)); /* we initalize the contiguous list which is pointed by the last block of the stack */ 
+			*errorCode = 0;
+			if ((p->begin)!= NULL)           /* if the previous allocation didn't go wrong */  
 			{
-					p->tailleMax = taille;
-					p->numSommet = -1;
-					*codeE = 1;
+					p->sizeMax = size;
+					p->numSummit = -1;     /*there is 0 element in the stack but the stack is created so we put -1 */
+					*errorCode = 1;           
 			}
 			else 
 			{
@@ -29,14 +48,22 @@ pile_t * initPile(int taille, int * codeE)
 	return p; 
 }
 
-void libererPile( pile_t * p)
+
+/* -------------------------------------------------------------------- */
+/* freeStack:        Free a stack properly                	         	*/
+/*                                                                      */
+/* Inputs :   - p0 is a pointer of the stack                     		*/
+/*                                                                      */
+/* -------------------------------------------------------------------- */
+
+void freeStack( stack_t * p)
 {
-	if (p->deb != NULL)
+	if (p->begin != NULL)  /* if there is a contiguous list, we free the pointer which link the stack to the contigous list */
 	{
-		free(p->deb);
+		free(p->begin);
 		
 	}
-	else 
+	else          /* so the pointer of the contiguous list is maybe null but we have to free the stack */
 	{
 		free(p);
 	}
@@ -44,42 +71,71 @@ void libererPile( pile_t * p)
 	
 }
 
+/* -------------------------------------------------------------------- */
+/* isEmpty:       Check if the stack is empty                	        */
+/*                                                                      */
+/* Input :   	- p0 is a pointer of the stack                     		*/
+/* Output:   	Return  boolean :                                       */
+/*                      * 0 if the stack is not isEmpty                 */
+/*						* 1 if it is                                    */
+/* -------------------------------------------------------------------- */
 
-int estVide(pile_t * p)
+
+int estVide(stack_t * p)
 {
-		return (p->numSommet == -1);
+		return (p->numSummit == -1);  /* if the stack is empty so there is 0 element , so numSummit = -1 */
 }
 
+/* --------------------------------------------------------------------- */
+/* stack:        Stack a value in the stack                	         	 */
+/*                                                                       */
+/* Inputs :  	- p0 is a pointer of the stack                     		 */
+/*           	- v is a value we want to stack                          */
+/*	            - errorCode is an integer that stores the result of the  */
+/*		          function :  -1 - there is an issue while allocating 	 */
+/*				                 the queue            		         	 */
+/*			                   1 - Everything went well !                */
+/* --------------------------------------------------------------------- */
 
-void empiler (pile_t * p, typePile v,int * codeE)
+void stack (stack_t * p, typeStack v ,int * errorCode)
 {		
-		
-		
-		*codeE = -1;
-		if (p->numSommet < (p->tailleMax) )
+		*errorCode = -1;
+		if (p->numSummit < (p->sizeMax) ) /* if the stack is not full */
 		{
-				*((p->deb) + (p->numSommet +1)*sizeof(typePile)) = v;
-				p->numSommet += 1;
-				*codeE = 1;
+				*((p->begin) + (p->numSummit +1)*sizeof(typeStack)) = v; /* we assign to the first free block of the contiguous list the value v */
+				p->numSummit += 1;  /* there is a further element in the stack */
+				*errorCode = 1;
 		}
 		
 }
 
-void depiler ( pile_t * p, typePile * v, int * codeE)
+/* -------------------------------------------------------------------- */
+/* unStack:        Unstack a value from the stack              	        */
+/*                                                                      */
+/* Inputs :  	- p0 is a pointer of the stack                     		*/
+/*           	- *v is the adress of the value                         */
+/*			       we want to unstack                                   */
+/*	          - errorCode is an integer that stores the result of the 	*/
+/*		        function :  -1 - there is an issue while allocating 	*/
+/*				                 the queue            		         	*/
+/*			                 1 - Everything went well !                 */
+/* -------------------------------------------------------------------- */
+
+void unStack ( stack_t * p, typeStack * v, int * errorCode)
 {
-		*codeE = -1;
+		*errorCode = -1;
 		
-		if (!estVide(p))
+		if (!estVide(p))      /* if the stack is not empty so we can unstack */
 		{
-				*v = *((p->deb) + (p->numSommet)*sizeof(typePile));
-				p->numSommet -= 1;
-				/*codeE = 1;*/
+				*v = *((p->begin) + (p->numSummit)*sizeof(typeStack));  /*  we pick up the value of the last element added and we assign it in a variable */
+				p->numSummit -= 1; /* we unstack the last element added so there is one element less stored in the stack */
+				errorCode = 1;
 		}
 }
 
 int main()
 {
-	pile_t * p;
+	stack_t * p;
 	int      i, v=2;
 	p = NULL;
 	p = initPile(3);

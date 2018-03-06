@@ -1,31 +1,24 @@
 #ifndef ZZ_Pile_h
 #define ZZ_Pile_h
 
-typedef int typePile;
+typedef int typeStack;
 
-typedef struct pile
+typedef struct stack
 {
-		int           tailleMax;
-		int           numSommet;
-		typePile  *   deb;
-}pile_t;
+		int           sizeMax;
+		int           numSummit;
+		typeStack  *  begin;
+}stack_t;
 
 
-pile_t * initPile(int taille); 
+stack_t * initStack(int size, int * errorCode); 
 
-void libererPile(pile_t * p);
+void freeStack( stack_t * p)
 
-int estVide(pile_t * p);
+int isEmpty(stack_t * p)
 
-void empiler(pile_t * p, typePile v);
+void stack (stack_t * p, typeStack v ,int * errorCode)
 
-void depiler(pile_t * p, typePile * v);
-
-
-
-
-
-
-
+void unStack ( stack_t * p, typeStack * v, int * errorCode)
 
 #endif
