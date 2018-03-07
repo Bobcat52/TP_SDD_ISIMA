@@ -97,7 +97,7 @@ int isEmpty(stack_t * p)
 /*			                   1 - Everything went well !                */
 /* --------------------------------------------------------------------- */
 
-void stack (stack_t * p, typeStack v ,int * errorCode)
+void push(stack_t * p, typeStack v ,int * errorCode)
 {		
 		*errorCode = -1;
 		if (p->numSummit < (p->sizeMax) ) /* if the stack is not full */
@@ -121,7 +121,7 @@ void stack (stack_t * p, typeStack v ,int * errorCode)
 /*			                 1 - Everything went well !                 */
 /* -------------------------------------------------------------------- */
 
-void unStack ( stack_t * p, typeStack * v, int * errorCode)
+void pop( stack_t * p, typeStack * v, int * errorCode)
 {
 		*errorCode = -1;
 		
@@ -137,17 +137,17 @@ int main()
 {
 	stack_t * p;
 	int       i, v=2;
-	int *     errorCode;
+	int     errorCode;
 	p = NULL;
-	p = initStack(3, errorCode);
+	p = initStack(3, &errorCode);
 	printf(" la pile est initialisée \n ");
 	i = isEmpty(p);
 	printf ( "%d\n", i);
-	stack(p , v, errorCode);
+	push(p , v, &errorCode);
 	i = isEmpty(p);
 	printf ( "%d\n", i);
 	int val;
-	unStack(p, &val, errorCode);
+	pop(p, &val, &errorCode);
 	printf("%d \n",val);
 	
 	return 0;
