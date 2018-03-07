@@ -56,7 +56,7 @@ stack_t * initStack(int size, int * errorCode)
 /*                                                                      */
 /* -------------------------------------------------------------------- */
 
-void freeStack( stack_t * p)
+void freeStack(stack_t * p)
 {
 	if (p->begin != NULL)  /* if there is a contiguous list, we free the pointer which link the stack to the contigous list */
 	{
@@ -81,7 +81,7 @@ void freeStack( stack_t * p)
 /* -------------------------------------------------------------------- */
 
 
-int estVide(stack_t * p)
+int isEmpty(stack_t * p)
 {
 		return (p->numSummit == -1);  /* if the stack is empty so there is 0 element , so numSummit = -1 */
 }
@@ -125,28 +125,29 @@ void unStack ( stack_t * p, typeStack * v, int * errorCode)
 {
 		*errorCode = -1;
 		
-		if (!estVide(p))      /* if the stack is not empty so we can unstack */
+		if (!isEmpty(p))      /* if the stack is not empty so we can unstack */
 		{
 				*v = *((p->begin) + (p->numSummit)*sizeof(typeStack));  /*  we pick up the value of the last element added and we assign it in a variable */
 				p->numSummit -= 1; /* we unstack the last element added so there is one element less stored in the stack */
-				errorCode = 1;
+				*errorCode = 1;
 		}
 }
 
 int main()
 {
 	stack_t * p;
-	int      i, v=2;
+	int       i, v=2;
+	int *     errorCode;
 	p = NULL;
-	p = initPile(3);
+	p = initStack(3, errorCode);
 	printf(" la pile est initialisée \n ");
-	i = estVide(p);
+	i = isEmpty(p);
 	printf ( "%d\n", i);
-	empiler(p , v);
-	i = estVide(p);
+	stack(p , v, errorCode);
+	i = isEmpty(p);
 	printf ( "%d\n", i);
 	int val;
-	depiler(p, &val);
+	unStack(p, &val, errorCode);
 	printf("%d \n",val);
 	
 	return 0;
