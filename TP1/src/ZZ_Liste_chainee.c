@@ -5,13 +5,13 @@
 
 
 /* ------------------------------------------------------------------------ */
-/* rechElt:  - Research an element in a sorted linked list.				    */
+/* findElt:  - Research an element in a sorted linked list.				    */
 /*                                                                          */
 /* Input:  	 - pHead is a ficticious head pointer of the linked list. 	    */
 /* 			 - v is the value we search in the list. 						*/
 /*                   														*/
 /* ------------------------------------------------------------------------ */
-production_t * rechElt(float v, production_t * pHead)
+production_t * findElt(float v, production_t * pHead)
 {
 	production_t  *curr = pHead;
 
@@ -171,7 +171,7 @@ void insertProductionBlock(production_t **pHead, float value, int factory, int p
 	production_t *insertAdress;
 	production_t *newElement;		
 	
-	insertAdress = rechElt(value,*pHead); /* we research the adress in the list where we could insert the new element */
+	insertAdress = findElt(value,*pHead); /* we research the adress in the list where we could insert the new element */
 	newElement = (production_t *)malloc(sizeof(production_t));  /* creation of a new block */
 	
 	/* If we were able to allocate the block */

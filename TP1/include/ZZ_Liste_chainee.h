@@ -11,7 +11,7 @@ typedef struct production
 
 
 
-production_t * rechElt(float v, production_t * pHead);
+production_t * findElt(float v, production_t * pHead);
 void insertKSorted(production_t ** pHead, production_t *adresse,production_t *element,int K);
 void insertProductionBlock(production_t **pHead,float value,int factory,int period,int K);
 void freeLinkedList(production_t *pHead);
