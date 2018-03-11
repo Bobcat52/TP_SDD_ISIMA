@@ -1,0 +1,313 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{legalpaper, margin=1in}
+\usepackage[T1]{fontenc}
+\usepackage{algorithm}
+\usepackage[noend]{algpseudocode}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+\title{SDD : TP 1}
+
+\begin{document}
+\maketitle
+\section*{Présentation générale}
+- Ce TP à pour but de créer une matrice représentant des coûts de production de différentes usines à différentes périodes depuis un fichier. Il faut ensuite récupérer les K usines ayant le plus faible coût de production. Finalement, il faut toutes les occurences d'une usines u dans cette liste et les supprimer.
+
+- schéma 
+
+
+- Les fichiers sources se trouvent dans le dossier \textbf{src}. Les entêtes sont dans le dossier \textbf{include}.
+\section{Détail de chaque fonction}
+\subsection{findElmt}
+\begin{algorithm}
+Principe : FindElmt
+\\
+\\
+\tab On initialise un pointeur courant qui va parcourir la liste. 
+\\
+\tab Tant qu'il n'est pas arrivé à la fin et que l'élément est inférieur à v 
+
+\tab \tab On parcout la liste chainée.
+\\
+\tab On retourne l'adresse du pointeur courant 
+
+FIN
+\end{algorithm}
+\underline{Lexique :}
+\begin{itemize}
+\item Paramètre(s) de la fonction  
+\begin{itemize}
+\item pHead est la tête fictive de la liste chainée
+\item v est la valeur que l'on cherche dans cette liste.
+\end{itemize}
+\item Variable(s) locale(s)
+\begin{itemize}
+\item curr est le pointeur courant qui parcourt la liste.
+\end{itemize}
+\end{itemize}
+
+\subsection{InserKSorted}
+\begin{algorithm}
+Principe : FindElmt
+\\
+\\
+\tab On initialise un pointeur courant qui va parcourir la liste. 
+\\
+\tab Tant qu'il n'est pas arrivé à la fin et que l'élément est inférieur à v 
+
+\tab \tab On parcout la liste chainée.
+\\
+\tab On retourne l'adresse du pointeur courant 
+\end{algorithm}
+\underline{Lexique :}
+\begin{itemize}
+\item Paramètre(s) de la fonction  
+\begin{itemize}
+\item Phead est la tête fictive de la liste chainée
+\item v est la valeur que l'on cherche dans cette liste.
+\end{itemize}
+\item Variable(s) locale(s)
+\begin{itemize}
+\item curr est le pointeur courant qui parcourt la liste.
+\end{itemize}
+\end{itemize}
+
+\newpage
+\subsection{RemoveFactory}
+\begin{algorithm}
+Principe : RemoveFactory
+\\
+\\
+\tab On initialise un pointeur courant, un pointeur précédent et un pointeur temporaire. 
+
+\tab Tant qu'on est pas arrivé à la fin de la liste.
+
+\tab \tab Si l'entreprise courante est celle recherchée alors : 
+
+\tab \tab \tab On supprime cet élément de la liste.
+
+\tab \tab Sinon
+
+\tab \tab \tab On avance dans la liste.
+
+FIN
+\end{algorithm}
+
+\underline{Lexique :}
+\begin{itemize}
+\item Paramètre(s) de la fonction  
+\begin{itemize}
+\item pHead est la tête fictive de la liste chainée
+\item factory est l'indice de l'usine que l'on supprimé de la liste chainée.
+\end{itemize}
+\item Variable(s) locale(s)
+\begin{itemize}
+\item prev est le pointeur qui pointe vers l'élément précédant le pointeur curr.
+\item curr est le pointeur courant qui parcourt la liste.
+\item tmp est un pointeur qui permet de libérer un bloc proprement.
+\end{itemize}
+\end{itemize}
+
+\subsection{WriteLinkedListToFile}
+\begin{algorithm}
+Principe : WriteLinkedListToFile
+\\
+\\
+\tab On initialise un pointeur courant
+
+\tab Tant qu'on est pas arrivé à la fin de la liste 
+
+\tab \tab On affiche un message avec des données de l'élément courant
+
+\tab \tab Le pointeur courant avance dans la liste 
+
+FIN
+\end{algorithm}
+
+\underline{Lexique :}
+\begin{itemize}
+\item Paramètre(s) de la fonction  
+\begin{itemize}
+\item file est le fichier dans lequel on veut afficher la liste chainée. (stdout, stderr, ou un fichier texte).
+\item pHead est la tête fictive de la liste chainée.
+\end{itemize}
+\item Variable(s) locale(s)
+\begin{itemize}
+\item curr est le pointeur courant qui parcourt la liste.
+\end{itemize}
+\end{itemize}
+
+
+\subsection{InsertProdutionBlock}
+\begin{algorithm}
+Principe : InsertProdutionBlock
+\\
+\\
+\tab On récupère l'adresse à laquelle on doit insérer le nouvel élément afin de garder la liste triée.
+
+\tab On crée un nouveau bloc.
+
+\tab Si on est capable d'allouer le bloc alors
+
+\tab \tab On affecte les nouvelles valeurs à ce bloc.
+
+\tab \tab On l'insert dans la liste chaînée triée.
+
+\tab Sinon 
+
+\tab \tab On affiche un message d'erreur
+
+FIN
+\end{algorithm}
+
+\underline{Lexique :}
+\begin{itemize}
+\item Paramètre(s) de la fonction  
+\begin{itemize}
+\item pHead est la tête fictive de la liste chainée.
+\item value est le coût de production de l'usine.
+\item factory est l'indice de l'usine.
+\item period est la période de production de l'usine.
+\item K est le nombre de plus petit coût de production que l'on veut garder.
+\end{itemize}
+\item Variable(s) locale(s)
+\begin{itemize}
+\item insertAdress pointe vers le bloc où on doit insérer le nouveau bloc.
+\item newElement pointe vers le nouveau bloc.
+\end{itemize}
+\end{itemize}
+
+\newpage
+\subsection{freeLinkedList}
+\begin{algorithm}
+Principe : freeLinkedList
+\\
+\\
+\tab Tant qu'on est pas arrivé au bout de la liste faire
+
+\tab \tab On libère proprement le bloc courant.
+
+\tab \tab On passe à l'élément suivant.
+
+FIN
+\end{algorithm}
+
+\underline{Lexique :}
+\begin{itemize}
+\item Paramètre(s) de la fonction  
+\begin{itemize}
+\item pHead est la tête fictive de la liste chainée.
+\end{itemize}
+\item Variable(s) locale(s)
+\begin{itemize}
+\item curr est le pointeur courant qui parcourt la liste.
+\item tmp est un pointeur qui permet de libérer un bloc proprement.
+\end{itemize}
+\end{itemize}
+
+\subsection{loadMatrixFromFile}
+\begin{algorithm}
+Principe : loadMatrixFromFile
+\\
+\\
+\tab On crée un flux vers notre fichier contenant notre matrice et une matrice pour stocker ses
+\tab valeurs, sa ligne, et sa colonne. 
+\\
+\\
+\tab Si le fichier s'est ouvert correctement alors 
+
+\tab \tab On lit les dimensions de la matrice situées sur la première ligne du fichier
+
+\tab \tab On alloue dynamiquement une matrice.
+
+\tab \tab Si on a un problème d'allocation à un certain moment 
+
+\tab \tab \tab on libère proprement la matrice et on rapporte une erreur à la fonction appelante.
+
+\tab \tab Sinon 
+
+\tab \tab \tab On lit l'élément $m_{i,j}$ depuis le fichier et on l'insère dans la matrice 
+
+\tab \tab  On ferme le fichier 
+
+\tab Sinon  
+
+\tab \tab On rapporte une erreur à la fonction appelante.
+
+FIN
+\end{algorithm}
+
+\underline{Lexique :}
+\begin{itemize}
+\item Paramètre(s) de la fonction  
+\begin{itemize}
+\item fileName est le nom du fichier qui contient la matrice.
+\item errorCode est un pointeur sur un entier qui indique si la fonction s'est bien passée.
+\end{itemize}
+\item Variable(s) locale(s)
+\begin{itemize}
+\item matrix est une structure contenant les valeurs de la matrice et sa taille.
+\item issue = 1, signifie qu'on doit s'arrêter d'allouer la matrice.
+\item file est le flux que l'on ouvre avec le nom du fichier contenant la matrice
+\item i et j permettent de parcourir la matrice.
+\end{itemize}
+\end{itemize}
+
+\subsection{freeMatrix}
+\begin{algorithm}
+Principe : freeMatrix
+\\
+\\
+\tab Si la matrice est non nulle alors : 
+
+\tab \tab On parcourt les lignes de la matrice : 
+
+\tab \tab \tab Si la valeur du bloc de la ligne i est non nulle alors: 
+
+\tab \tab \tab \tab On libère ce bloc
+
+\tab \tab On libère la matrice; 
+
+FIN
+\end{algorithm}
+
+\underline{Lexique :}
+\begin{itemize}
+\item Paramètre(s) de la fonction  
+\begin{itemize}
+\item matrix est la structure de la matrice que l'on veut afficher
+\end{itemize}
+\item Variable(s) locale(s)
+\begin{itemize}
+\item i est l'entier qui permet de supprimer chaque ligne de la matrice.
+\end{itemize}
+\end{itemize}
+\newpage
+\subsection{printMatrix}
+\begin{algorithm}
+Principe : printMatrix
+\\
+\\
+\tab On parcourt les lignes de la matrice
+
+\tab \tab On parcourt les colonnes de la matrice 
+
+\tab \tab \tab On affiche l'élément de la i-ème ligne et de la j-ème colonne 
+
+FIN
+\end{algorithm}
+
+\underline{Lexique :}
+\begin{itemize}
+\item Paramètre(s) de la fonction  
+\begin{itemize}
+\item matrix est la structure de la matrice que l'on veut afficher.
+\end{itemize}
+\item Variable(s) locale(s)
+\begin{itemize}
+\item i et j permettent d'afficher l'élément de la i-ème ligne et de la j-ème colonne.
+\end{itemize}
+\end{itemize}
+
+\end{document}
