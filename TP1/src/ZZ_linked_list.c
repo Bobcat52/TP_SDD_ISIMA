@@ -1,7 +1,19 @@
+/* ###################################################### */
+/* file's name : ZZ_linked_list.c						  */
+/*												    	  */
+/* Author : Mathieu Boutin & Jérémy Morceaux		 	  */
+/* Date : March 2018								 	  */
+/*													 	  */
+/* This file contains headers for ZZ_linked_list.c		  */
+/* Desc : It allows the user to manipulate a linked list  */ 
+/* (insertion, printing, finding etc ...)				  */
+/* ###################################################### */
+
+
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "ZZ_Liste_chainee.h"
+#include "ZZ_linked_list.h"
 
 
 /* ------------------------------------------------------------------------ */
@@ -15,16 +27,16 @@ production_t * findElt(float v, production_t * pHead)
 {
 	production_t  *curr = pHead;
 
-	while (curr != NULL && curr->value < v)   /* while we aren't arrived at the end of the list and the value is lower that v, we go through the list */
+	while (curr != NULL && curr->value < v) /* while we aren't arrived at the end of the list and the value is lower that v, we go through the list */
 	{
-			curr = curr->next;	/* we move forward in the list */
+			curr = curr->next; /* we move forward in the list */
 	}
 
 	return(curr); /* we return the adress of the element researched if we found it, otherwise return NULL */
 }
 
 /* -----------------------------------------------------------------------------*/
-/* insertKSorted: - Insert a block in a linked list so that it stay sorted and	*/ 
+/* insertKSorted: - Insert a block in a linked list so that it stays sorted and	*/ 
 /*				     not exceed a length of K  									*/
 /*                                                                          	*/
 /* Input:  		  - pHead is a ficticious head pointer of the linked list. 	    */
@@ -134,20 +146,20 @@ void removeFactory(production_t **pHead,int factory)
 		
 		if(tmp != NULL)	
 		{
-			 free(tmp);	/* we free it to avoid a problem of memory not restored */
+			 free(tmp); /* we free it to avoid a problem of memory not restored */
 		}	
 	}
 }
 
-/* -------------------------------------------------------------------------------------------------*/
-/* printLinkedList:  - print a linked list in a file (it can be stdout, stderr, or a created file). */
-/*                                                                          						*/
-/* Input:  			 - pHead is a ficticious head pointer of the linked list.					    */
-/*                   																			    */	
-/* -------------------------------------------------------------------------------------------------*/
+/* --------------------------------------------------------------------------------------------------------*/
+/* writeLinkedListToFile :  - print a linked list in a file (it can be stdout, stderr, or a created file). */
+/*                                                                          							   */
+/* Input:  			        - pHead is a ficticious head pointer of the linked list.					   */
+/*                   																			           */	
+/* --------------------------------------------------------------------------------------------------------*/
 void writeLinkedListToFile(FILE* file,production_t *pHead)
 {
-	production_t  *curr = pHead; /* we initialize a current pointer which will go through the list  */
+	production_t  * curr = pHead; /* we initialize a current pointer which will go through the list  */
 
 	while (curr != NULL) /* while we aren't arrived at the end of the list, we print a message with datas picked up in the list */
 	{
@@ -161,15 +173,15 @@ void writeLinkedListToFile(FILE* file,production_t *pHead)
 /* insertProductionBlock: - Creates and insert a production block in the linked list.                   */
 /*                                                                                                      */
 /* Input:  				  - pHead is a ficticious head pointer of the linked list. 	                    */
-/* 			    		  - value is the production of a factory.	   									*/
-/*              		  - factory is an intenger which represent the index of a factory.	  	  		*/
+/* 			    		  - value is the production's cost of the factory.	   							*/
+/*              		  - factory is an intenger which represent the index of the factory.	  	  	*/
 /*						  - period is an integer which represent the period of the production.		  	*/
 /*						  - K is the number of the smallest production we want to pick out.    			*/     
 /* ---------------------------------------------------------------------------------------------------- */
 void insertProductionBlock(production_t **pHead, float value, int factory, int period, int K)
 {	
-	production_t *insertAdress;
-	production_t *newElement;		
+	production_t * insertAdress;
+	production_t * newElement;		
 	
 	insertAdress = findElt(value,*pHead); /* we research the adress in the list where we could insert the new element */
 	newElement = (production_t *)malloc(sizeof(production_t));  /* creation of a new block */
@@ -200,8 +212,8 @@ void insertProductionBlock(production_t **pHead, float value, int factory, int p
 void freeLinkedList(production_t *pHead)
 {
 	/* We initiliaze a temp and a current pointer for the release */
-	production_t *curr = pHead;
-	production_t *temp = NULL;
+	production_t * curr = pHead;
+	production_t * temp = NULL;
 
 	while(curr != NULL) /* while we  aren't arrived at the end of the list we go through the list */
 	{

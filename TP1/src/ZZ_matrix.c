@@ -1,60 +1,80 @@
+/* ################################################# */
+/* file's name : ZZ_Matrix.c						 */
+/*												     */
+/* Author : Mathieu Boutin & Jérémy Morceaux		 */
+/* Date : March 2018								 */
+/*													 */
+/* This file contains source from ZZ_matrix.h 		 */
+/* Desc : It allows the user to manipulate a matrix  */ 
+/* (loading, printing, etc ...)						 */
+/* ################################################# */
+
 #include <stdlib.h>
 #include <stdio.h>
 #include "ZZ_matrix.h"
 
-
-
-/*-1 = problem while openin file	*/
-/* 1 = no problem				*/
-/* 0 = problem during allocation	*/
-
-
 /* ------------------------------------------------------------------------------------------------- */
-/* loadMatrixFromFile  Create a matrix from a file 													 */
-/* Inputs: fileName is a pointer of a file where it is written some data of production	of a company */
-/*        errorCode is a pointer of an error message												 */
-/* Output: return a matrix created from a file         												 */
+/* loadMatrixFromFile  					Create a matrix from a file 								 */
+/* 																									 */
+/* Inputs: 	- fileName is the name of the file where it is written some data of production			 */
+/*			  of a company 																			 */
+/*          - errorCode is a pointer of an error message :											 */
+/*					-1 = problem while openin file												     */
+/* 					 1 = no problem																	 */
+/* 					 0 = problem during allocation													 */	
+/*																									 */
+/* Output:  - Return a matrix created from a file         											 */
 /* ------------------------------------------------------------------------------------------------- */
-
 matrix_t loadMatrixFromFile(char* fileName,int *errorCode)
 {
-	FILE* file = fopen(fileName,"r");		/* creation of a flow */
+	
 	/* We create a matrix_t to store its value, column and line */
-	matrix_t matrix;
-	int issue;	
+	matrix_t 	matrix;
+	int 		issue;
+	FILE* 		file = fopen(fileName,"r"); /* creation of a flow */
+
+	/* Initialization */
 	matrix.value = NULL;
 	*errorCode = -1;
 
 	if(file!= NULL) /* We make sure, we actually opened the file */
 	{
+		int i = 0,
+			j = 0;
 
-		/* We can get dimension of the matrice n*m through the first line*/
-		int i=0, j=0;
 		*errorCode = 0;
 
+		/* We can get dimension of the matrice n*m through the first line*/
 		fscanf(file,"%d %d",&matrix.line,&matrix.column);		
 
 		matrix.value = malloc(matrix.line * sizeof(float*)); /* First, we create lines of the matrix */
 
 		issue = 0;
 
-		if (matrix.value != NULL)			/* while we aren't arrived at the end of the matrix which is a list of list, we go through it */
+		/* No error during first allocation */
+		if (matrix.value != NULL)
 		{
-			for(i=0; i< matrix.line; i++)   /* we go through the list which will become lines of the matrix */
+
+			for(i=0; i< matrix.line; i++)
 			{
-				if(issue == 0)
+				if(issue == 0) /* So far so good */
 				{
-					matrix.value[i]= malloc(matrix.column * sizeof(float));		/* Now, we create columns of the matrix */
+
+					matrix.value[i]= malloc(matrix.column * sizeof(float));	/* Now, we create columns of the matrix */
+
 				}
 
-				if(issue == 0 && matrix.value[i]==NULL)
+				if(issue == 0 && matrix.value[i]==NULL) /* error during allocation, aborting */
 				{
+
 					issue = 1;
-					freeMatrix(matrix);
+					freeMatrix(matrix); /* we had an issue during allocation, we free the matrix */
+
 				}
 			}
+
 		}
-		else
+		else /* error during allocation */
 		{
 			freeMatrix(matrix);
 		}
@@ -65,13 +85,17 @@ matrix_t loadMatrixFromFile(char* fileName,int *errorCode)
 
 		for(i = 0;i < matrix.line;i++)	/* we go through lines of the matrix */
 		{
+
 			for(j=0;j < matrix.column;j++)		/* we go through columns of the matrix */
 			{
-				fscanf(file,"%f",&matrix.value[i][j]);
+
+				fscanf(file,"%f",&matrix.value[i][j]); /* get the data from the file */
+
 			}
+
 		}
 
-		fclose(file);
+		fclose(file); /* Don't forget to close the flow */
 	}
 	else
 	{
@@ -83,27 +107,29 @@ matrix_t loadMatrixFromFile(char* fileName,int *errorCode)
 }
 
 /* ------------------------------------------------------------------------------------------------- */
+/* freeMatrix  			Free the matrix even if it is badly created.  								 */
+/* 																									 */
+/* Input: 	- matrix is a struct that stores values of the matrix and its size						 */
 /*																									 */
-/* freeMatrix  Free the matrix even if it is badly created.                            */
-/* Inputs: matrix is a list of list where is stored some data of production of a company	         */
-/*      																							 */
 /* ------------------------------------------------------------------------------------------------- */
-
 void freeMatrix(matrix_t matrix)
 {
 	int i;
 
 	if (matrix.value != NULL)
 	{
-		for(i=0; i< matrix.line; i++)			/* we go through lines of the matrix */
+		for(i=0; i< matrix.line; i++) /* For each line */
 		{
-			if(matrix.value[i] != NULL)
+			if(matrix.value[i] != NULL) /* We check that there is something to free */
 			{
-				free(matrix.value[i]);
+
+				free(matrix.value[i]); /* We free the line */
 				matrix.value[i] = NULL;
+
 			}
 		}
-		free(matrix.value);
+
+		free(matrix.value); /* We free the main pointer */
 		matrix.value = NULL;		
 			
 	}
@@ -111,31 +137,31 @@ void freeMatrix(matrix_t matrix)
 }
 
 /* ------------------------------------------------------------------------------------------------- */
+/* printMatrix  			Display the matrix in the terminal                            			 */
 /*																									 */
-/* printMatrix  Display the matrix in the terminal                            						 */
-/* Inputs: matrix is a list of list where is stored some data of production of a company	         */
+/* Input: 	- matrix is a struct that stores values of the matrix and its size						 */
 /*      																							 */
 /* ------------------------------------------------------------------------------------------------- */
-
-
-
 void printMatrix(matrix_t matrix)
 {
-	int i,j;
+	int i,
+		j;
 
-	for(i = 0;i < matrix.line;i++)     /* we go through lines of the matrix */
+	for(i = 0;i < matrix.line;i++) /* we go through lines of the matrix */
 	{
-		for(j=0;j < matrix.column;j++)	/* we go through columns of the matrix */
+		for(j=0;j < matrix.column;j++) /* we go through columns of the matrix */
 		{
-			printf("%f ",matrix.value[i][j]);		/* we display the value of the element in the line i and the column j */
+
+			printf("%f \t",matrix.value[i][j]); /* we display the value of the element in the line i and the column j */
+		
 		}
+
 		printf("\n");
 	}
 }
 
-
 /*-------------------------------------------------------------------------------------------------------------------------------------*/
-/* Don't look at these function, we wrote them to help us                                                                              */
+/* Don't look at these function, we wrote them just for fun		                                                                       */
 
 
 matrix_t multiply(matrix_t A,matrix_t B,int *errorCode)
@@ -191,10 +217,6 @@ matrix_t multiply(matrix_t A,matrix_t B,int *errorCode)
 *	1 = no problem
 * 0 = problem allocation
 */
-
-
-
-
 
 matrix_t zeroMatrix(int line,int column,int *errorCode)
 {

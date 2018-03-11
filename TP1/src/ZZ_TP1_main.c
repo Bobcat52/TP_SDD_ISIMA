@@ -1,8 +1,22 @@
+/* ################################################## */
+/* file's name : ZZ_TP1_main.c						  */
+/*												      */
+/* Author : Mathieu Boutin & Jérémy Morceaux		  */
+/* Date : March 2018								  */
+/*													  */
+/* This file contains main source for the TP		  */
+/*													  */
+/* Desc : This file create a matrix from a file, get  */
+/*		  the K-th smallest value in the matrix,      */
+/*		  remove a particular factory, and eventually */
+/*	      stores it in a file						  */
+/* ################################################## */
+
 #include <stdlib.h>
 #include <stdio.h>
 
 #include "ZZ_matrix.h"
-#include "ZZ_Liste_chainee.h"
+#include "ZZ_linked_list.h"
 
 #define NORMAL  "\x1B[0m"
 #define ROUGE  "\x1B[31m"
@@ -29,7 +43,9 @@ int main(int argc, char * argv[])
 		/* Load some of them thanks to arguments of the program */
 		K = atoi(argv[2]);
 		factoryIndex = atoi(argv[3]);
+
 		printf("%sI/ Loading the matrix from the file %s.%s\n",VERT,argv[1],NORMAL);
+
 		matrixA = loadMatrixFromFile(argv[1],&codeError);
 
 		/* Start with the creation of the matrix, if we manage to load it */
