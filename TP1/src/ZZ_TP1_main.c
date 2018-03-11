@@ -33,12 +33,15 @@ int main(int argc, char * argv[])
 	if(argc == 4) /* if we have enough arguments */
 	{	
 		/* Declare variables */
-		matrix_t matrixA;
-		int codeError;
-		int i,j;
-		int K,factoryIndex;
-		production_t *pTete;
-		FILE* file;
+		matrix_t 		matrixA;
+		int 			codeError,
+						i,
+						j,
+						K,
+						factoryIndex;
+
+		production_t  * pTete;
+		FILE          * file;
 
 		/* Load some of them thanks to arguments of the program */
 		K = atoi(argv[2]);

@@ -1,5 +1,6 @@
 !/usr/bin/sh
 
+make
 
 clear
 echo "Trace 0: Pas assez d'argument

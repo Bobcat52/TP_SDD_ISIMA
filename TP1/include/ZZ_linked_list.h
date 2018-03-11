@@ -27,7 +27,8 @@ typedef struct production
 
 /* Function */
 production_t * findElt(float v, production_t * pHead);
-void insertKSorted(production_t ** pHead, production_t *adresse,production_t *element,int K);
+void linkBlock(production_t ** prev,production_t * element,production_t * next);
+void insertKSorted(production_t ** pHead, production_t *address,production_t *element,int K);
 void insertProductionBlock(production_t **pHead,float value,int factory,int period,int K);
 void freeLinkedList(production_t *pHead);
 void removeFactory(production_t **pHead,int factory);

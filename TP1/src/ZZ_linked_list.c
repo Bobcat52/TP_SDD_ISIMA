@@ -32,7 +32,7 @@ production_t * findElt(float v, production_t * pHead)
 			curr = curr->next; /* we move forward in the list */
 	}
 
-	return(curr); /* we return the adress of the element researched if we found it, otherwise return NULL */
+	return(curr); /* we return the address of the element researched if we found it, otherwise return NULL */
 }
 
 /* -----------------------------------------------------------------------------*/
@@ -40,24 +40,25 @@ production_t * findElt(float v, production_t * pHead)
 /*				     not exceed a length of K  									*/
 /*                                                                          	*/
 /* Input:  		  - pHead is a ficticious head pointer of the linked list. 	    */
-/* 			      - adress is the adress of a block. We want to place our		*/ 
+/* 			      - address is the address of a block. We want to place our		*/ 
 /*				    block before this one.   									*/		
 /*                - element is the block we want to place.						*/
 /* 			      - K is the maximal length of our linked list 					*/
 /*				    (note that she can obviously be of length < K).    			*/
 /*                   															*/
 /* -----------------------------------------------------------------------------*/
-void insertKSorted(production_t ** pHead, production_t *adress, production_t *element, int K)
+void insertKSorted(production_t ** pHead, production_t *address, production_t *element, int K)
 {
 	production_t  ** prev  =   pHead;
 	production_t  *  curr  = * pHead;
 
+	/* the linked list is not empty */
 	if(curr != NULL)
 	{
 		int j = 0;
 
-		/* We go through the linked list, searching for the adress */
-		while (curr != NULL && curr != adress)
+		/* We go through the linked list, searching for the address */
+		while (curr != NULL && curr != address)
 		{
 			prev = &(curr->next);
 			curr = curr->next;
@@ -65,23 +66,26 @@ void insertKSorted(production_t ** pHead, production_t *adress, production_t *el
 			j++; /* We increment a counter, if it overpasses K, it means we can free the block because it has a to high value */
 		}
 
-		
+		/* if j <= K-1 , we need to free the rest of the linked list so that its length stay <= K */
 		if(j <= K-1 )
 		{
 
-			if(adress == NULL)
+			/* address = null means we are at the end of the linked list, so there is no block after this one */
+			if(address == NULL)
 			{
-				element->next = curr; /* TODO : create a specific function */
-				*prev = element;
+				/* We add the new block */	
+				linkBlock(prev,element,curr);
+
 			} 
 			else
-			{		
-				element->next = curr; /* TODO : create a specific function */
-				*prev = element;
+			{	
+				/* We add the new block */	
+				linkBlock(prev,element,curr);
 
 				/* We need to set curr to the element because the block is inserted before it */
 				curr = element;
 
+				/* we find the last element of the linked list */
 				while (curr != NULL && j <= K-2)
 				{
 					prev = &(curr->next);
@@ -89,29 +93,45 @@ void insertKSorted(production_t ** pHead, production_t *adress, production_t *el
 				
 					j++;
 				}
-
+				/* we free the rest of the linked list */
 				if(curr != NULL)
 				{
-					production_t *temp;
-					temp = curr->next;
+					production_t *tmp;
+
+					tmp = curr->next; /* set next's last element to null */
 					curr->next = NULL;
-					freeLinkedList(temp);
-					temp = NULL;
+
+					freeLinkedList(tmp); /* free the rest of the linked list */
+					tmp = NULL;
 				}
 				
 			}
 		}
-		else
+		else /* j > k-1, this value is to high, we can free it */
 		{
 			free(element); /* we free the element because it's outranged */
 	
 		}
 	}
-	else
+	else /* the linked list is empty, just need to add the bloc to it */
 	{
-		element->next = curr; /* TODO : create a specific function */
-		*pHead = element;
+		linkBlock(pHead,element,curr);
 	}
+
+}
+
+/* ----------------------------------------------------------------------------------------*/
+/* linkBlock:					Link two block between them 							   */
+/*                                                                          			   */
+/* Input:  		   - prev is the struct that comes before element				           */
+/* 			       - element is the struct we want to connect						  	   */ 
+/* 			       - next is the struct that comes after element					  	   */  
+/*                                                                          			   */                  
+/* ----------------------------------------------------------------------------------------*/
+void linkBlock(production_t ** prev,production_t * element,production_t * next)
+{
+	element->next = next; /* we simply modify the element's next and prev's next */
+	*prev = element;
 
 }
 
@@ -139,7 +159,7 @@ void removeFactory(production_t **pHead,int factory)
 		}
 		else /*  if the current element is not the factory researched */
 		{
-			prev = &(curr->next); /* the previous pointer points to the adress of the next element , and NOT to the next element !! */
+			prev = &(curr->next); /* the previous pointer points to the address of the next element , and NOT to the next element !! */
 		}
 		
 		curr = curr->next; /* we move forward in the list, the current pointer points to the next element */
@@ -180,10 +200,10 @@ void writeLinkedListToFile(FILE* file,production_t *pHead)
 /* ---------------------------------------------------------------------------------------------------- */
 void insertProductionBlock(production_t **pHead, float value, int factory, int period, int K)
 {	
-	production_t * insertAdress;
+	production_t * insertaddress;
 	production_t * newElement;		
 	
-	insertAdress = findElt(value,*pHead); /* we research the adress in the list where we could insert the new element */
+	insertaddress = findElt(value,*pHead); /* we research the address in the list where we could insert the new element */
 	newElement = (production_t *)malloc(sizeof(production_t));  /* creation of a new block */
 	
 	/* If we were able to allocate the block */
@@ -195,7 +215,7 @@ void insertProductionBlock(production_t **pHead, float value, int factory, int p
 		newElement->period = period;
 		newElement->next = NULL;
 
-		insertKSorted(pHead,insertAdress,newElement,K); /* we insert the new block in the sorted linked list by keeping the list sorted */	
+		insertKSorted(pHead,insertaddress,newElement,K); /* we insert the new block in the sorted linked list by keeping the list sorted */	
 	}	
 	else
 	{
