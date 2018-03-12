@@ -4,7 +4,6 @@
 \geometry{legalpaper, margin=1in}
 \usepackage[T1]{fontenc}
 \usepackage{algorithm}
-\usepackage[noend]{algpseudocode}
 \newcommand\tab[1][1cm]{\hspace*{#1}}
 \usepackage{graphicx}
 
@@ -13,10 +12,24 @@
 \begin{document}
 \maketitle
 \section{Présentation générale}
-- Ce TP à pour but de créer une matrice représentant des coûts de production de différentes usines à différentes périodes depuis un fichier. Il faut ensuite récupérer les K usines ayant le plus faible coût de production. Finalement, il faut toutes les occurences d'une usines u dans cette liste et les supprimer.
+- Ce TP à pour but de créer une matrice représentant des coûts de production de différentes usines à différentes périodes depuis un fichier. Il faut ensuite récupérer les K usines ayant le plus faible coût de production. Finalement, il faut repérer toutes les occurences d'une usines u dans cette liste et les supprimer.
 \\
 \\
-- schéma  à terminer.
+\underline{- Schéma de base :}
+\begin{center}
+\includegraphics[scale=0.39]{sdd.png}
+\end{center}
+
+\underline{Structure des fichiers de matrices : prenons par exemple une matrice n*m}
+\\
+\\
+1ère ligne fichier : <nombre de lignes> <nombre de colonne>
+\\
+2ème ligne du fichier: $m_{0,1}$ $m_{0,2}$  ... $m_{0,m-1}$
+\\
+...
+\\
+n+1ème ligne du fichier : $m_{n-1,1}$ $m_{0,2}$  ... $m_{n-1,m-1}$
 \\
 \\
 - Les fichiers sources se trouvent dans le dossier \textbf{src}.Les fonctions relatives au matrices sont dans le fichier \textbf{ZZ\_matrix.c} et les fonctions relatives aux listes chainées sont dans le fichier \textbf{ZZ\_linked\_list.c}. Les entêtes sont dans le dossier \textbf{include}.
@@ -66,7 +79,6 @@ Principe : linkBlock
 
 FIN
 \end{algorithm}
-\newpage
 \underline{Lexique :}
 \begin{itemize}
 \item Paramètre(s) de la fonction  
@@ -510,59 +522,66 @@ Source code : main()
 \begin{center}
 \includegraphics[scale=0.39]{Makefile.png}
 
-figure : Makefile
+Makefile
 \end{center}
 
 \underline{Jeux de test complets:}
 \begin{center}
 \includegraphics[scale=0.4]{trace_1.png}
 
-figure : Trace 1
+Terminal
 \end{center}
 
 \begin{center}
 \includegraphics[scale=0.4]{trace_2.png}
+\includegraphics[scale=0.4]{matrice_vide.png}
 
-figure : Trace 2
+Terminal | fichier matrice
 \end{center}
 
 \begin{center}
 \includegraphics[scale=0.4]{trace_3.png}
+\includegraphics[scale=0.4]{matrice_un_element.png}
 
-figure : Trace 3
+Terminal | fichier matrice
 \end{center}
 
 \begin{center}
 \includegraphics[scale=0.4]{trace_4.png}
+\includegraphics[scale=0.4]{matrice_ligne.png}
 
-figure : Trace 4
+Terminal | fichier matrice
 \end{center}
 \begin{center}
 \includegraphics[scale=0.4]{trace_5.png}
+\includegraphics[scale=0.4]{matrice_2.png}
 
-figure : Trace 5
+Terminal | fichier matrice
 \end{center}
 
 \begin{center}
 \includegraphics[scale=0.4]{trace_6.png}
+\includegraphics[scale=0.4]{matrice_2.png}
 
-figure : Trace 6
+Terminal | fichier matrice
 \end{center}
 \begin{center}
 \includegraphics[scale=0.4]{trace_7.png}
+\includegraphics[scale=0.4]{matrice_2.png}
 
-figure : Trace 7
+Terminal | fichier matrice
 \end{center}
 
 \begin{center}
 \includegraphics[scale=0.4]{trace_8.png}
 
-figure : Trace 8
+Terminal | fichier inexistant
 \end{center}
 
 \begin{center}
-\includegraphics[scale=0.4]{trace_9.png}
+\includegraphics[scale=0.3]{trace_9.png}
+\includegraphics[scale=0.3]{matrice_general.png}
 
-figure : Trace 9
+Terminal | fichier matrice
 \end{center}
 \end{document}

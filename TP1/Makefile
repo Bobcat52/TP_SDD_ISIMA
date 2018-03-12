@@ -7,8 +7,8 @@ all: main
 main: main.o matrix.o linkedList.o
 	$(CC) ./obj/main.o ./obj/matrix.o ./obj/linkedList.o -o ./bin/main_program $(LD_FLAGS)
 
-main.o: ./src/ZZ_TP1_main.c ./include/ZZ_matrix.h
-	$(CC) -c ./src/ZZ_TP1_main.c -o ./obj/main.o $(CX_FLAGS) 
+main.o: ./src/main.c ./include/ZZ_matrix.h
+	$(CC) -c ./src/main.c -o ./obj/main.o $(CX_FLAGS) 
 
 matrix.o: ./src/ZZ_matrix.c ./include/ZZ_matrix.h
 	$(CC) -c ./src/ZZ_matrix.c -o ./obj/matrix.o $(CX_FLAGS) 
