@@ -31,7 +31,7 @@
 int main(int argc, char * argv[])
 {
 	if(argc == 4) /* if we have enough arguments */
-	{	
+	{
 		/* Declare variables */
 		matrix_t 		matrixA;
 		int 			codeError,
@@ -60,17 +60,17 @@ int main(int argc, char * argv[])
 			printf("%sII/ Creating the linked list.%s\n",VERT,NORMAL);
 
 			if(K > 0)
-			{			
+			{
 				if(matrixA.line > 0 && matrixA.column > 0) /* we are dealing with a non-null matrix */
 				{
-					
+
 
 					if( K > matrixA.line * matrixA.column )
-					{	
+					{
 						fprintf(stdout,"%s[WARNING] K > number of data in the matrix.%s\n",JAUNE,NORMAL);
 					}
 
-					
+
 					for(i = 0;i < matrixA.line;i++)
 					{
 						for(j = 0;j < matrixA.column;j++)
@@ -78,7 +78,7 @@ int main(int argc, char * argv[])
 							if( K != 0) /* there is no use in allocating block when we don't need to sort any value */
 							{
 								insertProductionBlock(&pTete,matrixA.value[i][j],i,j,K);
-							}				
+							}
 						}
 					}
 
@@ -94,13 +94,13 @@ int main(int argc, char * argv[])
 					{
 						/* Removing all the block having factoryIndex as value */
 						removeFactory(&pTete,factoryIndex);
-					}	
+					}
 					else
 					{
 						fprintf(stdout,"%s[WARNING] You're attempting to remove a non-existing factory.%s\n",JAUNE,NORMAL);
 					}
-				
-					
+
+
 					/* Print the new linked list */
 					writeLinkedListToFile(stdout,pTete);
 
@@ -125,17 +125,19 @@ int main(int argc, char * argv[])
 				else
 				{
 					fprintf(stdout,"%s[WARNING] Null Matrix. There is no data to work with.%s\n",JAUNE,NORMAL);
+					freeMatrix(matrixA);
 				}
 			}
 			else
 			{
 				fprintf(stdout,"%s[ERROR] K is negative. No data will be shown%s\n",ROUGE,NORMAL);
-			}			
+				freeMatrix(matrixA);
+			}
 		}
 		else
 		{
 			fprintf(stderr,"%s[ERROR]%s Can't create the matrix from the file : %s \n%s[ERROR]%s Reason : ",ROUGE,NORMAL,argv[1],ROUGE,NORMAL);
-		
+
 			if(codeError == 0)
 			{
 				fprintf(stderr,"Unable to allocate enough space for the matrix.\n");
@@ -150,7 +152,7 @@ int main(int argc, char * argv[])
 	{
 		fprintf(stderr,"%s[ERROR] Too few/much arguments.%s\n",ROUGE,NORMAL);
 		printf("[INFO] Usage : %s matrixFile A B \nWhere : \nmatrixFile - It's the name of the file where the matrix is stored. It needs to be in directory where you start the program \nA - It's the number of smallest value you want to keep from the matrix\nB - It's the indice of the factory you want to remove from the linked list containing the x smallest value \n",argv[0]);
-		
+
 	}
 	return(0);
 }
