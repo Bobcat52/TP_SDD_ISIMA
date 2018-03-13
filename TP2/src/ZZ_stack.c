@@ -1,13 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "ZZ_Pile.h"
+#include "ZZ_stack.h"
 
 
 /* -------------------------------------------------------------------- */
 /* initStack        Init a stack properly                	         	*/
 /*                                                                      */
-/* Inputs :   - p0 is a pointer of the stack                     		*/
-/*            - size is the size of the queue 			            	*/
+/* Inputs :   - size is the size of the queue 			            	*/
 /*	          - errorCode is an integer that stores the result of the 	*/
 /*		        function :  -1 - there is an issue while allocating 	*/
 /*				                 the queue            		         	*/
@@ -24,14 +23,15 @@ stack_t * initStack(int size, int * errorCode)
 {	
 	stack_t * p;   /* we declare a pointer of the stack */
 	
-	
 	*errorCode=-1;
+
 	p = malloc(sizeof(stack_t));	/* we initialize the pointer */
 
 	if (p != NULL)   /* If the pointer is not null we initialize the point stack */
 	{
 			p->begin = malloc(size*sizeof(typeStack)); /* we initalize the contiguous list which is pointed by the last block of the stack */ 
 			*errorCode = 0;
+
 			if ((p->begin)!= NULL)           /* if the previous allocation didn't go wrong */  
 			{
 					p->sizeMax = size;
@@ -47,8 +47,98 @@ stack_t * initStack(int size, int * errorCode)
 	
 	return p; 
 }
+/* -------------------------------------------------------------------- */
+/* initStack        Init a stack from a file               	         	*/
+/*                                                                      */
+/* Inputs :   - fileName is the name of the file containing the stack.  */
+/*	          - errorCode is an integer that stores the result of the 	*/
+/*		        function :  -1 - there is an issue while trying to open	*/
+/*				                 the file            		         	*/
+/*								                                     	*/
+/*			                 0 - there is an issue while allocation the	*/
+/*				                 the array in the queue			        */
+/*									                                    */
+/*			                 1 - Everything went well !                 */
+/*                                                                      */
+/* Output :  Return the adress of the pointer of the head of the stack  */ 
+/* -------------------------------------------------------------------- */
+stack_t * initStackFromFile(char * fileName, int *errorCode)
+{
+	/* We create a matrix_t to store its value, column and line */
+	stack_t* 	stack;
+	int 		size;
+	int			codeE_init; /* errorCode for init */
+	int 		codeE_push;
+	int 		i;
+	int 		issue;
+	FILE* 		file = fopen(fileName,"r"); /* creation of a flow */
 
 
+	issue = 0;
+
+	if(file!= NULL) /* We make sure, we actually opened the file */
+	{
+		*errorCode = 0;
+
+		/* We can get the length of the stack with the first line*/
+		fscanf(file,"%d",&size);
+		
+		printf("size = %d\n",size); /* magie */
+
+		stack = initStack(size,&codeE_init); /* We initialize our stack */
+		
+		
+		if(codeE_init == 1)
+		{
+
+			/* Everything went well */
+			*errorCode = 1;
+
+			for(i = 0;i < size;i++)	/* We fill our stack */
+			{
+				if(issue == 0)
+				{	
+					typeStack value;
+	
+					fscanf(file,"%d ",&value); /* get the data from the file */
+					printf("%d\n",value);
+
+					push(stack,value,&codeE_push);
+
+					if(codeE_push != 1) /* if we had a problem during pushing, we stop the process */
+					{
+						*errorCode = 0;
+						issue = 1;
+					}
+					else
+					{
+						printf("No problem\n");
+					}
+				}			
+			}
+		}
+
+		fclose(file); /* Don't forget to close the flow */
+	}
+	else
+	{
+		*errorCode = -1; /* We had a problem while opening the file*/
+	}
+
+
+	return(stack);
+}
+
+void printStack(stack_t* p)
+{
+	int i;
+
+	for(i = 0;i <= p->numSummit;i++)	/* We fill our stack */
+	{
+		printf("%d ",*((p->begin) + i*sizeof(typeStack)));
+	}
+	printf("\n");
+}
 /* -------------------------------------------------------------------- */
 /* freeStack:        Free a stack properly                	         	*/
 /*                                                                      */
@@ -72,16 +162,16 @@ void freeStack(stack_t * p)
 }
 
 /* -------------------------------------------------------------------- */
-/* isEmpty:       Check if the stack is empty                	        */
+/* isStackEmpty:       Check if the stack is empty                	    */
 /*                                                                      */
 /* Input :   	- p0 is a pointer of the stack                     		*/
 /* Output:   	Return  boolean :                                       */
-/*                      * 0 if the stack is not isEmpty                 */
+/*                      * 0 if the stack is not isStackEmpty            */
 /*						* 1 if it is                                    */
 /* -------------------------------------------------------------------- */
 
 
-int isEmpty(stack_t * p)
+int isStackEmpty(stack_t * p)
 {
 		return (p->numSummit == -1);  /* if the stack is empty so there is 0 element , so numSummit = -1 */
 }
@@ -96,13 +186,13 @@ int isEmpty(stack_t * p)
 /*				                 the queue            		         	 */
 /*			                   1 - Everything went well !                */
 /* --------------------------------------------------------------------- */
-
 void push(stack_t * p, typeStack v ,int * errorCode)
 {		
 		*errorCode = -1;
-		if (p->numSummit < (p->sizeMax) ) /* if the stack is not full */
+
+		if (p->numSummit+1 <= (p->sizeMax) ) /* if the stack is not full */
 		{
-				*((p->begin) + (p->numSummit +1)*sizeof(typeStack)) = v; /* we assign to the first free block of the contiguous list the value v */
+				*((p->begin) + (p->numSummit+1)*sizeof(typeStack)) = v; /* we assign to the first free block of the contiguous list the value v */
 				p->numSummit += 1;  /* there is a further element in the stack */
 				*errorCode = 1;
 		}
@@ -125,30 +215,11 @@ void pop( stack_t * p, typeStack * v, int * errorCode)
 {
 		*errorCode = -1;
 		
-		if (!isEmpty(p))      /* if the stack is not empty so we can unstack */
+		if (!isStackEmpty(p))      /* if the stack is not empty so we can unstack */
 		{
 				*v = *((p->begin) + (p->numSummit)*sizeof(typeStack));  /*  we pick up the value of the last element added and we assign it in a variable */
 				p->numSummit -= 1; /* we unstack the last element added so there is one element less stored in the stack */
+								
 				*errorCode = 1;
 		}
-}
-
-int main()
-{
-	stack_t * p;
-	int       i, v=2;
-	int     errorCode;
-	p = NULL;
-	p = initStack(3, &errorCode);
-	printf(" la pile est initialisée \n ");
-	i = isEmpty(p);
-	printf ( "%d\n", i);
-	push(p , v, &errorCode);
-	i = isEmpty(p);
-	printf ( "%d\n", i);
-	int val;
-	pop(p, &val, &errorCode);
-	printf("%d \n",val);
-	
-	return 0;
 }

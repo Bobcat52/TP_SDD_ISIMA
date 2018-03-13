@@ -9,7 +9,6 @@
 /* (insertion, printing, finding etc ...)				  */
 /* ###################################################### */
 
-
 #ifndef ZZ_LINKED_LIST_H
 #define ZZ_LINKED_LIST_H
 

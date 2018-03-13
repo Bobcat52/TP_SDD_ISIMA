@@ -1,4 +1,4 @@
-#include "ZZ_File.h"
+#include "ZZ_queue.h"
 
 /* -------------------------------------------------------------------- */
 /* initQueue         Init a queue properly                		*/
@@ -14,27 +14,32 @@
 /*									*/
 /*			     1 - Everything went well !             	*/
 /* -------------------------------------------------------------------- */
-void initFile(file_t** p0,int size,int* errorCode) /* TODO = handle error */
+queue_t* initQueue(int size,int* errorCode)
 {
+	queue_t* p0;
+
 	*errorCode = -1;
-	*p0 = (file_t*)malloc(sizeof(file_t));
-	if(*p0 != NULL)
-	{
-		(*p0)->size = size;
-		(*p0)->number = 0;
 	
-		(*p0)->base = (typeFile*)malloc(size * sizeof(typeFile));
+	p0 = (queue_t*)malloc(sizeof(queue_t));
+	if(p0 != NULL)
+	{
+		p0->size = size;
+		p0->number = 0;
+	
+		p0->base = (queueType*)malloc(size * sizeof(queueType));
 		*errorCode = 0;
-		if((*p0)->base != NULL)
+		if(p0->base != NULL)
 		{		
 			*errorCode = 1;
-			(*p0)->start = (*p0)->base;
-			(*p0)->end = (*p0)->base + sizeof(typeFile) * (size-1);
+			p0->start = p0->base;
+			p0->end = p0->base + sizeof(queueType) * (size-1);
 		}	
 	}
+
+	return(p0);
 }
 /* -------------------------------------------------------------------- */
-/* enter         Put a value in the queue                 		*/
+/* enterQueue         Put a value in the queue                 		*/
 /*                                                                      */
 /* Input :    - p0 is a pointer to the queue.                  		*/
 /*            - element is the value that is entering the queue.	*/
@@ -47,36 +52,42 @@ void initFile(file_t** p0,int size,int* errorCode) /* TODO = handle error */
 /*									*/
 /*			     1 - Everything went well !             	*/
 /* -------------------------------------------------------------------- */
-void push(file_t* p0,typeFile element,int* errorCode)
+void enterQueue(queue_t* p0,queueType element,int* errorCode)
 {
 	*errorCode = 0;
 	if(p0->number < p0->size)
 	{
 		*errorCode = 1;
-		p0->end = ((p0->end - p0->base + sizeof(typeFile)) % p0->size) + p0->base;
+		p0->end = ((p0->end - p0->base + sizeof(queueType)) % p0->size) + p0->base;
 		*p0->end = element;
 		p0->number += 1;
 		
 	}
 }
-typeFile pop(file_t* p0,int* errorCode)
+queueType leaveQueue(queue_t* p0,int* errorCode)
 {
-	typeFile res;
+	queueType res;
+
 	*errorCode = 0;
+
 	if(p0->number != 0)
 	{
+
 		*errorCode = 1;
 		res = *(p0->start);
-		p0->start = ((p0->start - p0->base + sizeof(typeFile)) % p0->size) + p0->base;
+		p0->start = ((p0->start - p0->base + sizeof(queueType)) % p0->size) + p0->base;
 		p0->number -= 1;
+
 	}
+
 	return(res);
+
 }
-int estVide(file_t* p0)
+int isQueueEmpty(queue_t* p0)
 {
 	return(p0->number == 0);
 }
-void libererFile(file_t* p0)
+void freeQueue(queue_t* p0)
 {
 	if(p0->base != NULL)
 	{	
@@ -87,30 +98,3 @@ void libererFile(file_t* p0)
 		free(p0);
 	}
 }
-/*
-int main()
-{
-	file_t* p0;
-	p0 = NULL;
-	int errorCode;
-
-	initFile(&p0,3);
-	push(p0,1,&errorCode);
-	printf("valeur inserer = %d\n",*(p0->end));
-	push(p0,2,&errorCode);
-	printf("valeur inserer = %d\n",*(p0->end));
-	push(p0,3,&errorCode);
-	printf("valeur inserer = %d\n",*(p0->end));
-	push(p0,4,&errorCode);
-	printf("valeur inserer = %d\n",*(p0->end));
-
-
-	printf("valeur retourne = %d\n",pop(p0,&errorCode));
-	printf("valeur retourne = %d\n",pop(p0,&errorCode));
-	printf("valeur retourne = %d\n",pop(p0,&errorCode));
-	printf("valeur retourne = %d\n",pop(p0,&errorCode));
-
-	libererFile(p0);
-	return(0);
-
-}*/
