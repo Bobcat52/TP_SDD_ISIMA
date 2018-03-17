@@ -20,6 +20,8 @@ int main()
 	if(errorCode == 1)
 	{
 		printStack(stack);
+
+		freeStack(stack);
 	}
 	else
 	{

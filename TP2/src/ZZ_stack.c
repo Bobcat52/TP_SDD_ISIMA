@@ -29,10 +29,10 @@ stack_t * initStack(int size, int * errorCode)
 
 	if (p != NULL)   /* If the pointer is not null we initialize the point stack */
 	{
-			p->begin = malloc(size*sizeof(typeStack)); /* we initalize the contiguous list which is pointed by the last block of the stack */ 
+			p->begin = malloc(size * sizeof(typeStack)); /* we initalize the contiguous list which is pointed by the last block of the stack */ 
 			*errorCode = 0;
 
-			if ((p->begin)!= NULL)           /* if the previous allocation didn't go wrong */  
+			if ((p->begin)!= NULL)           /* if the previous allocation went wrong */  
 			{
 					p->sizeMax = size;
 					p->numSummit = -1;     /*there is 0 element in the stack but the stack is created so we put -1 */
@@ -48,7 +48,7 @@ stack_t * initStack(int size, int * errorCode)
 	return p; 
 }
 /* -------------------------------------------------------------------- */
-/* initStack        Init a stack from a file               	         	*/
+/* initStackFromFile        Init a stack from a file               	  	*/
 /*                                                                      */
 /* Inputs :   - fileName is the name of the file containing the stack.  */
 /*	          - errorCode is an integer that stores the result of the 	*/
@@ -64,7 +64,7 @@ stack_t * initStack(int size, int * errorCode)
 /* -------------------------------------------------------------------- */
 stack_t * initStackFromFile(char * fileName, int *errorCode)
 {
-	/* We create a matrix_t to store its value, column and line */
+
 	stack_t* 	stack;
 	int 		size;
 	int			codeE_init; /* errorCode for init */
@@ -76,17 +76,14 @@ stack_t * initStackFromFile(char * fileName, int *errorCode)
 
 	issue = 0;
 
-	if(file!= NULL) /* We make sure, we actually opened the file */
+	if(file != NULL) /* We make sure, we actually opened the file */
 	{
 		*errorCode = 0;
 
 		/* We can get the length of the stack with the first line*/
 		fscanf(file,"%d",&size);
-		
-		printf("size = %d\n",size); /* magie */
 
 		stack = initStack(size,&codeE_init); /* We initialize our stack */
-		
 		
 		if(codeE_init == 1)
 		{
@@ -135,7 +132,7 @@ void printStack(stack_t* p)
 
 	for(i = 0;i <= p->numSummit;i++)	/* We fill our stack */
 	{
-		printf("%d ",*((p->begin) + i*sizeof(typeStack)));
+		printf("%d ",p->begin[i]);
 	}
 	printf("\n");
 }
@@ -153,7 +150,7 @@ void freeStack(stack_t * p)
 		free(p->begin);
 		
 	}
-	else          /* so the pointer of the contiguous list is maybe null but we have to free the stack */
+	if(p != NULL)         /* so the pointer of the contiguous list is maybe null but we have to free the stack */
 	{
 		free(p);
 	}
@@ -192,7 +189,7 @@ void push(stack_t * p, typeStack v ,int * errorCode)
 
 		if (p->numSummit+1 <= (p->sizeMax) ) /* if the stack is not full */
 		{
-				*((p->begin) + (p->numSummit+1)*sizeof(typeStack)) = v; /* we assign to the first free block of the contiguous list the value v */
+				p->begin[p->numSummit+1] = v; /* we assign to the first free block of the contiguous list the value v */
 				p->numSummit += 1;  /* there is a further element in the stack */
 				*errorCode = 1;
 		}
@@ -217,7 +214,7 @@ void pop( stack_t * p, typeStack * v, int * errorCode)
 		
 		if (!isStackEmpty(p))      /* if the stack is not empty so we can unstack */
 		{
-				*v = *((p->begin) + (p->numSummit)*sizeof(typeStack));  /*  we pick up the value of the last element added and we assign it in a variable */
+				*v = p->begin[p->numSummit];  /*  we pick up the value of the last element added and we assign it in a variable */
 				p->numSummit -= 1; /* we unstack the last element added so there is one element less stored in the stack */
 								
 				*errorCode = 1;
