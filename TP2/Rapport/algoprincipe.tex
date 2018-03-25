@@ -1,0 +1,397 @@
+
+\documentclass[a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{geometry}
+
+\geometry{legalpaper, margin=1in}
+
+\usepackage[T1]{fontenc}
+
+\usepackage{algorithm}
+
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+
+\usepackage{graphicx}
+
+
+
+\title{SDD : TP 2}
+
+\author{Mathieu Boutin - Jérémy Morceaux}
+
+\begin{document}
+\maketitle
+\section{Présentation générale}
+- Les fichiers sources se trouvent dans le dossier \textbf{src}.Les fonctions relatives aux Piles sont dans le fichier \textbf{ZZ\_Pile.c} et celles des Files sont dans le fichier \textbf{ZZ\_Pile.c}.Les entêtes sont dans le fichier \textbf{include}.
+
+\section{Détail de chaque fonction}
+
+\subsection{initStack}
+
+\begin{algorithm}
+
+Principe : initStack
+\\
+\\
+\tab On initialise un pointeur pointant vers la tête de la pile 
+\\
+\tab Si le pointeur est non Null alors:
+\\
+\tab \tab On alloue une liste contiguë.
+\\
+\tab \tab  Si l'allocation s'est bien déroulée alors:
+\\
+\tab \tab \tab On affecte des valeurs à la pile.
+\\
+\tab \tab Sinon:
+\\ 
+\tab \tab \tab  On libère la pile.
+\\
+\\
+\tab On retourne l'adresse de la tête de la pile
+\\
+
+
+
+FIN
+
+\end{algorithm}
+\underline{Lexique :}
+
+\begin{itemize}
+
+\item Paramètre(s) de la fonction  
+
+\begin{itemize}
+
+\item size est la taille de la Pile.
+
+\item errorCode est un pointeur sur un entier qui indique si la fonction s'est bien déroulée.
+
+\end{itemize}
+
+\item Variable(s) locale(s)
+
+\begin{itemize}
+
+\item p est un pointeur de la Pile.
+\end{itemize}
+
+\end{itemize}
+
+\underline{Programme commenté :}
+\subsection{freeStack}
+
+\begin{algorithm}
+
+Principe : freeStack
+\\
+\\
+\tab Si la liste contiguë existe alors:
+\\
+\tab \tab On libère la liste contiguë.
+\\
+\tab  Sinon:
+\\ 
+\tab \tab  On libère la pile.
+\\
+\tab On affecter au pointeur la valeur NULL.
+\\
+
+
+FIN
+\end{algorithm}
+\underline{Lexique :}
+
+\begin{itemize}
+
+\item Paramètre(s) de la fonction  
+
+\begin{itemize}
+
+\item p est la tête fictive de la Pile.
+
+\end{itemize}
+
+\end{itemize}
+
+\underline{Programme commenté :}
+
+\newpage
+\subsection{isEmpty}
+
+\begin{algorithm}
+
+Principe : isEmpty
+
+\tab On test si la la pile est vide. 
+\\
+
+
+
+FIN
+\end{algorithm}
+
+
+\underline{Lexique :}
+
+\begin{itemize}
+
+\item Paramètre(s) de la fonction  
+
+\begin{itemize}
+
+\item p est le pointeur de tête fictive de la Pile.
+
+\end{itemize}
+
+\end{itemize}
+
+\underline{Programme commenté :}
+\subsection{push}
+
+\begin{algorithm}
+
+Principe : push
+\\
+\\
+\tab Si la pile n'est pas pleine alors:
+\\
+\tab \tab On attribue la valeur v au premier block libre de la liste contiguë.
+\\
+
+
+
+FIN
+
+\end{algorithm}
+
+
+\underline{Lexique :}
+
+\begin{itemize}
+
+\item Paramètre(s) de la fonction  
+
+\begin{itemize}
+
+\item p est le pointeur de tête fictive de la Pile.
+
+\item errorcode est un pointeur sur un entier qui indique si la fonction s'est bien déroulée.
+
+\item v est la valeur que l'on veut mettre dans la Pile.
+
+\end{itemize}
+
+
+\end{itemize}
+
+\underline{Programme commenté :}
+\subsection{pop}
+
+\begin{algorithm}
+
+Principe : pop
+\\
+\\
+\tab Si la pile n'est pas vide alors:
+\\
+\tab \tab On récupère le dernier élément de la pile et on le supprime.
+
+
+FIN
+
+\end{algorithm}
+
+
+\underline{Lexique :}
+
+\begin{itemize}
+
+\item Paramètre(s) de la fonction  
+
+\begin{itemize}
+
+\item p est le pointeur de tête fictive de la Pile.
+
+\item errorcode est un pointeur sur un entier qui indique si la fonction s'est bien déroulée.
+
+\item v est la variable dans laquelle on va mettre l'élément que l'on dépile.
+
+\end{itemize}
+\end{itemize}
+\underline{Programme commenté :}
+\newpage
+\subsection{initFile}
+
+\begin{algorithm}
+
+Principe : initFile
+\\
+\\
+\tab On initialise le pointeur pointant vers la File.
+\\
+\tab Si le pointeur est non NULL alors:
+\\
+\tab \tab On affecte des valeurs à la File pointée par le pointeur.
+
+
+
+FIN
+
+\end{algorithm}
+
+
+\underline{Lexique :}
+
+\begin{itemize}
+
+\item Paramètre(s) de la fonction  
+
+\begin{itemize}
+
+\item p0 est le pointeur de tête fictive de la File.
+
+\item errorcode est un pointeur sur un entier qui indique si la fonction s'est bien déroulée.
+
+\item size est la taille de la File.
+
+\end{itemize}
+
+\end{itemize}
+\underline{Programme commenté :}
+\subsection{push}
+
+\begin{algorithm}
+
+Principe : pop
+\\
+\\
+\tab Si la File n'est pas pleine alors:
+\\
+\tab \tab On ajoute l'élément au block suivant le dernier block occupé de la liste contiguë.
+
+FIN
+
+\end{algorithm}
+
+
+\underline{Lexique :}
+
+\begin{itemize}
+
+\item Paramètre(s) de la fonction  
+
+\begin{itemize}
+
+\item p0 est le pointeur de tête fictive de la File.
+
+\item errorcode est un pointeur sur un entier qui indique si la fonction s'est bien déroulée.
+
+\item element est l'élément que l'on veut insérer dans la File.
+
+\end{itemize}
+\end{itemize}
+\underline{Programme commenté :}
+\subsection{pop}
+
+\begin{algorithm}
+
+Principe : pop
+\\
+\\
+\tab Si la File n'est pas vjde alors:
+\\
+\tab \tab On retire le premier élément de la File.
+\\
+\tab On retourne l'élément supprimé.
+
+FIN
+
+\end{algorithm}
+
+
+\underline{Lexique :}
+
+\begin{itemize}
+
+\item Paramètre(s) de la fonction  
+
+\begin{itemize}
+
+\item p0 est le pointeur de tête fictive de la File.
+
+\item errorcode est un pointeur sur un entier qui indique si la fonction s'est bien déroulée.
+
+
+\end{itemize}
+\end{itemize}
+\underline{Programme commenté :}
+\subsection{estVide}
+
+\begin{algorithm}
+
+Principe : estVide
+\tab On test si la la File est vide. 
+\\
+
+
+
+FIN
+\end{algorithm}
+
+
+\underline{Lexique :}
+
+\begin{itemize}
+
+\item Paramètre(s) de la fonction  
+
+\begin{itemize}
+
+\item p0 est le pointeur de tête fictive de la File.
+
+\end{itemize}
+
+\end{itemize}
+
+\underline{Programme commenté :}
+\subsection{libererFile}
+
+\begin{algorithm}
+
+Principe : libererFile
+\\
+\\
+\tab Si la liste contiguë n'est pas vide alors:
+\\
+\tab \tab On libère la liste contiguë.
+\\
+\tab  Sinon:
+\\ 
+\tab \tab  On libère la File.
+\\
+\tab On affecter au pointeur la valeur NULL.
+\\
+
+
+FIN
+\end{algorithm}
+\underline{Lexique :}
+
+\begin{itemize}
+
+\item Paramètre(s) de la fonction  
+
+\begin{itemize}
+
+\item p0 est la tête fictive de la Pile.
+
+\end{itemize}
+
+\end{itemize}
+
+\underline{Programme commenté :}
+\end{document}

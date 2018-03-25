@@ -10,8 +10,8 @@ typedef struct queue{
 
 	int size;
 	int number;
-	queueType* start;
-	queueType* end;
+	int start;
+	int end;
 	queueType* base;
 
 } queue_t;
@@ -21,5 +21,5 @@ void enterQueue(queue_t* p0,queueType element, int* errorCode);
 queueType leaveQueue(queue_t* p0, int* errorCode);
 int isQueueEmpty(queue_t* p0);
 void freeQueue(queue_t* p0);
-
+void printQueue(queue_t* p0);
 #endif
