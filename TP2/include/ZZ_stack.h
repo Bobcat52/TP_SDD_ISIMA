@@ -1,3 +1,13 @@
+/* ########################################################## */
+/* file's name : ZZ_stack.h				                      */
+/*							                                  */
+/* Author : Mathieu Boutin & Jérémy Morceaux                  */
+/* Date : March 2018					                      */
+/*							                                  */
+/* This file contains headers for the file ZZ_stack.c         */
+/*							                                  */
+/* ########################################################## */
+
 #ifndef ZZ_STACK_H
 #define ZZ_STACK_H
 

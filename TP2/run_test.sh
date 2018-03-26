@@ -66,9 +66,8 @@ echo "Trace 5 : Stack à moitié vide/pleine
 "
 ./bin/main_program Stack/stack_semi_full.txt
 read -n 1 -s -r -p "
-Press any key to finish ...
+Press any key to continue ...
 "
-
 
 
 

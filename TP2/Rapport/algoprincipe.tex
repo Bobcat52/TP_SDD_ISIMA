@@ -24,40 +24,22 @@
 \begin{document}
 \maketitle
 \section{Présentation générale}
-- Les fichiers sources se trouvent dans le dossier \textbf{src}.Les fonctions relatives aux Piles sont dans le fichier \textbf{ZZ\_Pile.c} et celles des Files sont dans le fichier \textbf{ZZ\_Pile.c}.Les entêtes sont dans le fichier \textbf{include}.
+- Ce TP a pour but de créer les fonctions de base permettant de manipuler des piles et des files qui seront utiles pour le prochain TP. A l'aide de ses fonctions, on inverse une pile grâce à une file supplémentaire en vidant la pile dans la file, puis inversement, en vidant la file dans la pile.
+\\
+\\
+\underline{Structure des fichiers de pile : prenons par exemple une pile de taille n}
+\\
+\\
+1ère ligne fichier : <taille de la pile>
+\\
+2ème ligne du fichier: $valeur_{0}$ $valeur_{1}$  ... $valeur_{n-1}$
+\\
+\\
+- Les fichiers sources se trouvent dans le dossier \textbf{src}. Les fonctions relatives aux piles sont dans le fichier \textbf{ZZ\_stack.c} et celles des files sont dans le fichier \textbf{ZZ\_queue.c}. Les entêtes sont dans le fichier \textbf{include}.
 
 \section{Détail de chaque fonction}
 
 \subsection{initStack}
-
-\begin{algorithm}
-
-Principe : initStack
-\\
-\\
-\tab On initialise un pointeur pointant vers la tête de la pile 
-\\
-\tab Si le pointeur est non Null alors:
-\\
-\tab \tab On alloue une liste contiguë.
-\\
-\tab \tab  Si l'allocation s'est bien déroulée alors:
-\\
-\tab \tab \tab On affecte des valeurs à la pile.
-\\
-\tab \tab Sinon:
-\\ 
-\tab \tab \tab  On libère la pile.
-\\
-\\
-\tab On retourne l'adresse de la tête de la pile
-\\
-
-
-
-FIN
-
-\end{algorithm}
 \underline{Lexique :}
 
 \begin{itemize}
@@ -66,7 +48,7 @@ FIN
 
 \begin{itemize}
 
-\item size est la taille de la Pile.
+\item size est la taille de la pile.
 
 \item errorCode est un pointeur sur un entier qui indique si la fonction s'est bien déroulée.
 
@@ -76,33 +58,80 @@ FIN
 
 \begin{itemize}
 
-\item p est un pointeur de la Pile.
+\item p est un pointeur de la pile.
 \end{itemize}
 
 \end{itemize}
 
 \underline{Programme commenté :}
+\begin{center}
+\includegraphics[scale=0.4]{initStack.png}
+
+initStack
+\end{center}
+\subsection{initStackFromFile}
+\underline{Lexique :}
+
+\begin{itemize}
+
+\item Paramètre(s) de la fonction  
+
+\begin{itemize}
+
+\item fileName est le nom du fichier contenant la pile
+\item errorCode est un pointeur sur un entier qui indique si la fonction s'est bien déroulée.
+
+\end{itemize}
+\item Variables(s) locale(s)
+
+\begin{itemize}
+
+\item stack est le pointeur de la pile.
+\item size contient la taille de la pile.
+\item codeE\_init errorCode est un pointeur sur un entier qui indique si la fonction init s'est bien déroulée.
+\item codeE\_push errorCode est un pointeur sur un entier qui indique si la fonction push s'est bien déroulée.
+\item issue indique s'il y a eu un problème pendant un push.
+\item file est le flux du fichier.
+\item value contient une valeur à mettre dans la pile.
+
+\end{itemize}
+\end{itemize}
+
+\underline{Programme commenté :}
+\begin{center}
+\includegraphics[scale=0.4]{initStackFromFile.png}
+
+initStackFromFile
+\end{center}
+\subsection{printStack}
+\underline{Lexique :}
+
+\begin{itemize}
+
+\item Paramètre(s) de la fonction  
+
+\begin{itemize}
+
+\item p est la tête fictive de la pile.
+
+\end{itemize}
+\item Variables(s) locale(s)  
+
+\begin{itemize}
+
+\item i permet de parcourir la pile.
+
+\end{itemize}
+
+\end{itemize}
+
+\underline{Programme commenté :}
+\begin{center}
+\includegraphics[scale=0.4]{printStack.png}
+
+printStack
+\end{center}
 \subsection{freeStack}
-
-\begin{algorithm}
-
-Principe : freeStack
-\\
-\\
-\tab Si la liste contiguë existe alors:
-\\
-\tab \tab On libère la liste contiguë.
-\\
-\tab  Sinon:
-\\ 
-\tab \tab  On libère la pile.
-\\
-\tab On affecter au pointeur la valeur NULL.
-\\
-
-
-FIN
-\end{algorithm}
 \underline{Lexique :}
 
 \begin{itemize}
@@ -111,30 +140,19 @@ FIN
 
 \begin{itemize}
 
-\item p est la tête fictive de la Pile.
+\item p est la tête fictive de la pile.
 
 \end{itemize}
 
 \end{itemize}
 
 \underline{Programme commenté :}
+\begin{center}
+\includegraphics[scale=0.4]{freeStack.png}
 
-\newpage
-\subsection{isEmpty}
-
-\begin{algorithm}
-
-Principe : isEmpty
-
-\tab On test si la la pile est vide. 
-\\
-
-
-
-FIN
-\end{algorithm}
-
-
+freeStack
+\end{center}
+\subsection{isStackEmpty}
 \underline{Lexique :}
 
 \begin{itemize}
@@ -143,32 +161,18 @@ FIN
 
 \begin{itemize}
 
-\item p est le pointeur de tête fictive de la Pile.
+\item p est le pointeur de tête fictive de la pile.
 
 \end{itemize}
 
 \end{itemize}
 
 \underline{Programme commenté :}
+\begin{center}
+\includegraphics[scale=0.4]{isStackEmpty.png}
+
+isStackEmpty\end{center}
 \subsection{push}
-
-\begin{algorithm}
-
-Principe : push
-\\
-\\
-\tab Si la pile n'est pas pleine alors:
-\\
-\tab \tab On attribue la valeur v au premier block libre de la liste contiguë.
-\\
-
-
-
-FIN
-
-\end{algorithm}
-
-
 \underline{Lexique :}
 
 \begin{itemize}
@@ -177,11 +181,11 @@ FIN
 
 \begin{itemize}
 
-\item p est le pointeur de tête fictive de la Pile.
+\item p est le pointeur de tête fictive de la pile.
 
-\item errorcode est un pointeur sur un entier qui indique si la fonction s'est bien déroulée.
+\item errorCode est un pointeur sur un entier qui indique si la fonction s'est bien déroulée.
 
-\item v est la valeur que l'on veut mettre dans la Pile.
+\item v est la valeur que l'on veut mettre dans la pile.
 
 \end{itemize}
 
@@ -189,23 +193,12 @@ FIN
 \end{itemize}
 
 \underline{Programme commenté :}
+\begin{center}
+\includegraphics[scale=0.4]{push.png}
+
+push
+\end{center}
 \subsection{pop}
-
-\begin{algorithm}
-
-Principe : pop
-\\
-\\
-\tab Si la pile n'est pas vide alors:
-\\
-\tab \tab On récupère le dernier élément de la pile et on le supprime.
-
-
-FIN
-
-\end{algorithm}
-
-
 \underline{Lexique :}
 
 \begin{itemize}
@@ -214,36 +207,21 @@ FIN
 
 \begin{itemize}
 
-\item p est le pointeur de tête fictive de la Pile.
+\item p est le pointeur de tête fictive de la pile.
 
-\item errorcode est un pointeur sur un entier qui indique si la fonction s'est bien déroulée.
+\item errorCode est un pointeur sur un entier qui indique si la fonction s'est bien déroulée.
 
 \item v est la variable dans laquelle on va mettre l'élément que l'on dépile.
 
 \end{itemize}
 \end{itemize}
 \underline{Programme commenté :}
-\newpage
-\subsection{initFile}
+\begin{center}
+\includegraphics[scale=0.4]{pop.png}
 
-\begin{algorithm}
-
-Principe : initFile
-\\
-\\
-\tab On initialise le pointeur pointant vers la File.
-\\
-\tab Si le pointeur est non NULL alors:
-\\
-\tab \tab On affecte des valeurs à la File pointée par le pointeur.
-
-
-
-FIN
-
-\end{algorithm}
-
-
+pop
+\end{center}
+\subsection{initQueue}
 \underline{Lexique :}
 
 \begin{itemize}
@@ -252,32 +230,25 @@ FIN
 
 \begin{itemize}
 
-\item p0 est le pointeur de tête fictive de la File.
+\item size est la taille de la file.
 
-\item errorcode est un pointeur sur un entier qui indique si la fonction s'est bien déroulée.
+\item errorCode est un pointeur sur un entier qui indique si la fonction s'est bien déroulée.
+\end{itemize}
+\item Variables(s) locale(s)  
 
-\item size est la taille de la File.
+\begin{itemize}
+
+\item p0 est le pointeur vers la file qui sera retournée.
 
 \end{itemize}
-
 \end{itemize}
 \underline{Programme commenté :}
-\subsection{push}
+\begin{center}
+\includegraphics[scale=0.4]{initQueue.png}
 
-\begin{algorithm}
-
-Principe : pop
-\\
-\\
-\tab Si la File n'est pas pleine alors:
-\\
-\tab \tab On ajoute l'élément au block suivant le dernier block occupé de la liste contiguë.
-
-FIN
-
-\end{algorithm}
-
-
+initQueue
+\end{center}
+\subsection{enterQueue}
 \underline{Lexique :}
 
 \begin{itemize}
@@ -286,33 +257,21 @@ FIN
 
 \begin{itemize}
 
-\item p0 est le pointeur de tête fictive de la File.
+\item p0 est le pointeur de tête fictive de la file.
 
-\item errorcode est un pointeur sur un entier qui indique si la fonction s'est bien déroulée.
+\item errorCode est un pointeur sur un entier qui indique si la fonction s'est bien déroulée.
 
-\item element est l'élément que l'on veut insérer dans la File.
+\item element est l'élément que l'on veut insérer dans la file.
 
 \end{itemize}
 \end{itemize}
 \underline{Programme commenté :}
-\subsection{pop}
+\begin{center}
+\includegraphics[scale=0.4]{enterQueue.png}
 
-\begin{algorithm}
-
-Principe : pop
-\\
-\\
-\tab Si la File n'est pas vjde alors:
-\\
-\tab \tab On retire le premier élément de la File.
-\\
-\tab On retourne l'élément supprimé.
-
-FIN
-
-\end{algorithm}
-
-
+enterQueue
+\end{center}
+\subsection{leaveQueue}
 \underline{Lexique :}
 
 \begin{itemize}
@@ -321,28 +280,26 @@ FIN
 
 \begin{itemize}
 
-\item p0 est le pointeur de tête fictive de la File.
+\item p0 est le pointeur de tête fictive de la file.
 
-\item errorcode est un pointeur sur un entier qui indique si la fonction s'est bien déroulée.
+\item errorCode est un pointeur sur un entier qui indique si la fonction s'est bien déroulée.
 
+\end{itemize}
+\item Variables(s) locale(s)  
+
+\begin{itemize}
+
+\item res est la variable qui contient l'élément qui sera défilé.
 
 \end{itemize}
 \end{itemize}
 \underline{Programme commenté :}
-\subsection{estVide}
+\begin{center}
+\includegraphics[scale=0.4]{leaveQueue.png}
 
-\begin{algorithm}
-
-Principe : estVide
-\tab On test si la la File est vide. 
-\\
-
-
-
-FIN
-\end{algorithm}
-
-
+leaveQueue
+\end{center}
+\subsection{isQueueEmpty}
 \underline{Lexique :}
 
 \begin{itemize}
@@ -351,34 +308,19 @@ FIN
 
 \begin{itemize}
 
-\item p0 est le pointeur de tête fictive de la File.
+\item p0 est le pointeur de tête fictive de la file.
 
 \end{itemize}
 
 \end{itemize}
 
 \underline{Programme commenté :}
-\subsection{libererFile}
+\begin{center}
+\includegraphics[scale=0.4]{isQueueEmpty.png}
 
-\begin{algorithm}
-
-Principe : libererFile
-\\
-\\
-\tab Si la liste contiguë n'est pas vide alors:
-\\
-\tab \tab On libère la liste contiguë.
-\\
-\tab  Sinon:
-\\ 
-\tab \tab  On libère la File.
-\\
-\tab On affecter au pointeur la valeur NULL.
-\\
-
-
-FIN
-\end{algorithm}
+isQueueEmpty
+\end{center}
+\subsection{freeQueue}
 \underline{Lexique :}
 
 \begin{itemize}
@@ -387,11 +329,113 @@ FIN
 
 \begin{itemize}
 
-\item p0 est la tête fictive de la Pile.
+\item p0 est la tête fictive de la file.
 
 \end{itemize}
 
 \end{itemize}
 
 \underline{Programme commenté :}
+\begin{center}
+\includegraphics[scale=0.4]{freeQueue.png}
+
+freeQueue
+\end{center}
+\subsection{printQueue}
+\underline{Lexique :}
+
+\begin{itemize}
+
+\item Paramètre(s) de la fonction  
+
+\begin{itemize}
+
+\item p0 est la tête fictive de la file.
+
+\end{itemize}
+\item Variables(s) locale(s)  
+
+\begin{itemize}
+
+\item i permet de parcourir la file.
+
+\end{itemize}
+\end{itemize}
+\underline{Programme commenté :}
+\begin{center}
+\includegraphics[scale=0.4]{printQueue.png}
+
+printQueue
+\end{center}
+\subsection{main}
+\underline{Lexique :}
+
+\begin{itemize}
+\item Variables(s) locale(s)  
+
+\begin{itemize}
+
+\item queue pointe vers la pile.
+\item stack pointe vers la file.
+\item errorCode est un pointeur sur un entier qui indique si une fonction s'est bien déroulée.
+\item fileName contient le nom du fichier contenant la pile.
+\item i permet de vider la pile pour remplir la file et inversement.
+\item numberSummit contient le nombre de valeur dans la pile.
+\item empty et full sont des variables permettant de stopper les boucles for au cas où il y est une erreur ( une pile vide ou pleine, de même pour la file).
+\end{itemize}
+\end{itemize}
+\underline{Programme commenté :}
+\begin{center}
+\includegraphics[scale=0.4]{main.png}
+
+main
+\end{center}
+\section{Compte rendu d'exécution}
+
+\underline{Makefile :}
+\begin{center}
+\includegraphics[scale=0.39]{makefile.png}
+
+Makefile
+\end{center}
+
+\underline{Jeux de test complets:}
+\begin{center}
+\includegraphics[scale=0.4]{trace0.png}
+
+Terminal 
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.4]{trace1.png}
+
+Terminal
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.4]{trace2.png}
+\fbox{\includegraphics[scale=0.4]{stack_0.png}}
+
+Terminal | fichier pile
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.4]{trace3.png}
+\fbox{\includegraphics[scale=0.4]{stack1.png}}
+
+Terminal | fichier pile
+\end{center}
+\begin{center}
+\includegraphics[scale=0.4]{trace4.png}
+\fbox{\includegraphics[scale=0.4]{stack_full.png}}
+
+Terminal | fichier pile
+\end{center}
+
+\begin{center}
+\includegraphics[scale=0.4]{trace5.png}
+\fbox{\includegraphics[scale=0.4]{stack_semi_full.png}}
+
+Terminal | fichier pile
+\end{center}
 \end{document}

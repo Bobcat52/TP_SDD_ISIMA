@@ -116,7 +116,7 @@ stack_t * initStackFromFile(char * fileName, int *errorCode)
 						*errorCode = 0;
 						issue = 1;
 					}
-				}			
+				}		
 			}
 		}
 
@@ -130,6 +130,7 @@ stack_t * initStackFromFile(char * fileName, int *errorCode)
 
 	return(stack);
 }
+
 /* -------------------------------------------------------------------- */
 /* printStack:        print a stack to a terminal                	    */
 /*                                                                      */

@@ -1,3 +1,14 @@
+/* ########################################################## */
+/* file's name : main.c					                      */
+/*							                                  */
+/* Author : Mathieu Boutin & Jérémy Morceaux                  */
+/* Date : March 2018					                      */
+/*							                                  */
+/* This file contains the main program of the TP, we use the  */
+/* severals tools created to revert a stack.                  */
+/* ########################################################## */
+
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.3.11)  25 MAR 2018 17:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.3.11)  26 MAR 2018 13:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -530,113 +530,216 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <8> on input line 25.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <6> on input line 25.
-
-Underfull \hbox (badness 10000) in paragraph at lines 35--55
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 35--55
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 35--55
-
- []
-
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 63.
+(Font)              <7> on input line 30.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 63.
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 67.
+(Font)              <5> on input line 30.
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--39
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--39
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 27--39
+
+ []
+
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 47.
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 67.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 47.
 
-Underfull \hbox (badness 10000) in paragraph at lines 91--104
+<initStack.png, id=1, 1215.54124pt x 825.0825pt>
+File: initStack.png Graphic file (type png)
+ <use initStack.png>
+Package pdftex.def Info: initStack.png used on input line 68.
+(pdftex.def)             Requested size: 486.20789pt x 330.02715pt.
 
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 91--104
-
+Overfull \hbox (16.45287pt too wide) in paragraph at lines 68--69
+ [] 
  []
 
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 131--133
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./initStack.png>]
+<initStackFromFile.png, id=18, 811.03pt x 1369.115pt>
+File: initStackFromFile.png Graphic file (type png)
 
- []
+<use initStackFromFile.png>
+Package pdftex.def Info: initStackFromFile.png used on input line 102.
+(pdftex.def)             Requested size: 324.40625pt x 547.6363pt.
+ [2 <./initStackFromFile.png (PNG copy)>]
+<printStack.png, id=22, 637.38126pt x 443.6575pt>
+File: printStack.png Graphic file (type png)
+ <use printStack.png>
+Package pdftex.def Info: printStack.png used on input line 130.
+(pdftex.def)             Requested size: 254.94798pt x 177.45984pt.
 
+<freeStack.png, id=23, 1072.005pt x 389.455pt>
+File: freeStack.png Graphic file (type png)
+ <use freeStack.png>
+Package pdftex.def Info: freeStack.png used on input line 151.
+(pdftex.def)             Requested size: 428.7944pt x 155.77924pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 159--166
+<isStackEmpty.png, id=24, 909.3975pt x 238.8925pt>
+File: isStackEmpty.png Graphic file (type png)
+ <use isStackEmpty.png>
+Package pdftex.def Info: isStackEmpty.png used on input line 172.
+(pdftex.def)             Requested size: 363.75256pt x 95.5553pt.
 
- []
+[3 <./printStack.png> <./freeStack.png> <./isStackEmpty.png>]
+<push.png, id=28, 1026.83624pt x 428.60126pt>
+File: push.png Graphic file (type png)
+ <use push.png>
+Package pdftex.def Info: push.png used on input line 197.
+(pdftex.def)             Requested size: 410.72722pt x 171.43745pt.
 
+<pop.png, id=29, 1108.14pt x 479.7925pt>
+File: pop.png Graphic file (type png)
+ <use pop.png>
+Package pdftex.def Info: pop.png used on input line 220.
+(pdftex.def)             Requested size: 443.24815pt x 191.91359pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 159--166
+<initQueue.png, id=30, 640.3925pt x 837.1275pt>
+File: initQueue.png Graphic file (type png)
+ <use initQueue.png>
+Package pdftex.def Info: initQueue.png used on input line 247.
+(pdftex.def)             Requested size: 256.15245pt x 334.84506pt.
+ [4 <./push.png> <./pop.png>] <enterQueue.png, id=34, 719.68875pt x 557.08125pt
+>
+File: enterQueue.png Graphic file (type png)
 
- []
+<use enterQueue.png>
+Package pdftex.def Info: enterQueue.png used on input line 270.
+(pdftex.def)             Requested size: 287.87039pt x 222.82855pt.
+ [5 <./initQueue.png> <./enterQueue.png>]
+<leaveQueue.png, id=38, 733.74126pt x 554.07pt>
+File: leaveQueue.png Graphic file (type png)
+ <use leaveQueue.png>
+Package pdftex.def Info: leaveQueue.png used on input line 298.
+(pdftex.def)             Requested size: 293.4913pt x 221.62407pt.
 
+<isQueueEmpty.png, id=39, 737.75626pt x 248.93pt>
+File: isQueueEmpty.png Graphic file (type png)
+ <use isQueueEmpty.png>
+Package pdftex.def Info: isQueueEmpty.png used on input line 319.
+(pdftex.def)             Requested size: 295.09727pt x 99.57022pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 198--204
+<freeQueue.png, id=40, 643.40375pt x 341.275pt>
+File: freeQueue.png Graphic file (type png)
+ <use freeQueue.png>
+Package pdftex.def Info: freeQueue.png used on input line 340.
+(pdftex.def)             Requested size: 257.35693pt x 136.50757pt.
+ [6 <./leaveQueue.png> <./isQueueEmpty.png> <./freeQueue.png>]
+<printQueue.png, id=44, 661.47125pt x 345.29pt>
+File: printQueue.png Graphic file (type png)
+ <use printQueue.png>
+Package pdftex.def Info: printQueue.png used on input line 366.
+(pdftex.def)             Requested size: 264.58382pt x 138.11354pt.
 
- []
+<main.png, id=45, 939.51pt x 1845.89626pt>
+File: main.png Graphic file (type png)
+ <use main.png>
+Package pdftex.def Info: main.png used on input line 389.
+(pdftex.def)             Requested size: 375.79733pt x 738.34543pt.
+ [7 <./printQueue.png>] <makefile.png, id=51, 742.775pt x 376.40625pt>
+File: makefile.png Graphic file (type png)
+ <use makefile.png>
+Package pdftex.def Info: makefile.png used on input line 397.
+(pdftex.def)             Requested size: 289.68108pt x 146.79784pt.
+ [8 <./main.png>] <trace0.png, id=56, 635.37375pt x 355.3275pt>
+File: trace0.png Graphic file (type png)
+ <use trace0.png>
+Package pdftex.def Info: trace0.png used on input line 404.
+(pdftex.def)             Requested size: 254.14499pt x 142.12846pt.
 
-[2]
-Underfull \hbox (badness 10000) in paragraph at lines 233--241
+<trace1.png, id=57, 698.61pt x 327.2225pt>
+File: trace1.png Graphic file (type png)
+ <use trace1.png>
+Package pdftex.def Info: trace1.png used on input line 410.
+(pdftex.def)             Requested size: 279.43904pt x 130.88667pt.
 
- []
+<trace2.png, id=58, 759.83875pt x 344.28625pt>
+File: trace2.png Graphic file (type png)
+ <use trace2.png>
+Package pdftex.def Info: trace2.png used on input line 416.
+(pdftex.def)             Requested size: 303.93011pt x 137.71205pt.
 
+<stack_0.png, id=59, 872.25874pt x 394.47375pt>
+File: stack_0.png Graphic file (type png)
+ <use stack_0.png>
+Package pdftex.def Info: stack_0.png used on input line 417.
+(pdftex.def)             Requested size: 348.89731pt x 157.7867pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 271--277
+<trace3.png, id=60, 738.76pt x 357.335pt>
+File: trace3.png Graphic file (type png)
+ <use trace3.png>
+Package pdftex.def Info: trace3.png used on input line 423.
+(pdftex.def)             Requested size: 295.49875pt x 142.93146pt.
 
- []
+<stack1.png, id=61, 829.0975pt x 218.8175pt>
+File: stack1.png Graphic file (type png)
+ <use stack1.png>
+Package pdftex.def Info: stack1.png used on input line 424.
+(pdftex.def)             Requested size: 331.63313pt x 87.52544pt.
+ [9 <./makefile.png> <./trace0.png> <./trace1.png> <./trace2.png> <./stack_0.pn
+g>]
+<trace4.png, id=65, 782.925pt x 354.32375pt>
+File: trace4.png Graphic file (type png)
+ <use trace4.png>
+Package pdftex.def Info: trace4.png used on input line 429.
+(pdftex.def)             Requested size: 313.16446pt x 141.72697pt.
 
+<stack_full.png, id=66, 730.73pt x 293.095pt>
+File: stack_full.png Graphic file (type png)
+ <use stack_full.png>
+Package pdftex.def Info: stack_full.png used on input line 430.
+(pdftex.def)             Requested size: 292.28682pt x 117.23592pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 304--312
+<trace5.png, id=67, 809.0225pt x 379.4175pt>
+File: trace5.png Graphic file (type png)
+ <use trace5.png>
+Package pdftex.def Info: trace5.png used on input line 436.
+(pdftex.def)             Requested size: 323.60327pt x 151.7643pt.
 
- []
+<stack_semi_full.png, id=68, 785.93625pt x 302.12875pt>
+File: stack_semi_full.png Graphic file (type png)
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 338--341
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 367--380
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 367--380
-
- []
-
-[3] [4] (./algoprincipe.aux) ) 
+<use stack_semi_full.png>
+Package pdftex.def Info: stack_semi_full.png used on input line 437.
+(pdftex.def)             Requested size: 314.36893pt x 120.84935pt.
+ [10 <./trace3.png> <./stack1.png> <./trace4.png> <./stack_full.png> <./trace5.
+png> <./stack_semi_full.png>] (./algoprincipe.aux) ) 
 Here is how much of TeX's memory you used:
- 2636 strings out of 493029
- 34449 string characters out of 6136234
- 104252 words of memory out of 5000000
- 6135 multiletter control sequences out of 15000+600000
+ 2760 strings out of 493029
+ 36471 string characters out of 6136234
+ 101252 words of memory out of 5000000
+ 6235 multiletter control sequences out of 15000+600000
  11766 words of font info for 30 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 37i,6n,29p,285b,189s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-sup
-er-t1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.
-pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texm
-f/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public
-/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.p
-fb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf
-/fonts/type1/public/cm-super/sfrm1728.pfb>
-Output written on algoprincipe.pdf (4 pages, 99084 bytes).
+ 37i,6n,29p,327b,239s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc
+/dvips/cm-super/cm-super-t1.enc}</usr/share/texlive/texmf-dist/fonts/type1/publ
+ic/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/c
+m/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10
+.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></
+usr/share/texmf/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf/font
+s/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-su
+per/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></u
+sr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts
+/type1/public/cm-super/sfrm1728.pfb>
+Output written on algoprincipe.pdf (10 pages, 1110144 bytes).
 PDF statistics:
- 46 PDF objects out of 1000 (max. 8388607)
- 32 compressed objects within 1 object stream
+ 109 PDF objects out of 1000 (max. 8388607)
+ 59 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 126 words of extra memory for PDF output out of 10000 (max. 10000000)
 

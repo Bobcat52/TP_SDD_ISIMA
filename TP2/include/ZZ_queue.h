@@ -1,3 +1,13 @@
+/* ########################################################## */
+/* file's name : ZZ_queue.h				                      */
+/*							                                  */
+/* Author : Mathieu Boutin & Jérémy Morceaux                  */
+/* Date : March 2018					                      */
+/*							                                  */
+/* This file contains headers for the file ZZ_queue.c         */
+/*							                                  */
+/* ########################################################## */
+
 #ifndef ZZ_QUEUE_H
 #define ZZ_QUEUE_H
 
