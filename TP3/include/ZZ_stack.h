@@ -16,6 +16,7 @@ typedef struct tree{
 	char value;
 	struct tree* vLink;
 	struct tree* hLink;
+
 } tree_t;
 
 typedef tree_t* typeStack;
