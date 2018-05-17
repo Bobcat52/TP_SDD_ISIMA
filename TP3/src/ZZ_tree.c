@@ -38,7 +38,7 @@ tree_t* createTree(char *formatage,int size)
 			}
 			case 41: /* ")" */
 			{
-				if(isStackEmpty(stack)) /* If the stack is not empty */
+				if(!isStackEmpty(stack)) /* If the stack is not empty */
 				{
 					pop(stack,curr,&errorCode);
 				}
@@ -64,7 +64,7 @@ tree_t* createTree(char *formatage,int size)
 				{
 				
 					
-					if(head != NULL) /* If we already deal with a node */
+					if(head != NULL) /* If we have already dealt with a node */
 					{
 						tree_t node;
 	
