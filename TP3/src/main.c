@@ -26,11 +26,10 @@
 
 int main(int argc, char * argv[])
 {
-	tree_t* arbre;
+	noeud_t* arbre;
 	char *formatage = "(a(b(k(h,u)z)f(m)x)";
-	printf("lfgdlf : %s \n",formatage);
 
-	int size = 19;
+	int size = strlen(formatage); 
 
 	arbre = createTree(formatage,size);
 	return(EXIT_SUCCESS);

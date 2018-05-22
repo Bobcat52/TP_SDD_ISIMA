@@ -1,18 +1,20 @@
 #include "ZZ_tree.h"
+#include "ZZ_stack.h"
 
-tree_t* createTree(char *formatage,int size)
+noeud_t* createTree(char *formatage,int size)
 {
 	/* Init our Stack */
 	stack_t* stack;
 	int errorCode;
+
 	printf("hh\n");
 	printf("teste : %s \n",formatage);
 
 	stack = initStack(100,&errorCode); 
 
- 	tree_t* head = NULL;
-	tree_t** prec = &head;
-	tree_t* curr;
+ 	noeud_t* head = NULL;
+	noeud_t** prec = &head;
+	noeud_t* curr;
 
 	char courant;
 	int index;
@@ -23,8 +25,8 @@ tree_t* createTree(char *formatage,int size)
 	int comma = 0;
 	int numberOfNode = 0;
 
-
-	while( index < size && fini == 0)
+	int i=0;
+	for(i = 0; i < 19;i++)
 	{
 		printf("%c \n",formatage[index]);
 		courant = formatage[index]; /* On récupère le premier caractère */
@@ -40,11 +42,16 @@ tree_t* createTree(char *formatage,int size)
 			{
 				if(!isStackEmpty(stack)) /* If the stack is not empty */
 				{
-					pop(stack,curr,&errorCode);
+					T_elmtPile elmtPile;
+
+					pop(stack,&elmtPile,&errorCode);
+
+					curr = elmtPile.adr;
 				}
 				else
 				{
 					fini = 1;
+					printf("fini \n");
 				}
 				/*comma = 0;*/
 				/*parentOpen = 0;*/
@@ -62,45 +69,50 @@ tree_t* createTree(char *formatage,int size)
 
 				if(parentOpen == 1)
 				{
-				
 					
 					if(head != NULL) /* If we have already dealt with a node */
 					{
-						tree_t node;
+						noeud_t* node = malloc(sizeof(noeud_t));
 	
-						node.value = courant;
+						node->value = courant;
 					
-						node.hLink = NULL;
-						node.vLink = NULL;
+						node->hLink = NULL;
+						node->vLink = NULL;
 
 						printf("1 \n");
 						/* Create the vertical link */
 	
-						curr->vLink = &node;
+						curr->vLink = node;
 
 						printf("2 \n");
 						/* Stack the current node to come back for it */
-						push(stack, curr , &errorCode);
+
+						T_elmtPile elmtPile;
+						elmtPile.adr = curr;
+						elmtPile.nb_fils = 0;
+
+
+						push(stack, elmtPile , &errorCode);
 						printf("3 \n");
 
 
 						/* Change the current node */
-						curr = &node;
+						curr = node;
 						printf("4 \n");
 					}
 					else
 					{
 						/* Creation of the node */
-						tree_t node;
+						noeud_t* node = malloc(sizeof(noeud_t));
 	
-						node.value = courant;
+						node->value = courant;
 					
-						node.hLink = NULL;
-						node.vLink = NULL;
+						node->hLink = NULL;
+						node->vLink = NULL;
 
 						printf("Création de la tete \n");
-						*(prec) = &node;
-						curr = &node;
+						*(prec) = node;
+						curr = node;
 						printf("valeur de la tête : %c \n",head->value);
 					}
 
@@ -108,19 +120,19 @@ tree_t* createTree(char *formatage,int size)
 				else /* We have a comma or a closed parenthesis */
 				{
 					/* Creation of the node */
-					tree_t node;
+					noeud_t* node = malloc(sizeof(noeud_t));
 		
-					node.value = courant;
+					node->value = courant;
 
-					node.hLink = NULL;
-					node.vLink = NULL;
+					node->hLink = NULL;
+					node->vLink = NULL;
 					
 					if(curr != NULL)
 					{
 						/* Create the vertical link */
-						curr->hLink = &node;
+						curr->hLink = node;
 						/* Change the current node */
-						curr = &node;
+						curr = node;
 					}
 				}
 				comma = 0;
@@ -133,6 +145,6 @@ tree_t* createTree(char *formatage,int size)
 		index++;
 	}
 	printf("Il y a %d noeuds dans cette arbre \n",numberOfNode);
-	printf("valeur de la tête : %c \n",head->vLink->value);
+
 	return(head);
 }

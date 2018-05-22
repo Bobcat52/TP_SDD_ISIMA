@@ -17,17 +17,19 @@ typedef struct eltPile
 {
 	adresse adr;
 	int nb_fils;
-}T_elmtPile
+
+} T_elmtPile;
 
 
 typedef struct stack
 {
-		int           sizeMax;
-		int           numSummit;
-		T_elmtPile  *  begin;
-}stack_t;
+	int           sizeMax;
+	int           numSummit;
+	T_elmtPile  *  begin;
 
+} stack_t;
 
+typedef T_elmtPile typeStack;
 
 
 

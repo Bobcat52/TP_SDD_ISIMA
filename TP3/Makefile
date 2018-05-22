@@ -10,9 +10,9 @@ main: main.o tree.o stack.o
 main.o: ./src/main.c ./include/ZZ_tree.h
 	$(CC) -c ./src/main.c -o ./obj/main.o $(CX_FLAGS) 
 
-tree.o: ./src/ZZ_tree.c ./include/ZZ_stack.h
+tree.o: ./src/ZZ_tree.c ./include/ZZ_base.h
 	$(CC) -c ./src/ZZ_tree.c -o ./obj/tree.o $(CX_FLAGS) 
 
-stack.o: ./src/ZZ_stack.c
+stack.o: ./src/ZZ_stack.c ./include/ZZ_base.h
 	$(CC) -c ./src/ZZ_stack.c -o ./obj/stack.o $(CX_FLAGS) 
-	
+
