@@ -10,13 +10,8 @@
 
 #ifndef ZZ_STACK_H
 #define ZZ_STACK_H
+#include "ZZ_base.h"
 
-typedef struct stack
-{
-		int           sizeMax;
-		int           numSummit;
-		T_elmtPile  *  begin;
-}stack_t;
 
 typedef struct eltPile
 {
@@ -25,7 +20,16 @@ typedef struct eltPile
 }T_elmtPile
 
 
-typedef T_elmtPile typeStack;
+typedef struct stack
+{
+		int           sizeMax;
+		int           numSummit;
+		T_elmtPile  *  begin;
+}stack_t;
+
+
+
+
 
 
 stack_t * initStack(int size, int * errorCode); 

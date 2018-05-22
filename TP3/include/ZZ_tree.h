@@ -6,17 +6,17 @@
 #include <string.h>
 #include <ctype.h>
 
-#include "ZZ_stack.h"
+#include "ZZ_base.h"
 
-typedef struct tree{
+typedef struct noeud{
 
 	char value;
-	struct tree* vLink;
-	struct tree* hLink;
+	struct noeud* vLink;
+	struct noeud* hLink;
 
-} tree_t;
+} noeud_t;
 	
-tree_t* createTree(char* formatage,int size);
+noeud_t* createTree(char* formatage,int size);
 
 
 
