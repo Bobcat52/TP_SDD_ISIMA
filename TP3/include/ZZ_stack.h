@@ -11,22 +11,21 @@
 #ifndef ZZ_STACK_H
 #define ZZ_STACK_H
 
-typedef struct tree{
-
-	char value;
-	struct tree* vLink;
-	struct tree* hLink;
-
-} tree_t;
-
-typedef tree_t* typeStack;
-
 typedef struct stack
 {
 		int           sizeMax;
 		int           numSummit;
-		typeStack  *  begin;
+		T_elmtPile  *  begin;
 }stack_t;
+
+typedef struct eltPile
+{
+	adresse adr;
+	int nb_fils;
+}T_elmtPile
+
+
+typedef T_elmtPile typeStack;
 
 
 stack_t * initStack(int size, int * errorCode); 
