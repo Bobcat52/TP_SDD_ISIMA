@@ -83,7 +83,7 @@ queueType leaveQueue(queue_t* p0,int* errorCode)
 noeud_t *  rechercher(noeud_t * a, char v, int * errorCode)
 {
     queue_t* file=NULL;
-    int      end = 0;
+    int      end = 1;
     noeud_t* cur = a;
 	queueType elmt;
 
@@ -93,7 +93,7 @@ noeud_t *  rechercher(noeud_t * a, char v, int * errorCode)
 
     if (cur != NULL)
     {
-        while (cur !=NULL && end && cur->value != v)   //Tant qu'on a pas trouve v ou qu'on est pas a la fin de l'arbre
+        while (cur!=NULL && (!end) || cur->value != v)   //Tant qu'on a pas trouve v ou qu'on est pas a la fin de l'arbre
         {
             if (cur->vLink != NULL)                   // Si l'element a un fils
             {
@@ -115,7 +115,7 @@ noeud_t *  rechercher(noeud_t * a, char v, int * errorCode)
                 }
                 else                           // la file est vide, ie aucun element a de fils
                 {
-                    end = 1;
+                    end = 0;
                 }
             }
         }
@@ -123,7 +123,7 @@ noeud_t *  rechercher(noeud_t * a, char v, int * errorCode)
     return cur ;
 }
 
-void insert(noeud_t* v,char w, int* errorCode)  // v correspond à l'adresse du pere et w au fils a inserer
+void insert(noeud_t* v,char w, int* errorCode)  // v correspond au  pere et w au fils a inserer
 {
 	noeud_t* cur=v;
 	noeud_t* prec=NULL;
@@ -138,6 +138,7 @@ void insert(noeud_t* v,char w, int* errorCode)  // v correspond à l'adresse du 
 			cur->hLink=NULL;
 			cur->vLink=NULL;
 			*errorCode=1;
+			
 		}
 		else                     // alors il a au moins un fils
 		{
@@ -201,8 +202,9 @@ int main()
 	int errorCode;
 	noeud_t* arbre;
 	noeud_t* pere;
-	char p='c';
+	char p='a';
 	char i='a';
+	arbre = (noeud_t *)malloc(sizeof(noeud_t));
 	arbre->value = 'a';
     arbre->vLink = (noeud_t *)malloc(sizeof(noeud_t));
     arbre->hLink = (noeud_t *)malloc(sizeof(noeud_t));
@@ -214,8 +216,8 @@ int main()
     arbre->hLink->hLink = NULL;
 	pere=rechercher(arbre, p, &errorCode);
 	printf("%c\n",pere->value);
-	//insert(pere,i,&errorCode);
-	//printf("Le pere:%c \nLes fils inseres: %c %c \n",pere->value, pere->vLink->value, pere->vLink->hLink->value);
+	insert(pere,i,&errorCode);
+	printf("Le pere:%c \nLes fils inseres: %c %c  \n",pere->value, pere->vLink->value,pere->vLink->hLink->value);
 	
     return 0;
 }

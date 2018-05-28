@@ -15,7 +15,7 @@ int isQueueEmpty(queue_t* p0);
 void freeQueue(queue_t* p0);
 
 noeud_t *  rechercher(noeud_t * a, char v, int * errorCode);
-void insert(noeud_t* v,char w,int * errorCode);
+void insert(noeud_t* v,char w, int* errorCode);
 
 
 #endif

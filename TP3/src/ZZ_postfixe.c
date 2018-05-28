@@ -101,7 +101,7 @@ void repPostFixe(noeud_t* a, int* errorCode)
         while(cur!=NULL && (!end))   // Tant qu'on a pas parcourru tout l'arbre 
         {
             
-            while(cur->vLink != NULL)  // Tant qu'il existe un fils
+            while(cur!=NULL && cur->vLink != NULL)  // Tant qu'il existe un fils
             {   
                 elmt.adr = cur;
                 elmt.nb_fils = 1;
@@ -161,21 +161,21 @@ void repPostFixe(noeud_t* a, int* errorCode)
 }
 int main()
 {
-    noeud_t  arbre;
-    noeud_t* cur= &arbre;
+    noeud_t*  arbre;
+    
     stack_t* stack;
     int      errorCode;
-    
-    arbre.value = 'a';
-    arbre.vLink = (noeud_t *)malloc(sizeof(noeud_t));
-    arbre.hLink = (noeud_t *)malloc(sizeof(noeud_t));
-    arbre.vLink->value = 'b';
-    arbre.vLink->vLink = NULL;
-    arbre.vLink->hLink = NULL;
-    arbre.hLink->value = 'c';
-    arbre.hLink->vLink = NULL;
-    arbre.hLink->hLink = NULL;
+    arbre = (noeud_t *)malloc(sizeof(noeud_t));
+    arbre->value = 'a';
+    arbre->vLink = (noeud_t *)malloc(sizeof(noeud_t));
+    arbre->hLink = (noeud_t *)malloc(sizeof(noeud_t));
+    arbre->vLink->value = 'b';
+    arbre->vLink->vLink = NULL;
+    arbre->vLink->hLink = NULL;
+    arbre->hLink->value = 'c';
+    arbre->hLink->vLink = NULL;
+    arbre->hLink->hLink = NULL;
     printf("Début du test: \n");
-    repPostFixe(cur,&errorCode);
+    repPostFixe(arbre,&errorCode);
     return 0;
 }
