@@ -3,13 +3,7 @@
 
 
 struct noeud;
-
-
 typedef struct noeud* adresse;
-
-
-
-
 
 
 
