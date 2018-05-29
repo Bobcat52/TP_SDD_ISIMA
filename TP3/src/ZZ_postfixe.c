@@ -96,64 +96,63 @@ void repPostFixe(noeud_t* a, int* errorCode)
     *errorCode=0;
     stack = initStack(100, errorCode);
     
-    if(cur != NULL)                   // si l'arbre n'est pas vide
+    if(cur != NULL)                   										/* if the tree is not empty */
     {
-        while(cur!=NULL && end!=0)   // Tant qu'on a pas parcourru tout l'arbre 
-        {
+        while(cur!=NULL && end!=0)   										/* while we don't have gone throught the entire tree */ 
+        {	
             
-            while(cur!=NULL && cur->vLink != NULL)  // Tant qu'il existe un fils
+            while(cur!=NULL && cur->vLink != NULL)  						/* while there is a son */
             {   
                 elmt.adr = cur;
                 elmt.nb_fils = 1;
-                push(stack, elmt, errorCode);
-                cur = cur->vLink;      
+                push(stack, elmt, errorCode);			
+                cur = cur->vLink;      										/* the pointer points to its son */
             }
             printf("| %c | 0 |", cur->value);
-            if (cur->hLink != NULL)  //Si l'élément possède un frere
+            if (cur->hLink != NULL)  										/*if it has a brother */
             {
-                cur = cur->hLink;
-                if (!isStackEmpty(stack))
-                {
+                cur = cur->hLink;											/* the pointer points to its brother */
+                if (!isStackEmpty(stack))									/* if the stack is not empty */
+                {	
                     pop(stack,&elmt, errorCode);
-                    elmt.nb_fils+=1;
+                    elmt.nb_fils+=1;										/* the father has one more son */
                     push(stack,elmt,errorCode);
                 }
             }
-            else             // s'il n'a pas de frere alors on remonte dans l'arbre si cela est possible
+            else             												/* if there isn't a brother we pull up the tree if it's possible */
             {   
-				if (!isStackEmpty(stack)) //si la pile est non vide, on peut remonter dans l'arbre
+				if (!isStackEmpty(stack)) 									/* if the stack is not empty we can pull up in the tree */
                 {
                     pop(stack,&elmt,errorCode);
-                    cur = elmt.adr;                        // on fait pointer le pointeur vers le pere
-                    printf("| %c | %d |", cur->value, elmt.nb_fils);
-                    if (cur->hLink != NULL)                // si le père possède un frere
+                    cur = elmt.adr;                     					/* the pointer points to its father */
+                    printf("| %c | %d |", cur->value, elmt.nb_fils);		/* we display the father and its number of son */
+                    if (cur->hLink != NULL)                					/* if it has a brother */
                     {
-                        if (!isStackEmpty(stack))   // a-t-il un pere? 
+                        if (!isStackEmpty(stack))   						/* Has it a father?*/
                         {
-                            cur = cur->hLink;
                             pop(stack,&elmt,errorCode);
-                            elmt.nb_fils+=1;
+                            elmt.nb_fils+=1;								/* the father has one more son */
                             push(stack,elmt,errorCode);
                         }
-                        cur = cur->hLink;
+                        cur = cur->hLink;									/* the pointer points to its brother */
                     }
-                    else                    // le pere n'a pas de frere
+                    else                    								/* it doesn't have a brother */
                     {
-                        if (!isStackEmpty(stack))  // a-t-il un pere?
+                        if (!isStackEmpty(stack))  							/* Does it have a father? */
                         {
                             pop(stack,&elmt,errorCode);
-                            cur = elmt.adr;    // on fait pointer le pointeur vers le pere
+                            cur = elmt.adr;    								/* the pointer  points to its father */
                         }
-                        else               //on a parcouru tout l'arbre
+                        else               									/* we actually have gone through the entire tree */		
                         {
-                            end = 0;
+                            end = 0;										/* the path of the tree is finished */
                         }
                     }
                 }
-				else              //on a parcouru tout l'arbre
+				else              											/* he don't have a father, we actually have gone through the entire tree */  
                 {	
 					
-                    end = 0;
+                    end = 0;												/* the path of the tree is finished */
                 }
             }
         }

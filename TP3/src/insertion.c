@@ -93,29 +93,28 @@ noeud_t *  rechercher(noeud_t * a, char v, int * errorCode)
 
     if (cur != NULL)
     {
-        while (cur!=NULL && (!end) || cur->value != v)   //Tant qu'on a pas trouve v ou qu'on est pas a la fin de l'arbre
+        while (cur!=NULL && (!end) || cur->value != v)   /* while we don't have found the value v or we don't have gone through the entire tree */
         {
-            if (cur->vLink != NULL)                   // Si l'element a un fils
+            if (cur->vLink != NULL)                   /* if it has a son */
             {
-                elmt.adr = cur;						 // on stock l'element courrant et on l'enfile
+                elmt.adr = cur;						 /* we stock the current element then we pull it on the queue */
                 enterQueue(file,elmt,errorCode);
             }
-            if (cur->hLink != NULL)                // Si l'element courant a un frere alors on va sur celui-ci
+            if (cur->hLink != NULL)                /* if it has a brother */
             {
-                cur = cur->hLink;
+                cur = cur->hLink;					/* the pointer points to its brother */
             }
-            else                                   // S'il n'a pas de freres 
+            else                                   /* if it doesn't have a brother */
             {
-                if(!isQueueEmpty(file))
+                if(!isQueueEmpty(file))				
                 {
-                    cur = file->base->adr;             // on retourne sur le premier element enfiler
-                    elmt = leaveQueue(file,errorCode); // on defile le premier element de la file
-                    //val= leaveQueue(file,errorCode);
-					cur = cur->vLink ;                // on va sur son fils
+                    cur = file->base->adr;             /* we go back on the first element threaded */
+                    elmt = leaveQueue(file,errorCode); 
+					cur = cur->vLink ;                /* the pointer points to its son */
                 }
-                else                           // la file est vide, ie aucun element a de fils
+                else                           /* the queue is empty, there isn't son */
                 {
-                    end = 0;
+                    end = 0;					/* the path of the tree is finished */
                 }
             }
         }
@@ -123,14 +122,14 @@ noeud_t *  rechercher(noeud_t * a, char v, int * errorCode)
     return cur ;
 }
 
-void insert(noeud_t* v,char w, int* errorCode)  // v correspond au  pere et w au fils a inserer
+void insert(noeud_t* v,char w, int* errorCode)  
 {
 	noeud_t* cur=v;
 	noeud_t* prec=NULL;
 	*errorCode=0;
-	if (cur!=NULL)      
+	if (cur!=NULL)       /*if the tree is not empty */
 	{
-		if (cur->vLink == NULL)  //alors il n'a pas de fils
+		if (cur->vLink == NULL)  /* so there isn't son */
 		{
 			cur->vLink=(noeud_t *)malloc(sizeof(noeud_t));
 			cur = cur->vLink;
