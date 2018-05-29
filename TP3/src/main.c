@@ -1,7 +1,7 @@
 /* ########################################################## */
 /* file's name : main.c					                      */
 /*							                                  */
-/* Author : Mathieu Boutin & Jérémy Morceaux                  */
+/* Author : Mathieu Boutin & Jeremy Morceaux                  */
 /* Date : March 2018					                      */
 /*							                                  */
 /* This file contains the main program of the TP, we use the  */
@@ -29,8 +29,6 @@ int main(int argc, char * argv[])
 	noeud_t* arbre;
 	char *formatage = "(a(b(k(h,u)z)f(m)x)";
 
-	int size = strlen(formatage); 
-
-	arbre = createTree(formatage,size);
+	arbre = createTree(formatage);
 	return(EXIT_SUCCESS);
 }

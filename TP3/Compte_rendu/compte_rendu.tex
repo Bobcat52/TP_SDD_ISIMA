@@ -1,0 +1,104 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{legalpaper, margin=1in}
+\usepackage[T1]{fontenc}
+\usepackage{algorithm}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+\usepackage{graphicx}
+
+\title{SDD : TP 3}
+\author{Mathieu Boutin - Jérémy Morceaux}
+\begin{document}
+\maketitle
+\section{Présentation générale}
+- Ce TP à pour but de travailler sur la représentation des arbres en mémoire. Tout d'abord, il fallait utiliser la représentation lien vertical/horizontal. Puis de vérifier le résultat avec le débuggeur ddd. Ensuite, il fallait passer de cette représentation à celle de la représentation postfixée. Par la suite, il fallait créer une méthode d'insertion d'un nœud dans la représentation postfixée. Finalement, il fallait créer une copie de l'arbre initial et créer un autre type d'arbre où chaque noeud possède l'arbre du noeud père.
+\\
+\\
+\underline{- Schéma de base :}
+\begin{center}
+
+\end{center}
+
+\underline{Structure des fichiers de matrices : prenons par exemple une matrice n*m}
+\\
+\\
+1ère ligne fichier : <nombre de lignes> <nombre de colonne>
+\\
+2ème ligne du fichier: $m_{0,1}$ $m_{0,2}$  ... $m_{0,m-1}$
+\\
+...
+\\
+n+1ème ligne du fichier : $m_{n-1,1}$ $m_{0,2}$  ... $m_{n-1,m-1}$
+\\
+\\
+- Les fichiers sources se trouvent dans le dossier \textbf{src}.Les fonctions relatives au matrices sont dans le fichier \textbf{ZZ\_matrix.c} et les fonctions relatives aux listes chainées sont dans le fichier \textbf{ZZ\_linked\_list.c}. Les entêtes sont dans le dossier \textbf{include}.
+
+\section{Détail de chaque fonction}
+
+\subsection{createTree (char * formatage)}
+\begin{algorithm}
+Principe : createTree (char * formatage)
+\\
+\\
+\tab On initialise une pile, des pointeurs de parcours, et des variables
+\\
+\tab Pour chaque caractère de notre chaine :
+\\
+\tab \tab Si le caractère courant est une parenthèse ouvrante:
+\\
+\tab \tab \tab On le sauvegarde pour la prochaine itération
+\\
+\tab \tab Si le caractère est une parenthèse fermante :
+\\
+\tab \tab \tab Si la pile est non vide:
+\\
+\tab \tab \tab \tab On la dépile pour faire pointer le noeud de parcours sur un noeud père
+\\
+\tab \tab \tab Sinon:
+\\
+\tab \tab \tab \tab On s'arrête
+\\
+\tab \tab Si le caractère est une virgule:
+\\
+\tab \tab \tab On le sauvegarde pour la prochaine itération
+\\
+\tab \tab Sinon [Si c'est une lettre]:
+\\
+\tab \tab \tab On ajoute un noeud au noeud courant : sur le le lien vertical si le caracètre pécèdent 
+\\
+\tab \tab \tab était une parenthèse ouvrante, sur le lien horizontale si le caractère précèdent était une
+\\
+\tab \tab \tab virgule ou une parenthèse fermante.
+\\
+\tab On renvoie l'arbre
+\\
+FIN
+\end{algorithm}
+\underline{Lexique :}
+\begin{itemize}
+\item Paramètre(s) de la fonction  
+\begin{itemize}
+\item formatage contient la chaîne de caractère décrivant l'arbre à créer.
+\end{itemize}
+\item Variable(s) locale(s)
+\begin{itemize}
+\item curr est le pointeur courant qui parcourt la liste.
+\end{itemize}
+\end{itemize}
+\underline{Programme commenté :}
+\begin{center}
+
+Source code : findElt()
+\end{center}
+
+
+\section{Compte rendu d'exécution}
+
+\underline{Makefile :}
+\begin{center}
+
+Makefile
+\end{center}
+
+\end{document}

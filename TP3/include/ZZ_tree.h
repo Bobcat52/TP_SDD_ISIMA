@@ -16,7 +16,9 @@ typedef struct noeud{
 
 } noeud_t;
 	
-noeud_t* createTree(char* formatage,int size);
+noeud_t* createTree(char* formatage);
+
+noeud_t* createNode(char courant);
 
 
 

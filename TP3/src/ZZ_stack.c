@@ -1,7 +1,7 @@
 /* ########################################################## */
 /* file's name : ZZ_stack.c				                      */
 /*							                                  */
-/* Author : Mathieu Boutin & Jérémy Morceaux                  */
+/* Author : Mathieu Boutin & Jeremy Morceaux                  */
 /* Date : March 2018					                      */
 /*							                                  */
 /* This file contains source from the ZZ_stack.h	          */
