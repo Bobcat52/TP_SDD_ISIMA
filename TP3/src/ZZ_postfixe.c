@@ -98,7 +98,7 @@ void repPostFixe(noeud_t* a, int* errorCode)
     
     if(cur != NULL)                   // si l'arbre n'est pas vide
     {
-        while(cur!=NULL && (!end))   // Tant qu'on a pas parcourru tout l'arbre 
+        while(cur!=NULL && end!=0)   // Tant qu'on a pas parcourru tout l'arbre 
         {
             
             while(cur!=NULL && cur->vLink != NULL)  // Tant qu'il existe un fils
@@ -121,14 +121,14 @@ void repPostFixe(noeud_t* a, int* errorCode)
             }
             else             // s'il n'a pas de frere alors on remonte dans l'arbre si cela est possible
             {   
-                if (!isStackEmpty) //si la pile est non vide, on peut remonter dans l'arbre
+				if (!isStackEmpty(stack)) //si la pile est non vide, on peut remonter dans l'arbre
                 {
                     pop(stack,&elmt,errorCode);
                     cur = elmt.adr;                        // on fait pointer le pointeur vers le pere
                     printf("| %c | %d |", cur->value, elmt.nb_fils);
                     if (cur->hLink != NULL)                // si le père possède un frere
                     {
-                        if (!isStackEmpty)   // a-t-il un pere? 
+                        if (!isStackEmpty(stack))   // a-t-il un pere? 
                         {
                             cur = cur->hLink;
                             pop(stack,&elmt,errorCode);
@@ -139,7 +139,7 @@ void repPostFixe(noeud_t* a, int* errorCode)
                     }
                     else                    // le pere n'a pas de frere
                     {
-                        if (!isStackEmpty)  // a-t-il un pere?
+                        if (!isStackEmpty(stack))  // a-t-il un pere?
                         {
                             pop(stack,&elmt,errorCode);
                             cur = elmt.adr;    // on fait pointer le pointeur vers le pere
@@ -150,8 +150,9 @@ void repPostFixe(noeud_t* a, int* errorCode)
                         }
                     }
                 }
-                else              //on a parcouru tout l'arbre
-                {
+				else              //on a parcouru tout l'arbre
+                {	
+					
                     end = 0;
                 }
             }
