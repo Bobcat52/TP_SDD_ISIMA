@@ -26,9 +26,30 @@
 
 int main(int argc, char * argv[])
 {
-	noeud_t* arbre;
-	char *formatage = "(a(b(k(h,u)z)f(m)x)";
+	noeud_t arbre;
+	int errorCode;
+	/*char *formatage = "(a(b(k(h,u)z)f(m)x(p,v,w)))";*/
+	char *formatage = "(a(b(k))c)";
 
 	arbre = createTree(formatage);
+	repPostFixe(&arbre,&errorCode);
+
+	noeud_t* pere;
+	char p='a';
+	char i='a';
+
+	pere = rechercher(&arbre, p, &errorCode);
+
+	if(pere != NULL)
+	{	
+		printf("%c\n",pere->value);
+		insertNode(pere,i,&errorCode);
+	}
+	else
+	{
+		printf("pointeur null \n");
+	}
+	repPostFixe(&arbre,&errorCode);
+	
 	return(EXIT_SUCCESS);
 }

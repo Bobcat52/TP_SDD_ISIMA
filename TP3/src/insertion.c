@@ -82,7 +82,7 @@ queueType leaveQueue(queue_t* p0,int* errorCode)
 
 noeud_t *  rechercher(noeud_t * a, char v, int * errorCode)
 {
-    queue_t* file=NULL;
+    queue_t* file = NULL;
     int      end = 1;
     noeud_t* cur = a;
 	queueType elmt;
@@ -93,28 +93,28 @@ noeud_t *  rechercher(noeud_t * a, char v, int * errorCode)
 
     if (cur != NULL)
     {
-        while (cur!=NULL && (!end) || cur->value != v)   /* while we don't have found the value v or we don't have gone through the entire tree */
+        while (cur != NULL && !end || cur->value != v) /* while we don't have found the value v or we don't have gone through the entire tree */
         {
-            if (cur->vLink != NULL)                   /* if it has a son */
+            if (cur->vLink != NULL) /* if it has a son */
             {
-                elmt.adr = cur;						 /* we stock the current element then we pull it on the queue */
+                elmt.adr = cur; /* we stock the current element then we pull it on the queue */
                 enterQueue(file,elmt,errorCode);
             }
-            if (cur->hLink != NULL)                /* if it has a brother */
+            if (cur->hLink != NULL) /* if it has a brother */
             {
-                cur = cur->hLink;					/* the pointer points to its brother */
+                cur = cur->hLink; /* the pointer points to its brother */
             }
-            else                                   /* if it doesn't have a brother */
+            else /* if it doesn't have a brother */
             {
                 if(!isQueueEmpty(file))				
                 {
-                    cur = file->base->adr;             /* we go back on the first element threaded */
+                    cur = file->base->adr; /* we go back on the first element threaded */
                     elmt = leaveQueue(file,errorCode); 
-					cur = cur->vLink ;                /* the pointer points to its son */
+					cur = cur->vLink; /* the pointer points to its son */
                 }
-                else                           /* the queue is empty, there isn't son */
+                else /* the queue is empty, there isn't son */
                 {
-                    end = 0;					/* the path of the tree is finished */
+                    end = 0; /* the path of the tree is finished */
                 }
             }
         }
