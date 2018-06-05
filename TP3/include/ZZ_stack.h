@@ -20,7 +20,6 @@ typedef struct eltPile
 
 } T_elmtPile;
 
-
 typedef struct stack
 {
 	int           sizeMax;

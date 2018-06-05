@@ -29,28 +29,12 @@ int main(int argc, char * argv[])
 	noeud_t arbre;
 	int errorCode;
 	char *formatage = "(a(b(k(h,u)z)f(m)x(p,v,w)))";
-	/* char *formatage = "(a(b(k(u,z)))c)"; */
+	/*char *formatage = "(a(b(k(u,z)))c)"; */
 
 	arbre = createTree(formatage);
+	noeud_t arbre_copy;
 
-	repPostFixe(&arbre,&errorCode);
-
-	noeud_t* pere;
-	char p='a';
-	char i='a';
-
-	pere = rechercher(&arbre, p, &errorCode);
-
-	if(pere != NULL)
-	{	
-		printf("%c\n",pere->value);
-		insertNode(pere,i,&errorCode);
-	}
-	else
-	{
-		printf("pointeur null \n");
-	}
-	repPostFixe(&arbre,&errorCode);
+	arbre_copy = s
 	
 	return(EXIT_SUCCESS);
 }

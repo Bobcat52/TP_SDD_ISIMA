@@ -327,3 +327,84 @@ void insertNode(noeud_t* v,char w, int* errorCode)
 		}
 	}
 }
+noeudModified_t copyTree(noeud_t arbre)
+{
+
+    noeud_t*  cur = arbre.vLink;
+	noeud_t* pere = NULL;
+	/* head of the new tree */
+	noeudModified_t treeCopy;
+	noeudModified_t curTreeCopy = treeCopy;
+
+
+    int end = 1;
+    
+    if(cur != NULL) /* if the tree is not empty */               										
+    {
+		/* while we don't have gone throught the entire tree */ 
+        while(cur != NULL && end != 0)   										
+        {	
+
+            /* while there is a son */
+            while(cur != NULL && cur->vLink != NULL)  						
+            {   
+				/* we create a new block from the current block with a slight change : we add the parent's adress to it */
+				noeudModified_t *newBlock = createModifiedNode(cur,pere); 
+
+				pere = cur;
+                cur = cur->vLink; /* the pointer points to its son */
+				
+
+				curTreeCopy.vLink = newBlock;
+				curTreeCopy = newBlock;
+            }
+
+            if (cur->hLink != NULL) /*if it has a brother */
+            {
+				/* we create a new block from the current block with a slight change : we add the parent's adress to it */
+				noeudModified_t *newBlock = createModifiedNode(cur,pere); 
+
+                cur = cur->hLink; /* the pointer points to its brother */
+
+				curTreeCopy.hLink = newBlock;
+				curTreeCopy = newBlock;
+            }
+            else /* if there isn't a brother we pull up the tree if it's possible */
+            {   
+				cur = curTreeCopy.papa; /* we come back to the father */
+
+                if (cur->hLink != NULL) /* if it has a brother */
+                {
+
+                    cur = cur->hLink; /* the pointer points to its brother */
+                }
+                else /* it doesn't have a brother */
+                {
+                    if (!isStackEmpty(stack) && stack->numSummit != 1) /* Does it have a father? */
+                    {
+                        pop(stack,&elmt,errorCode);
+                        cur = elmt.adr; /* the pointer  points to its father */
+                    }
+                    else /* we actually have gone through the entire tree */		
+                    {
+                        end = 0;	/* the path of the tree is finished */
+                    }
+                }
+       
+
+            }
+        }
+    }
+    
+}
+
+noeudModified_t* createModifiedNode(noeud_t* cur,noeud_t* pere)
+{
+    noeudModified_t* newBlock = malloc(sizeof(noeudModified_t));
+	newBlock->value = cur->value;
+	newBlock->vLink = cur->vLink;
+	newBlock->hLink = cur->hLink;
+	newBlock->papa = pere;
+
+	return(newBlock);
+}
