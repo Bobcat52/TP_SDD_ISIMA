@@ -32,9 +32,29 @@ int main(int argc, char * argv[])
 	/*char *formatage = "(a(b(k(u,z)))c)"; */
 
 	arbre = createTree(formatage);
-	noeud_t arbre_copy;
 
-	arbre_copy = s
-	
+	printf("%c \n", arbre.vLink->value);
+	/*printf("%c \n", arbre.vLink->hLink->value);*/
+	derniereRacine(arbre.vLink);
+	repPostFixe(arbre.vLink,&errorCode);
+
+	noeud_t* pere;
+	char p='a';
+	char i='t';
+
+	/*pere = rechercher(arbre.vLink, p, &errorCode);
+
+	if(pere != NULL)
+	{	
+		printf("%c\n",pere->value);
+		insertNode(pere,i,&errorCode);
+		printf("%d \n",errorCode);
+	}
+	else
+	{
+		printf("pointeur null \n");
+	}
+	repPostFixe(arbre.vLink,&errorCode);*/
+
 	return(EXIT_SUCCESS);
 }

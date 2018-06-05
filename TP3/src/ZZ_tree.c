@@ -14,12 +14,27 @@ noeud_t* createNode(char courant)
 
 	return(node);
 }
+
+noeud_t* derniereRacine(noeud_t* a)
+{
+	noeud_t* cur = a;
+	if (cur !=NULL)
+	{
+		while(cur->hLink!=NULL)
+		{
+			cur = cur->hLink;
+		}
+	}
+	printf("%c \n",cur->value);
+	return cur;
+}
 void repPostFixe(noeud_t* a, int* errorCode)
 {
    
     noeud_t*  cur = a;
     stack_t*  stack = NULL;
     typeStack elmt;
+	noeud_t*  racineUltime = derniereRacine(a); 
     int       end = 1;
     
     *errorCode = 0;
@@ -42,7 +57,7 @@ void repPostFixe(noeud_t* a, int* errorCode)
             }
 
             printf("(%c,0) ", cur->value);
-
+			
             if (cur->hLink != NULL) /*if it has a brother */
             {
                 cur = cur->hLink; /* the pointer points to its brother */
@@ -81,11 +96,16 @@ void repPostFixe(noeud_t* a, int* errorCode)
                     }
                     else /* it doesn't have a brother */
                     {
-                        if (!isStackEmpty(stack) && stack->numSummit != 1) /* Does it have a father? */
+                        if (!isStackEmpty(stack)) /* Does it have a father? */
                         {
                             pop(stack,&elmt,errorCode);
                             cur = elmt.adr; /* the pointer  points to its father */
-                        }
+							if(cur == racineUltime)
+							{
+								end = 0;
+								printf("(%c,%d) ", cur->value, elmt.nb_fils); /* we display the father and its number of son */
+	                    	 }
+						}
                         else /* we actually have gone through the entire tree */		
                         {
                             end = 0;	/* the path of the tree is finished */
