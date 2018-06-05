@@ -29,28 +29,31 @@ int main(int argc, char * argv[])
 	noeud_t arbre;
 	int errorCode;
 	char *formatage = "(a(b(k(h,u)z)f(m)x(p,v,w)))";
-	/* char *formatage = "(a(b(k(u,z)))c)"; */
+	/*char *formatage = "(a(b(k(u,z)))c)"; */
 
 	arbre = createTree(formatage);
-
-	repPostFixe(&arbre,&errorCode);
+	printf("%c \n", arbre.vLink->value);
+	/*printf("%c \n", arbre.vLink->hLink->value);*/
+	derniereRacine(arbre.vLink);
+	repPostFixe(arbre.vLink,&errorCode);
 
 	noeud_t* pere;
 	char p='a';
-	char i='a';
+	char i='t';
 
-	pere = rechercher(&arbre, p, &errorCode);
+	/*pere = rechercher(arbre.vLink, p, &errorCode);
 
 	if(pere != NULL)
 	{	
 		printf("%c\n",pere->value);
 		insertNode(pere,i,&errorCode);
+		printf("%d \n",errorCode);
 	}
 	else
 	{
 		printf("pointeur null \n");
 	}
-	repPostFixe(&arbre,&errorCode);
+	repPostFixe(arbre.vLink,&errorCode);*/
 	
 	return(EXIT_SUCCESS);
 }
