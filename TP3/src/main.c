@@ -28,33 +28,35 @@ int main(int argc, char * argv[])
 {
 	noeud_t arbre;
 	int errorCode;
+	int o;
 	char *formatage = "(a(b(k(h,u)z)f(m)x(p,v,w)))";
-	/*char *formatage = "(a(b(k(u,z)))c)"; */
+	/*char *formatage = "(a(b(k(u,w)))c)"; */ 
 
 	arbre = createTree(formatage);
 
-	printf("%c \n", arbre.vLink->value);
-	/*printf("%c \n", arbre.vLink->hLink->value);*/
-	derniereRacine(arbre.vLink);
+	
+	printf("Premiere representation Postfixee avant insertion: \n");
 	repPostFixe(arbre.vLink,&errorCode);
+	 
+	 noeud_t* pere;
+	 char p='k';
+	 char i='s';
 
-	noeud_t* pere;
-	char p='a';
-	char i='t';
-
-	/*pere = rechercher(arbre.vLink, p, &errorCode);
-
+	pere = rechercher(arbre.vLink, p, &errorCode);
+	
+	
 	if(pere != NULL)
 	{	
 		printf("%c\n",pere->value);
 		insertNode(pere,i,&errorCode);
-		printf("%d \n",errorCode);
+		printf("errorCode: %d \n",errorCode);
 	}
 	else
 	{
 		printf("pointeur null \n");
 	}
-	repPostFixe(arbre.vLink,&errorCode);*/
+	printf("Deuxieme representation Postfixee apres insertion: \n");
+	repPostFixe(arbre.vLink,&errorCode);
 
 	return(EXIT_SUCCESS);
 }

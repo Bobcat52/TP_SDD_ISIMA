@@ -1,5 +1,5 @@
 #include "ZZ_tree.h"
-#include "ZZ_stack.h"
+
 #include "ZZ_queue.h"
 
 noeud_t* createNode(char courant)
@@ -15,28 +15,36 @@ noeud_t* createNode(char courant)
 	return(node);
 }
 
-noeud_t* derniereRacine(noeud_t* a)
+
+void incrementNbSon(stack_t* stack, typeStack elmt, int*errorCode)
 {
-	noeud_t* cur = a;
-	if (cur !=NULL)
-	{
-		while(cur->hLink!=NULL)
-		{
-			cur = cur->hLink;
-		}
-	}
-	printf("%c \n",cur->value);
-	return cur;
+	
+	pop(stack,&elmt, errorCode);
+	
+	elmt.nb_fils+=1; /* the father has one more son */
+
+	push(stack,elmt,errorCode);
 }
+
+void pushBis(stack_t* stack, typeStack elmt, int* errorCode, noeud_t* cur)
+{
+	elmt.adr = cur;
+	elmt.nb_fils = 1;
+	push(stack, elmt, errorCode);	
+	
+}
+
+
+
 void repPostFixe(noeud_t* a, int* errorCode)
 {
    
     noeud_t*  cur = a;
     stack_t*  stack = NULL;
     typeStack elmt;
-	noeud_t*  racineUltime = derniereRacine(a); 
+	
     int       end = 1;
-    
+    int wasInStack = 0;
     *errorCode = 0;
     stack = initStack(100, errorCode);
     
@@ -45,84 +53,78 @@ void repPostFixe(noeud_t* a, int* errorCode)
 		/* while we don't have gone throught the entire tree */ 
         while(cur != NULL && end != 0)   										
         {	
-
-            /* while there is a son */
-            while(cur != NULL && cur->vLink != NULL)  						
-            {   
-                elmt.adr = cur;
-                elmt.nb_fils = 1;
-                push(stack, elmt, errorCode);	
+			if(wasInStack==1) /* we have already processed this element */
+			{
+				printf("(%c,%d)",cur->value,elmt.nb_fils); /* we display the element */
+				if(cur->hLink!=NULL) /* Has it a brother ? */
+				{
+					cur = cur->hLink ;
+					if (!isStackEmpty(stack)) /* if the stack is not empty */
+					{	
+						incrementNbSon(stack,elmt,errorCode);
+					}
+					wasInStack = 0; /* this element hasn't been processed yet */
+				}
+				else          /* we pull up the tree if it is possible */
+				{
+					if(!isStackEmpty(stack))
+					{
+						pop(stack,&elmt,errorCode);
+						cur = elmt.adr;
+					}
+					else
+					{
+						end=0;
+					}
+				}
+			}
+			else
+			{
+				/* while there is a son */
+				while(cur != NULL && cur->vLink != NULL)  						
+				{   
+					pushBis(stack,elmt,errorCode,cur);
 		
-                cur = cur->vLink; /* the pointer points to its son */
-            }
+					cur = cur->vLink; /* the pointer points to its son */
+				}
 
-            printf("(%c,0) ", cur->value);
+				printf("(%c,0)", cur->value);
 			
-            if (cur->hLink != NULL) /*if it has a brother */
-            {
-                cur = cur->hLink; /* the pointer points to its brother */
+			
+				if (cur->hLink != NULL) /*if it has a brother */
+				{
+					cur = cur->hLink; /* the pointer points to its brother */
 
-                if (!isStackEmpty(stack)) /* if the stack is not empty */
-                {	
-                    pop(stack,&elmt, errorCode);
-
-                    elmt.nb_fils+=1; /* the father has one more son */
-
-                    push(stack,elmt,errorCode);
-                }
-            }
-            else /* if there isn't a brother we pull up the tree if it's possible */
-            {   
-				if (!isStackEmpty(stack)) /* if the stack is not empty we can pull up in the tree */
-                {
-                    pop(stack,&elmt,errorCode);
-
-                    cur = elmt.adr; /* the pointer points to its father */
-
-                    printf("(%c,%d) ", cur->value, elmt.nb_fils); /* we display the father and its number of son */
-
-
-                    if (cur->hLink != NULL) /* if it has a brother */
-                    {
-                        if (!isStackEmpty(stack))  /* Has it a father?*/
-                        {
-							/* TODO : faire une fonction générique pour le pop/push */
-                            pop(stack,&elmt,errorCode);
-                            elmt.nb_fils += 1; /* the father has one more son */
-                            push(stack,elmt,errorCode);
-                        }
-
-                        cur = cur->hLink; /* the pointer points to its brother */
-                    }
-                    else /* it doesn't have a brother */
-                    {
-                        if (!isStackEmpty(stack)) /* Does it have a father? */
-                        {
-                            pop(stack,&elmt,errorCode);
-                            cur = elmt.adr; /* the pointer  points to its father */
-							if(cur == racineUltime)
-							{
-								end = 0;
-								printf("(%c,%d) ", cur->value, elmt.nb_fils); /* we display the father and its number of son */
-	                    	 }
-						}
-                        else /* we actually have gone through the entire tree */		
-                        {
-                            end = 0;	/* the path of the tree is finished */
-                        }
-                    }
-                }
-				else /* he doesn't have a father, we actually have gone through the entire tree */  
-                {	
+					if (!isStackEmpty(stack)) /* if the stack is not empty */
+					{	
+						incrementNbSon(stack,elmt,errorCode);
+					}
 					
-                    end = 0; /* the path of the tree is finished */
-                }
-            }
-        }
-    }
-    
+				}
+				else /* if there isn't a brother we pull up the tree if it's possible */
+				{   
+					if (!isStackEmpty(stack)) /* if the stack is not empty we can pull up in the tree */
+					{
+						pop(stack,&elmt,errorCode);
+
+						cur = elmt.adr; /* the pointer points to its father */
+						
+						wasInStack = 1;
+					}
+					else
+					{
+						end = 0;
+					}
+				}
+			}
+		}
+	}
 	printf("\n");
 }
+				
+				
+		
+
 noeud_t createTree(char *formatage)
 {
 	/* Init our Stack */
@@ -220,10 +222,11 @@ noeud_t createTree(char *formatage)
 
 	return(head);
 }
+
 noeud_t *  rechercher(noeud_t * a, char v, int * errorCode)
 {
     queue_t* file = NULL;
-    int      end = 1;
+    
     noeud_t* cur = a;
 	queueType elmt;
 
@@ -231,42 +234,33 @@ noeud_t *  rechercher(noeud_t * a, char v, int * errorCode)
     *errorCode = 0;
     file = initQueue(100,errorCode);
 
-	printf("1 \n");
     if (cur != NULL)
     {
-        while ( (cur != NULL && (!end) ) || cur->value != v) /* while we don't have found the value v or we don't have gone through the entire tree */
+        while ( cur != NULL && cur->value != v) /* while we don't have found the value v or we don't have gone through the entire tree */
         {
-			printf("2 \n");
+
             if (cur->vLink != NULL) /* if it has a son */
             {
-				printf("3 \n");
+				
                 elmt.adr = cur; /* we stock the current element then we pull it on the queue */
                 enterQueue(file,elmt,errorCode);
             }
             if (cur->hLink != NULL) /* if it has a brother */
             {
-				printf("4 \n");
-				if(cur == NULL)
-				{
-					printf("null\n");
-				}	
                 cur = cur->hLink; /* the pointer points to its brother */
             }
             else /* if it doesn't have a brother */
             {
-				printf("5 \n");
+				
                 if(!isQueueEmpty(file))				
                 {
-					printf("6 \n");
+					
                     cur = file->base->adr; /* we go back on the first element threaded */
                     elmt = leaveQueue(file,errorCode); 
-					printf("7 \n");
+					
 					cur = cur->vLink; /* the pointer points to its son */
                 }
-                else /* the queue is empty, there isn't son */
-                {
-                    end = 0; /* the path of the tree is finished */
-                }
+                
             }
         }
     }
@@ -279,7 +273,7 @@ void insertNode(noeud_t* v,char w, int* errorCode)
 	noeud_t* prec=NULL;
 
 	*errorCode=0;
-	if (cur!=NULL)       /*if the tree is not empty */
+	if (cur!=NULL)       /*if the subtree exists */
 	{
 		if (cur->vLink == NULL)  /* so there isn't son */
 		{
@@ -295,7 +289,7 @@ void insertNode(noeud_t* v,char w, int* errorCode)
 		{
 			prec = cur;
 			cur = cur->vLink;
-			if (cur->value < w)   /* le premier fils n'est pas avant l'element dans l'alphabet */
+			if (cur->value < w)   /* le premier fils est  avant l'element dans l'alphabet */
 			{
 				while(cur != NULL && cur->value <w) /* On cherche ou inserer le fils */
 				{
@@ -311,34 +305,34 @@ void insertNode(noeud_t* v,char w, int* errorCode)
 					*errorCode=1;
 
 				}
-				else                 /*on insere le fils au milieu de ses freres;*/
+				else     /*we insert the element in the middle of its brothers*/
 				{
-					if (cur->value != w)  /*le fils w n'existe pas deja */
+					if (cur->value != w)  /*the element hasn't created yet*/
 					{
-						prec->hLink = (noeud_t *)malloc(sizeof(noeud_t)); /* on insere le fils w entre 2 freres*/
+						prec->hLink = (noeud_t *)malloc(sizeof(noeud_t)); /* we insert the element between 2 brothers*/
 						prec->hLink->value = w;
 						prec->hLink->vLink = NULL;
-						prec->hLink->hLink = cur;    /*on relie au frere suivant  */
+						prec->hLink->hLink = cur;    /*we link the element to the next brother  */
 						*errorCode=1; 
 					}
-					else /* Sinon le fils w existe deja donc pas besoin de l'inserer*/
+					else /* the element is already created so no need to insert it*/
 					{
 						*errorCode=-1;
 					}
 				
 				}
 			}
-			else
+			else  /*if the element is before the first son in the alphabet */
 			{
-				if (cur->value > w) /* alors on insere le fils en tete */
+				if (cur->value > w) /* so we insert the element into the head */
 				{
-					prec->vLink = (noeud_t *)malloc(sizeof(noeud_t)); /* on insere le fils w entre 2 freres*/
+					prec->vLink = (noeud_t *)malloc(sizeof(noeud_t)); /* we insert the element between its 2 brothers*/
 					prec->vLink->value = w;
 					prec->vLink->vLink = NULL;
-					prec->vLink->hLink = cur;    /* on relie au frere suivant  */
+					prec->vLink->hLink = cur;    /* we link the element to the next brother  */
 					*errorCode=1; 
 				}
-				else   /* le premier fils est deja w donc pas besoin de l'inserer */
+				else   /* the first son is already the element, no need to insert it */
 				{
 					*errorCode=-1;
 				}
@@ -347,84 +341,4 @@ void insertNode(noeud_t* v,char w, int* errorCode)
 		}
 	}
 }
-noeudModified_t copyTree(noeud_t arbre)
-{
 
-    noeud_t*  cur = arbre.vLink;
-	noeud_t* pere = NULL;
-	/* head of the new tree */
-	noeudModified_t treeCopy;
-	noeudModified_t curTreeCopy = treeCopy;
-
-
-    int end = 1;
-    
-    if(cur != NULL) /* if the tree is not empty */               										
-    {
-		/* while we don't have gone throught the entire tree */ 
-        while(cur != NULL && end != 0)   										
-        {	
-
-            /* while there is a son */
-            while(cur != NULL && cur->vLink != NULL)  						
-            {   
-				/* we create a new block from the current block with a slight change : we add the parent's adress to it */
-				noeudModified_t *newBlock = createModifiedNode(cur,pere); 
-
-				pere = cur;
-                cur = cur->vLink; /* the pointer points to its son */
-				
-
-				curTreeCopy.vLink = newBlock;
-				curTreeCopy = newBlock;
-            }
-
-            if (cur->hLink != NULL) /*if it has a brother */
-            {
-				/* we create a new block from the current block with a slight change : we add the parent's adress to it */
-				noeudModified_t *newBlock = createModifiedNode(cur,pere); 
-
-                cur = cur->hLink; /* the pointer points to its brother */
-
-				curTreeCopy.hLink = newBlock;
-				curTreeCopy = newBlock;
-            }
-            else /* if there isn't a brother we pull up the tree if it's possible */
-            {   
-				cur = curTreeCopy.papa; /* we come back to the father */
-
-                if (cur->hLink != NULL) /* if it has a brother */
-                {
-
-                    cur = cur->hLink; /* the pointer points to its brother */
-                }
-                else /* it doesn't have a brother */
-                {
-                    if (!isStackEmpty(stack) && stack->numSummit != 1) /* Does it have a father? */
-                    {
-                        pop(stack,&elmt,errorCode);
-                        cur = elmt.adr; /* the pointer  points to its father */
-                    }
-                    else /* we actually have gone through the entire tree */		
-                    {
-                        end = 0;	/* the path of the tree is finished */
-                    }
-                }
-       
-
-            }
-        }
-    }
-    
-}
-
-noeudModified_t* createModifiedNode(noeud_t* cur,noeud_t* pere)
-{
-    noeudModified_t* newBlock = malloc(sizeof(noeudModified_t));
-	newBlock->value = cur->value;
-	newBlock->vLink = cur->vLink;
-	newBlock->hLink = cur->hLink;
-	newBlock->papa = pere;
-
-	return(newBlock);
-}
