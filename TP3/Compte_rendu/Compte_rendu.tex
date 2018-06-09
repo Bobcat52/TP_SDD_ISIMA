@@ -1,0 +1,330 @@
+\documentclass[a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{legalpaper, margin=1in}
+\usepackage[T1]{fontenc}
+\usepackage{algorithm}
+\newcommand\tab[1][1cm]{\hspace*{#1}}
+\usepackage{graphicx}
+
+\title{SDD : TP 3}
+\author{Mathieu Boutin - Jérémy Morceaux}
+\begin{document}
+\maketitle
+\section{Présentation générale}
+- Ce TP à pour but de travailler sur la représentation des arbres en mémoire. Tout d'abord, il fallait utiliser la représentation lien vertical/horizontal. Puis de vérifier le résultat avec le débuggeur ddd. Ensuite, il fallait passer de cette représentation à celle de la représentation postfixée. Par la suite, il fallait créer une méthode d'insertion d'un nœud dans la représentation postfixée. Finalement, il fallait créer une copie de l'arbre initial et créer un autre type d'arbre où chaque noeud possède l'arbre du noeud père.
+\\
+\\
+\underline{- Schéma de base :}
+\begin{center}
+
+\end{center}
+
+\underline{Structure des fichiers de matrices : prenons par exemple une matrice n*m}
+\\
+\\
+1ère ligne fichier : <nombre de lignes> <nombre de colonne>
+\\
+2ème ligne du fichier: $m_{0,1}$ $m_{0,2}$  ... $m_{0,m-1}$
+\\
+...
+\\
+n+1ème ligne du fichier : $m_{n-1,1}$ $m_{0,2}$  ... $m_{n-1,m-1}$
+\\
+\\
+- Les fichiers sources se trouvent dans le dossier \textbf{src}.Les fonctions relatives au matrices sont dans le fichier \textbf{ZZ\_matrix.c} et les fonctions relatives aux listes chainées sont dans le fichier \textbf{ZZ\_linked\_list.c}. Les entêtes sont dans le dossier \textbf{include}.
+
+\section{Détail de chaque fonction}
+
+\subsection{createTree (char * formatage)}
+\begin{algorithm}
+Principe : createTree (char * formatage)
+\\
+\\
+\tab On initialise une pile, des pointeurs de parcours, et des variables
+\\
+\tab Pour chaque caractère de notre chaine :
+\\
+\tab \tab Si le caractère courant est une parenthèse ouvrante:
+\\
+\tab \tab \tab On le sauvegarde pour la prochaine itération
+\\
+\tab \tab Si le caractère est une parenthèse fermante :
+\\
+\tab \tab \tab Si la pile est non vide:
+\\
+\tab \tab \tab \tab On la dépile pour faire pointer le noeud de parcours sur un noeud père
+\\
+\tab \tab \tab Sinon:
+\\
+\tab \tab \tab \tab On s'arrête
+\\
+\tab \tab Si le caractère est une virgule:
+\\
+\tab \tab \tab On le sauvegarde pour la prochaine itération
+\\
+\tab \tab Sinon [Si c'est une lettre]:
+\\
+\tab \tab \tab On ajoute un noeud au noeud courant : sur le le lien vertical si le caracètre pécèdent 
+\\
+\tab \tab \tab était une parenthèse ouvrante, sur le lien horizontale si le caractère précèdent était une
+\\
+\tab \tab \tab virgule ou une parenthèse fermante.
+\\
+\tab On renvoie l'arbre
+\\
+FIN
+\end{algorithm}
+\underline{Lexique :}
+\begin{itemize}
+\item Paramètre(s) de la fonction  
+\begin{itemize}
+\item formatage contient la chaîne de caractère décrivant l'arbre à créer.
+\end{itemize}
+\item Variable(s) locale(s)
+\begin{itemize}
+\item curr est le pointeur courant qui parcourt la liste.
+\end{itemize}
+\end{itemize}
+\underline{Programme commenté :}
+\begin{center}
+
+Source code : findElt()
+\end{center}
+
+\pagebreak
+
+\subsection{Représentation Postfixée}
+\begin{algorithm}
+Principe : Représentation Postfixée
+\\
+\\
+\tab On initialise des pointeurs, une pile et des variables;
+\\
+\tab Si l'arbre est non vide alors:
+\\
+\tab \tab Tant qu'on n'a pas parcouru tout l'arbre faire:
+\\
+\tab \tab \tab Si l'élément a déjà été traité alors :
+\\
+\tab \tab \tab \tab On affiche l'élément avec son nombre de fils;
+\\
+\tab \tab \tab \tab S'il a un frère alors:
+\\
+\tab \tab \tab \tab \tab On accède à son frère;
+\\
+\tab \tab \tab \tab Sinon: 
+\\
+\tab \tab \tab \tab \tab On accède à son père s'il en a un;
+\\
+\tab \tab \tab Sinon: [S'il n'a pas déjà été traité]
+\\
+\tab \tab \tab \tab Tant qu'il existe un fils faire :
+\\
+\tab \tab \tab \tab \tab On accède au fils de l'élément;
+\\
+\tab \tab \tab \tab On affiche le dernier fils;
+\\
+\tab \tab \tab \tab S'il a un frère alors:
+\\
+\tab \tab \tab \tab \tab On accède à son frère;
+\\
+\tab \tab \tab \tab Sinon: [il n'a pas de frère]
+\\
+\tab \tab \tab \tab \tab On accède à son père si il existe;
+\\
+FIN
+\end{algorithm}
+\underline{Lexique :}
+\begin{itemize}
+\item Paramètre(s) de la fonction  
+\begin{itemize}
+\item L'adresse de l'arbre
+\item L'adresse d'une variable de Code Erreur
+\end{itemize}
+\item Variables locales:
+\begin{itemize}
+\item cur est le pointeur courant qui parcourt l'arbre
+\item stack est la pile qui servira à stocker les élément lors du parcours et de remonter dans l'arbre
+\item elmt  est le type d'élément stocké dans la pile stack 
+\item wasInStack est un entier représentant un booléen afin de savoir si l'élément a déjà été empilé et donc traité
+\item end est un entier traduisant un booléen afin de savoir si on a parcouru tout l'arbre 
+\end{itemize}
+\end{itemize}
+\underline{Programme Commenté :}
+
+
+
+\subsection{Recherche avec parcours du 1er ordre par niveau et insertion }
+\begin{algorithm}
+Principe : Recherche avec parcours 1er ordre par niveau
+\\
+\\
+\tab On initialise des pointeurs et des variables;
+\\
+\tab Si l'arbre est non Vide alors:
+\\
+\tab \tab Tant qu'on a pas parcouru tout l'arbre ou qu'on n'a pas trouvé la valeur v faire:
+\\
+\tab \tab \tab Si l'élément a un fils alors:
+\\
+\tab \tab \tab \tab On stock l'élément dans la file;
+\\
+\tab \tab \tab Si l'élément possède un frère alors:
+\\
+\tab \tab \tab \tab on accède à son frère;
+\\
+\tab \tab \tab Sinon:
+\\
+\tab \tab \tab \tab Si la file est non vide alors:
+\\
+\tab \tab \tab \tab \tab On retourne sur le premier élément enfiler;
+\\
+\tab \tab \tab \tab Sinon:
+\\
+\tab \tab \tab \tab \tab On a parcouru tout l'arbre;
+\\
+FIN
+\end{algorithm}
+\underline{Lexique :}
+\begin{itemize}
+\item Paramètre(s) de la fonction  
+\begin{itemize}
+\item L'adresse de l'arbre
+\item L'adresse d'une variable de Code Erreur
+\item La valeur v du nœud à chercher
+\end{itemize}
+\item Variables locales:
+\begin{itemize}
+\item cur est le pointeur courant qui parcourt l'arbre
+\item queue est la file qui servira à stocker les élément lors du parcours de l'arbre selon le 1er ordre 
+\item end est un entier traduisant booléen
+\end{itemize}
+\end{itemize}
+\underline{Programme Commenté :}
+
+
+
+\begin{algorithm}
+Principe : Insertion 
+\\
+\\
+\tab On initialise des pointeurs et des variables;
+\\
+\tab Si le père existe:
+\\
+\tab \tab S'il n'a pas de fils alors :
+\\
+\tab \tab \tab On insère en tête le fils;
+\\
+\tab \tab Sinon: [il a au moins un fils]
+\\
+\tab \tab \tab Si le premier fils est avant que le fils à insérer dans l'ordre alphabétique alors:
+\\
+\tab \tab \tab \tab Tant qu'on n'a pas trouvé la place où on insère le fils faire: 
+\\
+\tab \tab \tab \tab \tab On parcourt ses frères
+\\
+\tab \tab \tab \tab Si on est à la fin des fils alors:
+\\
+\tab \tab \tab \tab \tab On insère le fils à la fin des fils;
+\\
+\tab \tab \tab \tab Sinon: [on a trouvé une place où insérer le fils entre 2 frères]
+\\
+\tab \tab \tab \tab \tab Si le fils n'existe pas déjà alors:
+\\
+\tab \tab \tab \tab \tab \tab On insère le fils;
+\\
+\tab \tab \tab \tab \tab Sinon: [ le fils existe déjà pas besoin ]
+\\ 
+\tab \tab \tab \tab \tab \tab On met fin au parcours;
+\\ 
+\tab \tab \tab Sinon: [alors on l'insère en tête ]
+\\
+\tab \tab \tab \tab On insère le fils;
+\\
+FIN
+\end{algorithm}
+\underline{Lexique :}
+\begin{itemize}
+\item Paramètre(s) de la fonction  
+\begin{itemize}
+\item L'adresse du nœud où l'on doit insérer le fils
+\item L'adresse d'une variable de Code Erreur
+\item La valeur w du fils à insérer
+\end{itemize}
+\item Variables locales:
+\begin{itemize}
+\item cur est le pointeur courant qui parcourt l'arbre
+\item prec est le pointeur qui pointe sur l'élément précédent, ici sur le frère précédent
+\end{itemize}
+\end{itemize}
+\underline{Programme Commenté :}
+
+\subsection{Représentation Postfixée avec la nouvelle structure}
+
+\begin{algorithm}
+Principe :Représentation Postfixée Bis
+\\
+\tab On initialise des pointeurs, une pile et des variables;
+\\
+\tab Si l'arbre est non vide alors:
+\\
+\tab \tab Tant qu'on n'a pas parcouru tout l'arbre faire:
+\\
+\tab \tab \tab Si l'élément a déjà été traité alors :
+\\
+\tab \tab \tab \tab On affiche l'élément avec son nombre de fils;
+\\
+\tab \tab \tab \tab S'il a un frère alors:
+\\
+\tab \tab \tab \tab \tab On accède à son frère;
+\\
+\tab \tab \tab \tab Sinon: 
+\\
+\tab \tab \tab \tab \tab On accède à son père s'il en a un;
+\\
+\tab \tab \tab Sinon: [S'il n'a pas déjà été traité]
+\\
+\tab \tab \tab \tab Tant qu'il existe un fils faire :
+\\
+\tab \tab \tab \tab \tab On accède au fils de l'élément;
+\\
+\tab \tab \tab \tab On affiche le dernier fils;
+\\
+\tab \tab \tab \tab S'il a un frère alors:
+\\
+\tab \tab \tab \tab \tab On accède à son frère;
+\\
+\tab \tab \tab \tab Sinon: [il n'a pas de frère]
+\\
+\tab \tab \tab \tab \tab On accède à son père si il existe;
+FIN
+\end{algorithm}
+\underline{Lexique :}
+\begin{itemize}
+\item Paramètre(s) de la fonction  
+\begin{itemize}
+\item L'adresse de l'arbre
+\item L'adresse d'une variable de Code Erreur
+\end{itemize}
+\item Variables locales:
+\begin{itemize}
+\item cur est le pointeur courant qui parcourt l'arbre
+\item end est un entier traduisant un booléen afin de savoir si on a parcouru tout l'arbre
+\item elmt  est le type d'élément stocké dans la pile stack 
+\item wasInStack est un entier représentant un booléen afin de savoir si l'élément a déjà été empilé et donc traité
+\end{itemize}
+\end{itemize}
+\underline{Programme Commenté :}
+
+
+\section{Compte rendu d'exécution}
+
+\underline{Makefile :}
+\begin{center}
+
+Makefile
+\end{center}
+
+\end{document}
