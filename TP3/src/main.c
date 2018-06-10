@@ -28,29 +28,38 @@ int main(int argc, char * argv[])
 {
 	noeud_t arbre;
 	int errorCode;
-	int o;
-	/*char *formatage = "(a(b(k(h,u)z)f(m)x(p,v,w)))";*/
-	char *formatage = "(a(b(k(u,w)))c(l(j,x)m(d,e)))";
+	char *formatage = "(a(b(k(h,u)z)f(m)x(p,v,w)))";
+	/*char *formatage = "(a(b(k(u,w)))c(l(j,x)m(d,e)))";*/
 
-	arbre = createTree(formatage);
+	arbre = createTree(formatage,&errorCode);
 
-	
-	printf("Premiere representation Postfixee avant insertion: \n");
-	repPostFixe(arbre.vLink,&errorCode);
-	 
-	 noeud_t* pere;
-	 char p='k';
-	 char i='s';
+	if(errorCode == 0)
+	{
+		printf("Premiere representation Postfixee avant insertion: \n");
+		repPostFixe(arbre.vLink,&errorCode);
+		
+		noeud_t* pere;
+		char p='k';
+		char i='s';
 
-	pere = rechercher(arbre.vLink, p, &errorCode);
-	
-	insertNode(pere,i,&errorCode);
+		pere = rechercher(arbre.vLink, p, &errorCode);
+		
+		insertNode(pere,i,&errorCode);
 
-	printf("Deuxieme representation Postfixee apres insertion: \n");
-	repPostFixe(arbre.vLink,&errorCode);
+		printf("Deuxieme representation Postfixee apres insertion: \n");
+		repPostFixe(arbre.vLink,&errorCode);
 
-	newNode_t* newTree = copyTree(&arbre,&errorCode);
+		newNode_t* newTree = copyTree(&arbre,&errorCode);
+		freeTree(arbre.vLink,&errorCode);
 
-	repPostFixeBis(*newTree,&errorCode);
+		posFixNotationFather(*newTree);
+
+		freeTreeFather(*newTree);
+	}
+	else
+	{
+		printf("problem durant la création de l'arbre \n");
+	}
+
 	return(EXIT_SUCCESS);
 }

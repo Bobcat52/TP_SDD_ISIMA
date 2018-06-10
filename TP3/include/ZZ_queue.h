@@ -38,5 +38,4 @@ void enterQueue(queue_t* p0,queueType element, int* errorCode);
 queueType leaveQueue(queue_t* p0, int* errorCode);
 int isQueueEmpty(queue_t* p0);
 void freeQueue(queue_t* p0);
-void printQueue(queue_t* p0);
 #endif

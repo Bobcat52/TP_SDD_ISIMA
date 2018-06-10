@@ -147,21 +147,3 @@ void freeQueue(queue_t* p0)
 		free(p0);
 	}
 }
-
-/* -------------------------------------------------------------------- */
-/* printQueue         print a Queue to a terminal			*/
-/*                                                                      */
-/* Input :    - p0 is a pointer to the queue.                  		*/
-/*									*/
-/* -------------------------------------------------------------------- */
-void printQueue(queue_t *p0)
-{
-	int i;
-
-	/* simply display each value of the queue */
-	for(i=0;i < p0->number;i++)
-	{
-		printf("%d ",p0->base[(p0->start +i ) % p0->size]);
-	}
-	printf("\n");
-}

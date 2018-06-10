@@ -43,7 +43,4 @@ void push(stack_t * p, typeStack v ,int * errorCode);
 
 void pop(stack_t * p, typeStack * v, int * errorCode);
 
-stack_t* initStackFromFile(char * fileName, int * errorCode);
-
-void printStack(stack_t* p);
 #endif
