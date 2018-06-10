@@ -29,8 +29,8 @@ int main(int argc, char * argv[])
 	noeud_t arbre;
 	int errorCode;
 	int o;
-	char *formatage = "(a(b(k(h,u)z)f(m)x(p,v,w)))";
-	/*char *formatage = "(a(b(k(u,w)))c)"; */ 
+	/*char *formatage = "(a(b(k(h,u)z)f(m)x(p,v,w)))";*/
+	char *formatage = "(a(b(k(u,w)))c(l(j,x)m(d,e)))";
 
 	arbre = createTree(formatage);
 
@@ -44,19 +44,13 @@ int main(int argc, char * argv[])
 
 	pere = rechercher(arbre.vLink, p, &errorCode);
 	
-	
-	if(pere != NULL)
-	{	
-		printf("%c\n",pere->value);
-		insertNode(pere,i,&errorCode);
-		printf("errorCode: %d \n",errorCode);
-	}
-	else
-	{
-		printf("pointeur null \n");
-	}
+	insertNode(pere,i,&errorCode);
+
 	printf("Deuxieme representation Postfixee apres insertion: \n");
 	repPostFixe(arbre.vLink,&errorCode);
 
+	newNode_t* newTree = copyTree(&arbre,&errorCode);
+
+	repPostFixeBis(*newTree,&errorCode);
 	return(EXIT_SUCCESS);
 }

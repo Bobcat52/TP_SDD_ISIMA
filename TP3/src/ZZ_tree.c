@@ -170,7 +170,7 @@ noeud_t createTree(char *formatage)
 					pop(stack,&elmtPile,&errorCode);
 
 					prec = elmtPile.adr;
-					printf("noeud dépilé : %c \n", prec->value);
+
 				}
 				else
 				{
@@ -201,7 +201,6 @@ noeud_t createTree(char *formatage)
 					elmtPile.nb_fils = 0;
 
 					push(stack, elmtPile , &errorCode);
-					printf("%d taille de la pile \n",stack->numSummit);
 				}
 				else /* We have a comma or a closed parenthesis */
 				{
@@ -341,4 +340,152 @@ void insertNode(noeud_t* v,char w, int* errorCode)
 		}
 	}
 }
+newNode_t* createModifiedNode(noeud_t* cur,newNode_t* pere)
+{
+	newNode_t* node = malloc(sizeof(newNode_t));
 
+	node->value = cur->value;
+	node->vLink = NULL;
+	node->hLink = NULL;
+
+	node->papa = pere;
+
+	return(node);
+}
+
+newNode_t* copyTree(noeud_t* arbre,int* errorCode)
+{
+	newNode_t* newTree = malloc(sizeof(newNode_t));
+
+	newTree->papa = NULL;
+	newTree->hLink = NULL;
+	newTree->vLink = NULL;
+	
+	newNode_t* currNewTree = newTree;
+	newNode_t* father = currNewTree;
+
+    noeud_t*  cur = arbre;
+    stack_t*  stack = NULL;
+    typeStack elmt;
+	
+    int end = 1;
+    int wasInStack = 0;
+
+    *errorCode = 0;
+    stack = initStack(100, errorCode);
+    
+    if(cur->vLink != NULL) /* if the tree is not empty */               										
+    {
+		/* while we don't have gone throught the entire tree */ 
+        while(cur != NULL && end != 0)   										
+        {	
+			if(cur->vLink != NULL && wasInStack == 0)
+			{
+				/* while there is a son */
+				do					
+				{   
+					cur = cur->vLink;
+
+					currNewTree->vLink = createModifiedNode(cur,father);
+					currNewTree = currNewTree->vLink;
+
+					if(cur->vLink != NULL)
+					{
+						pushBis(stack,elmt,errorCode,cur);
+						father = currNewTree;
+					}
+				
+
+				}
+				while(cur != NULL && cur->vLink != NULL && wasInStack == 0);
+			}
+			wasInStack = 0;
+
+
+			if (cur->hLink != NULL) /*if it has a brother */
+			{
+				cur = cur->hLink;
+				currNewTree->hLink = createModifiedNode(cur,father);
+				currNewTree = currNewTree->hLink;
+
+				if(cur->vLink != NULL)
+				{
+					pushBis(stack,elmt,errorCode,cur);
+					father = currNewTree;
+				}
+			}
+			else /* if there isn't a brother we pull up the tree if it's possible */
+			{   
+
+				if(!isStackEmpty(stack))
+				{
+					pop(stack,&elmt,errorCode);
+					cur = (elmt.adr); 
+					wasInStack = 1;
+
+					currNewTree = currNewTree->papa; /* came back to the father */
+					father = currNewTree->papa;
+				}
+
+				if(isStackEmpty(stack) && cur->hLink == NULL)
+				{
+					end = 0;
+				}
+			}
+		}
+	}
+	
+	return(newTree);
+}
+void repPostFixeBis(newNode_t a, int* errorCode)
+{
+
+    newNode_t*  cur = a.vLink; /*we don't initialize on the first element but on the second, because the first element don't have value */
+    int       end = 0;
+    int 	  backFromFather = 0;
+
+    *errorCode=0;
+    
+    if(cur != NULL) /* if the tree is not empty */
+    {
+        while(cur  != NULL && end == 0)/* while we don't have gone throught the entire tree */ 
+        {
+			while(cur != NULL && cur->vLink != NULL && backFromFather == 0)  /* while there is a son */
+			{   
+				cur = cur->vLink; /*the pointer points to its son */
+			}
+			
+			if(backFromFather == 0)
+			{
+           		printf("| %c | ", cur->value);
+			}
+
+            backFromFather = 0;
+			
+			
+			if (cur->hLink != NULL) /*if it has a brother */
+            {
+                cur = cur->hLink; /* the pointer points to its brother */
+            }
+            else /* if there isn't a brother we pull up the tree if it's possible */
+            {   
+				while (cur->papa != NULL && cur->hLink == NULL) /* if he has a father */
+                {
+					backFromFather = 1;
+                    cur = cur->papa; /* the pointer points to the father */
+
+					if(cur->papa != NULL)
+					{
+                    	printf("| %c | ", cur->value);
+					}
+				}
+
+				if(cur->papa == NULL)        
+                {	
+                    end = 1;
+                }
+            }
+        }
+    }
+    printf("\n");
+}

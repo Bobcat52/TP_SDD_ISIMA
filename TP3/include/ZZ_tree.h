@@ -16,25 +16,26 @@ typedef struct noeud{
 
 } noeud_t;
 
-typedef struct noeudModified{
+typedef struct newNode{
 
 	char value;
-	struct noeudModified* vLink;
-	struct noeudModified* hLink;
-	struct noeud* papa;
+	struct newNode* vLink;
+	struct newNode* hLink;
+	struct newNode* papa;
 
-} noeudModified_t;
+} newNode_t;
 
 
 noeud_t* createNode(char courant);
-noeudModified_t* createModifiedNode(noeud_t* cur,noeud_t* pere);
+newNode_t* createModifiedNode(noeud_t* cur,newNode_t* pere);
 	
 noeud_t createTree(char* formatage);
 void repPostFixe(noeud_t* a, int* errorCode);
 noeud_t* rechercher(noeud_t * a, char v, int * errorCode);
 void insertNode(noeud_t* v,char w, int* errorCode);
-noeudModified_t copyTree(noeud_t arbre,int* errorCode);
+newNode_t* copyTree(noeud_t* arbre,int* errorCode);
 void incrementNbSon(stack_t* stack, typeStack elmt, int*errorCode);
 void pushBis(stack_t* stack, typeStack elmt, int* errorCode, noeud_t* cur);
+void repPostFixeBis(newNode_t a, int* errorCode);
 
 #endif
