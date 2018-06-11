@@ -20,7 +20,7 @@
 #include "ZZ_base.h"
 #include "ZZ_stack.h"
 
-#define SIZE_STACK 50
+#define SIZE_STACK 100
 
 
 /* basic tree */
@@ -46,7 +46,7 @@ typedef struct newNode{
 /* Creation */
 noeud_t* createNode(char courant);
 newNode_t* createModifiedNode(noeud_t* cur,newNode_t* pere);
-noeud_t createTree(char* treeString,int *errorCode);
+noeud_t* createTree(char* treeString,int *errorCode);
 
 /* Insertion */
 void insertNode(noeud_t* tree,char w, int* errorCode);

@@ -234,14 +234,14 @@ void repPostFixe(noeud_t* tree, int* errorCode)
 /* 			0 : problem 							    					*/
 /*																			*/
 /* ------------------------------------------------------------------------ */
-noeud_t createTree(char *treeString,int* errorCode)
+noeud_t* createTree(char *treeString,int* errorCode)
 {
 	/* Init our Stack */
 	stack_t* stack;
 	int 	 errorCodeStack;
 	int 	 size;
 	
- 	noeud_t  head; /* create the head of the tree */ 
+ 	noeud_t*  head = malloc(sizeof(noeud_t)); /* create the head of the tree */ 
 	noeud_t* prec;
 
 	char     courant;
@@ -250,7 +250,11 @@ noeud_t createTree(char *treeString,int* errorCode)
 	int 	 fini;
 
  	size = strlen(treeString);
-	prec = &head;
+
+	head->value = '!';
+	head->vLink = NULL;
+	head->hLink = NULL;
+	prec = head;
 	index = 0;
 	parentOpen = 0;
 	stack = initStack(SIZE_STACK,&errorCodeStack); 
@@ -421,6 +425,11 @@ noeud_t *  rechercher(noeud_t * tree, char v, int * errorCode)
 							cur = cur->vLink; /* the pointer points to its son */
 						}
 					}
+					else
+					{
+						end = 1;
+						*errorCode = 1;
+					}
 					
 				}
 			}
@@ -502,7 +511,6 @@ void insertNode(noeud_t* tree,char w, int* errorCode)
 				if(cur == NULL) /*went through all the sons, we can insert it at the end */
 				{
 					prec->hLink = createNodeForInsertion(w,NULL);
-					*errorCode=1;
 
 				}
 				else     /*we insert the element in the middle of its brothers*/
@@ -513,7 +521,7 @@ void insertNode(noeud_t* tree,char w, int* errorCode)
 					}
 					else /* the element is already created so no need to insert it*/
 					{
-						*errorCode = -1;
+						*errorCode = 1;
 					}
 				
 				}
@@ -526,13 +534,12 @@ void insertNode(noeud_t* tree,char w, int* errorCode)
 				}
 				else   /* the first son is already the element, no need to insert it */
 				{
-					*errorCode=-1;
+					*errorCode = 1;
 				}
 			}
 
 		}
 	}
-
 
 }
 
@@ -843,8 +850,6 @@ void freeTreeFather(newNode_t tree)
 	}
 
 	free(cur);
-
-	printf("\n");
 }
 
 /* --------------------------------------------------------------------- */
