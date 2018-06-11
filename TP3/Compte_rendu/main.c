@@ -4,8 +4,7 @@
 /* Author : Mathieu Boutin & Jeremy Morceaux                  */
 /* Date : March 2018					      */
 /*							      */
-/* This file contains the main program of the TP, we use the  */
-/* severals tools created to revert a stack.                  */
+/* This file contains the main program of the TP3             */
 /* ########################################################## */
 
 
