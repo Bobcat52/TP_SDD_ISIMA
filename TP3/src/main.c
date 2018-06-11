@@ -24,8 +24,8 @@ int main()
 	noeud_t* arbre;
 	int errorCode;
 	/*char *treeString = "()";*/
-	char *treeString = "(a(b(k(h,u)z)f(m)x(p,v,w)))";
-	/*char *treeString = "(a(b(k(u,w)))c(l(j,x)m(d,e)))";*/
+	/*char *treeString = "(a(b(k(h,u)z)f(m)x(p,v,w)))";*/
+	char *treeString = "(a(b(k(u,w)))c(l(j,x)m(d,e)))";
 
 	printf("%sI/ Creation de l'arbre !\n%s",VERT,BLANC);
 	arbre = createTree(treeString,&errorCode);
@@ -53,7 +53,7 @@ int main()
 			p = '!'; /* !  is equal to the head of the tree */
 			i = 'm';
 
-			printf("%sIII/Recherche du noeud pour inserer le nouveau noeud: \n%s",VERT,BLANC);
+			printf("%sIII/ Recherche du noeud pour inserer le nouveau noeud: \n%s",VERT,BLANC);
 
 			pere = rechercher(arbre, p, &errorCode);
 			/* can't find the node */
@@ -123,12 +123,14 @@ int main()
 
 		}
 
-		free(arbre); /* we finally free the head of the tree */
+		
 	}
 	else
 	{
 		printf("%sImpossible de créer cette arbre. Peut-être que votre pile est trop petite ?\n%s",ROUGE,BLANC);
 	}
+
+	free(arbre); /* we finally free the head of the tree */
 
 	return(EXIT_SUCCESS);
 }

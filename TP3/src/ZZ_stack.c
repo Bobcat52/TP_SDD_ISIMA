@@ -33,29 +33,33 @@
 stack_t * initStack(int size, int * errorCode)	
 {	
 	stack_t * p;   /* we declare a pointer of the stack */
-	
+	p = NULL;
+
 	*errorCode = -1;
 
-	p = malloc(sizeof(stack_t));	/* we initialize the pointer */
-
-	if (p != NULL)   /* If the pointer is not null we initialize the point stack */
+	if(size != 0)
 	{
-			p->begin = malloc(size * sizeof(typeStack)); /* we initalize the contiguous list which is pointed by the last block of the stack */ 
-			*errorCode = 0;
+		p = malloc(sizeof(stack_t));	/* we initialize the pointer */
 
-			if ((p->begin)!= NULL)           /* if the previous allocation went wrong */  
-			{
-					p->sizeMax = size;
-					p->numSummit = -1;     /*there is 0 element in the stack but the stack is created so we put -1 */
-					*errorCode = 1;           
-			}
-			else 
-			{
-				free(p);
-				p=NULL;
-			}
+		if (p != NULL)   /* If the pointer is not null we initialize the point stack */
+		{
+				p->begin = malloc(size * sizeof(typeStack)); /* we initalize the contiguous list which is pointed by the last block of the stack */ 
+				*errorCode = 0;
+
+				if ((p->begin)!= NULL)           /* if the previous allocation went wrong */  
+				{
+						p->sizeMax = size;
+						p->numSummit = -1;     /*there is 0 element in the stack but the stack is created so we put -1 */
+						*errorCode = 1;           
+				}
+				else 
+				{
+					free(p);
+					p=NULL;
+				}
+		}
 	}
-	
+
 	return p; 
 }
 

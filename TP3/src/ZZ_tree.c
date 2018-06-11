@@ -350,6 +350,12 @@ noeud_t* createTree(char *treeString,int* errorCode)
 		*errorCode = 1;
 	}
 
+	/* if the creation went wrong, we need to free the partial tree here */
+	if(*errorCode == 1)
+	{
+		freeTree(head->vLink,&errorCodeStack);
+	}
+
 	return(head);
 }
 
@@ -869,8 +875,8 @@ void freeTree(noeud_t* a,int *errorCode)
 	int		  wasInStack;
 	int 	  errorCodeStack;
 
-
-	stack = initStack(SIZE_STACK, &errorCodeStack);
+	*errorCode = 0;
+	stack = initStack(1000, &errorCodeStack);
 	cur = a;
 	end = 1;
 	wasInStack = 0;
@@ -883,7 +889,7 @@ void freeTree(noeud_t* a,int *errorCode)
 			/* while we don't have gone throught the entire tree */ 
 			while(cur != NULL && end != 0)   										
 			{	
-				if(wasInStack==1) /* we have already processed this element */
+				if(wasInStack == 1) /* we have already processed this element */
 				{
 					noeud_t* temp;
 					temp = cur;

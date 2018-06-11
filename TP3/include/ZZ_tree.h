@@ -20,7 +20,7 @@
 #include "ZZ_base.h"
 #include "ZZ_stack.h"
 
-#define SIZE_STACK 100
+#define SIZE_STACK 50
 
 
 /* basic tree */
