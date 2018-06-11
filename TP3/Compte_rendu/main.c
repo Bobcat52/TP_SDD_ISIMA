@@ -1,9 +1,9 @@
 /* ########################################################## */
-/* file's name : main.c					                      */
-/*							                                  */
+/* file's name : main.c					      */
+/*							      */
 /* Author : Mathieu Boutin & Jeremy Morceaux                  */
-/* Date : March 2018					                      */
-/*							                                  */
+/* Date : March 2018					      */
+/*							      */
 /* This file contains the main program of the TP, we use the  */
 /* severals tools created to revert a stack.                  */
 /* ########################################################## */
@@ -48,8 +48,8 @@ int main()
 				printf("%sImpossible d'afficher la notation postfixee de cette arbre.\n%s",ROUGE,BLANC);
 			}
 
-			p = 'a'; /* !  is equal to the head of the tree */
-			i = 'l';
+			p = '!'; /* !  is equal to the head of the tree */
+			i = 'm';
 
 			printf("%sIII/ Recherche du noeud pour inserer le nouveau noeud: \n%s",VERT,BLANC);
 

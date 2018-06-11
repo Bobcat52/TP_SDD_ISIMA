@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.3.11)  10 JUN 2018 11:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2018.3.11)  11 JUN 2018 19:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -364,6 +364,35 @@ Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
 \Gm@layoutvoffset=\dimen110
 \Gm@dimlist=\toks17
 )
+(/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+
+(/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count90
+)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1341.
+Package xcolor Info: Model `RGB' extended on input line 1353.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1355.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1356.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
+)
 (/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
 Package: fontenc 2005/09/27 v1.99g Standard LaTeX package
 
@@ -377,7 +406,7 @@ nment
 
 (/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count90
+\c@float@type=\count91
 \float@exts=\toks18
 \float@box=\box26
 \@float@everytoks=\toks19
@@ -387,7 +416,7 @@ Package: float 2001/11/08 v1.3d Float enhancements (AL)
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 )
 \@float@every@algorithm=\toks20
-\c@algorithm=\count91
+\c@algorithm=\count92
 )
 (/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
@@ -402,36 +431,57 @@ Package: trig 2016/01/03 v1.10 sin cos tan (DPC)
 File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
 )
 Package graphics Info: Driver file: pdftex.def on input line 95.
-
-(/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
-File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
-
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
-Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
 )
-(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
-Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
-)
-\Gread@gobject=\count92
-))
 \Gin@req@height=\dimen111
 \Gin@req@width=\dimen112
 )
-No file Compte_renduBis.aux.
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count93
+\lst@gtempboxa=\box28
+\lst@token=\toks21
+\lst@length=\count94
+\lst@currlwidth=\dimen113
+\lst@column=\count95
+\lst@pos=\count96
+\lst@lostspace=\dimen114
+\lst@width=\dimen115
+\lst@newlines=\count97
+\lst@lineno=\count98
+\lst@maxwidth=\dimen116
+
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
+\c@lstnumber=\count99
+\lst@skipnumbers=\count100
+\lst@framebox=\box29
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2015/06/04 1.6 listings configuration
+))
+Package: listings 2015/06/04 1.6 (Carsten Heinz)
+
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2015/06/04 1.6 listings language file
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2015/06/04 1.6 (Carsten Heinz)
+)
+(./Compte_renduBis.aux)
 \openout1 = `Compte_renduBis.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 12.
-LaTeX Font Info:    ... okay on input line 12.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 44.
+LaTeX Font Info:    ... okay on input line 44.
+
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
 *geometry* verbose mode - [ preamble ] result:
@@ -468,17 +518,17 @@ LaTeX Font Info:    ... okay on input line 12.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count93
-\scratchdimen=\dimen113
-\scratchbox=\box28
-\nofMPsegments=\count94
-\nofMParguments=\count95
-\everyMPshowfont=\toks21
-\MPscratchCnt=\count96
-\MPscratchDim=\dimen114
-\MPnumerator=\count97
-\makeMPintoPDFobject=\count98
-\everyMPtoPDFconversion=\toks22
+\scratchcounter=\count101
+\scratchdimen=\dimen117
+\scratchbox=\box30
+\nofMPsegments=\count102
+\nofMParguments=\count103
+\everyMPshowfont=\toks22
+\MPscratchCnt=\count104
+\MPscratchDim=\dimen118
+\MPnumerator=\count105
+\makeMPintoPDFobject=\count106
+\everyMPtoPDFconversion=\toks23
 ) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
 Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
 )
@@ -523,83 +573,273 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
+\c@lstlisting=\count107
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 13.
+(Font)              <12> on input line 45.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 13.
+(Font)              <8> on input line 45.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 13.
+(Font)              <6> on input line 45.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 18.
+(Font)              <7> on input line 50.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 18.
+(Font)              <5> on input line 50.
 
-Underfull \hbox (badness 10000) in paragraph at lines 15--19
+Underfull \hbox (badness 10000) in paragraph at lines 47--51
 
  []
 
+<Schema_base.png, id=1, 803.0pt x 642.4pt>
+File: Schema_base.png Graphic file (type png)
+ <use Schema_base.png>
+Package pdftex.def Info: Schema_base.png used on input line 52.
+(pdftex.def)             Requested size: 321.1943pt x 256.95544pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 23--36
+<structure_arbre_base.png, id=3, 121.45375pt x 51.19125pt>
+File: structure_arbre_base.png Graphic file (type png)
+
+<use structure_arbre_base.png>
+Package pdftex.def Info: structure_arbre_base.png used on input line 54.
+(pdftex.def)             Requested size: 121.45343pt x 51.19112pt.
+
+<structure_arbre_modifie.png, id=4, 120.45pt x 65.24374pt>
+File: structure_arbre_modifie.png Graphic file (type png)
+
+<use structure_arbre_modifie.png>
+Package pdftex.def Info: structure_arbre_modifie.png used on input line 55.
+(pdftex.def)             Requested size: 120.44969pt x 65.24358pt.
+
+<image_arbre_base.png, id=5, 1630.09pt x 565.11125pt>
+File: image_arbre_base.png Graphic file (type png)
+
+<use image_arbre_base.png>
+Package pdftex.def Info: image_arbre_base.png used on input line 62.
+(pdftex.def)             Requested size: 326.01222pt x 113.02023pt.
+ <foret_newNode.png, id=6, 1814.78pt x 803.0pt>
+File: foret_newNode.png Graphic file (type png)
+
+<use foret_newNode.png>
+Package pdftex.def Info: foret_newNode.png used on input line 68.
+(pdftex.def)             Requested size: 362.94957pt x 160.59715pt.
+ [1
+
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./Schema_base.png> <./stru
+cture_arbre_base.png> <./structure_arbre_modifie.png> <./image_arbre_base.png>]
+
+Underfull \hbox (badness 10000) in paragraph at lines 77--129
 
  []
 
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 132.
 
-Underfull \hbox (badness 10000) in paragraph at lines 23--36
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 41--77
-
- []
-
-LaTeX Font Info:    Try loading font information for OMS+cmr on input line 80.
 (/usr/share/texlive/texmf-dist/tex/latex/base/omscmr.fd
 File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 80.
- [1
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 132.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 145.
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-Underfull \hbox (badness 10000) in paragraph at lines 99--137
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
+File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+) (./main.c
+LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <8> not available
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 12.
+ [2 <./foret_newNode.png>] [3])
+Underfull \hbox (badness 10000) in paragraph at lines 150--162
+
+ []
+
+(./ZZ_tree.c) [4]
+Underfull \hbox (badness 10000) in paragraph at lines 182--192
+
+ []
+
+(./ZZ_tree.c)
+Underfull \hbox (badness 10000) in paragraph at lines 209--219
+
+ []
+
+(./ZZ_tree.c) [5]
+Underfull \hbox (badness 10000) in paragraph at lines 237--275
+
+ []
+
+(./ZZ_tree.c [6] [7])
+Underfull \hbox (badness 10000) in paragraph at lines 298--339
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 160--188
+Underfull \hbox (badness 10000) in paragraph at lines 298--339
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 209--247
+(./ZZ_tree.c [8])
+Underfull \hbox (badness 10000) in paragraph at lines 357--385
 
  []
 
-[2] [3] [4] (./Compte_renduBis.aux) ) 
+[9] (./ZZ_tree.c [10])
+Underfull \hbox (badness 10000) in paragraph at lines 407--421
+
+ []
+
+(./ZZ_tree.c) [11]
+Underfull \hbox (badness 10000) in paragraph at lines 441--479
+
+ []
+
+(./ZZ_tree.c [12])
+Underfull \hbox (badness 10000) in paragraph at lines 500--514
+
+ []
+
+(./ZZ_tree.c) [13]
+Underfull \hbox (badness 10000) in paragraph at lines 533--573
+
+ []
+
+(./ZZ_tree.c [14] [15])
+Underfull \hbox (badness 10000) in paragraph at lines 600--636
+
+ []
+
+(./ZZ_tree.c [16])
+Underfull \hbox (badness 10000) in paragraph at lines 656--704
+
+ []
+
+(./ZZ_tree.c [17]) [18]
+Underfull \hbox (badness 10000) in paragraph at lines 725--781
+
+ []
+
+(./ZZ_tree.c [19] [20])
+Underfull \hbox (badness 10000) in paragraph at lines 805--815
+
+ []
+
+<cas_general.png, id=82, 702.625pt x 549.05125pt>
+File: cas_general.png Graphic file (type png)
+ <use cas_general.png>
+Package pdftex.def Info: cas_general.png used on input line 816.
+(pdftex.def)             Requested size: 421.57825pt x 329.43329pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 822--832
+
+ []
+
+<2foret.png, id=83, 725.71124pt x 555.07375pt>
+File: 2foret.png Graphic file (type png)
+ <use 2foret.png>
+Package pdftex.def Info: 2foret.png used on input line 833.
+(pdftex.def)             Requested size: 435.4301pt x 333.0468pt.
+ [21 <./cas_general.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 839--849
+
+ []
+
+<vertical.png, id=87, 737.75626pt x 548.0475pt>
+File: vertical.png Graphic file (type png)
+ <use vertical.png>
+Package pdftex.def Info: vertical.png used on input line 850.
+(pdftex.def)             Requested size: 442.65717pt x 328.83104pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 856--866
+
+ []
+
+[22 <./2foret.png> <./vertical.png>]
+<horizontal.png, id=91, 695.59875pt x 549.05125pt>
+File: horizontal.png Graphic file (type png)
+ <use horizontal.png>
+Package pdftex.def Info: horizontal.png used on input line 867.
+(pdftex.def)             Requested size: 417.36247pt x 329.43329pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 873--883
+
+ []
+
+<pere_existe_pas.png, id=92, 739.76375pt x 513.92pt>
+File: pere_existe_pas.png Graphic file (type png)
+ <use pere_existe_pas.png>
+Package pdftex.def Info: pere_existe_pas.png used on input line 884.
+(pdftex.def)             Requested size: 443.86166pt x 308.35437pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 890--900
+
+ []
+
+[23 <./horizontal.png> <./pere_existe_pas.png>]
+<insertion_tete.png, id=96, 733.74126pt x 544.0325pt>
+File: insertion_tete.png Graphic file (type png)
+ <use insertion_tete.png>
+Package pdftex.def Info: insertion_tete.png used on input line 901.
+(pdftex.def)             Requested size: 440.24815pt x 326.42201pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 907--917
+
+ []
+
+<vide.png, id=97, 701.62125pt x 276.03125pt>
+File: vide.png Graphic file (type png)
+ <use vide.png>
+Package pdftex.def Info: vide.png used on input line 918.
+(pdftex.def)             Requested size: 420.97598pt x 165.62001pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 924--934
+
+ []
+
+<noeud_present.png, id=98, 710.655pt x 547.04375pt>
+File: noeud_present.png Graphic file (type png)
+ <use noeud_present.png>
+Package pdftex.def Info: noeud_present.png used on input line 935.
+(pdftex.def)             Requested size: 426.39629pt x 328.22878pt.
+
+[24 <./insertion_tete.png> <./vide.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 941--951
+
+ []
+
+<stack_2.png, id=102, 741.77126pt x 281.05pt>
+File: stack_2.png Graphic file (type png)
+ <use stack_2.png>
+Package pdftex.def Info: stack_2.png used on input line 952.
+(pdftex.def)             Requested size: 445.0662pt x 168.63129pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 958--968
+
+ []
+
+<stack_0.png, id=103, 715.67375pt x 270.00874pt>
+File: stack_0.png Graphic file (type png)
+ <use stack_0.png>
+Package pdftex.def Info: stack_0.png used on input line 969.
+(pdftex.def)             Requested size: 429.40756pt x 162.00648pt.
+ [25 <./noeud_present.png> <./stack_2.png>] [26 <./stack_0.png>] (./Compte_rend
+uBis.aux) ) 
 Here is how much of TeX's memory you used:
- 2633 strings out of 493029
- 34428 string characters out of 6136234
- 108252 words of memory out of 5000000
- 6135 multiletter control sequences out of 15000+600000
- 11766 words of font info for 30 fonts, out of 8000000 for 9000
+ 5191 strings out of 493029
+ 67458 string characters out of 6136234
+ 432426 words of memory out of 5000000
+ 8612 multiletter control sequences out of 15000+600000
+ 13158 words of font info for 33 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 37i,6n,29p,584b,225s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/share/texmf/fonts/enc/dvips/cm-super
-/cm-super-t1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
-cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.
-pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></us
-r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/shar
-e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf
-/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/type1/public/
-cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pf
-b></usr/share/texmf/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/
-fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/c
-m-super/sfrm1728.pfb>
-Output written on Compte_renduBis.pdf (4 pages, 135655 bytes).
+ 38i,6n,56p,623b,1783s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}</usr/sha
+re/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/tex
+mf/fonts/type1/public/cm-super/sfbx1000.pfb></usr/share/texmf/fonts/type1/publi
+c/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.
+pfb></usr/share/texmf/fonts/type1/public/cm-super/sfit0800.pfb></usr/share/texm
+f/fonts/type1/public/cm-super/sfrm1000.pfb></usr/share/texmf/fonts/type1/public
+/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1728.p
+fb></usr/share/texmf/fonts/type1/public/cm-super/sftt0800.pfb>
+Output written on Compte_renduBis.pdf (26 pages, 931484 bytes).
 PDF statistics:
- 62 PDF objects out of 1000 (max. 8388607)
- 44 compressed objects within 1 object stream
+ 142 PDF objects out of 1000 (max. 8388607)
+ 88 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 76 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -20,7 +20,7 @@
 #include "ZZ_base.h"
 #include "ZZ_stack.h"
 
-#define SIZE_STACK 50
+#define SIZE_STACK 100
 
 
 /* basic tree */
@@ -63,7 +63,7 @@ void posFixNotationFather(newNode_t tree);
 
 /* Liberation */
 void freeTreeFather(newNode_t tree);
-void freeTree(noeud_t* a,int * errorCode);
+void freeTree(noeud_t* tree,int * errorCode);
 
 /* utils */
 void incrementNbSon(stack_t* stack, typeStack elmt, int*errorCode);
